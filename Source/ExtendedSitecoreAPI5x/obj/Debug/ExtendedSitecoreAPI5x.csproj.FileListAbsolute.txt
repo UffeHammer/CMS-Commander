@@ -1,0 +1,9 @@
+C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI5x\bin\ExtendedSitecoreAPI5x.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI5x\bin\ExtendedSitecoreAPI5x.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI5x\bin\Core.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI5x\bin\sitecore.kernel.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI5x\bin\Core.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.csprojResolveAssemblyReference.cache
+C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI5x\bin\ExtendedSitecoreAPI5x.dll.config

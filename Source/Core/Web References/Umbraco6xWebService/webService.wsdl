@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://umbraco.org/webservices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://umbraco.org/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://umbraco.org/webservices/">
+      <s:element name="GetNode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NodeId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContextID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNodeResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNodeValidate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NodeId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNodeValidateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNodeValidateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NodeId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContextID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMedia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NodeId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContextID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMediaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMediaResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMediaValidate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NodeId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMediaValidateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMediaValidateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentValidate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NodeId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentValidateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentValidateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentsBySearchValidate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Query" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="StartNodeId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentsBySearchValidateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentsBySearchValidateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentsBySearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Query" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="StartNodeId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContextID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentsBySearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentsBySearchResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetNodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNode" />
+  </wsdl:message>
+  <wsdl:message name="GetNodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNodeValidateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNodeValidate" />
+  </wsdl:message>
+  <wsdl:message name="GetNodeValidateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNodeValidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocument" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMedia" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMediaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaValidateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMediaValidate" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaValidateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMediaValidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentValidateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentValidate" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentValidateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentValidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentsBySearchValidateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentsBySearchValidate" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentsBySearchValidateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentsBySearchValidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentsBySearchSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentsBySearch" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentsBySearchSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentsBySearchResponse" />
+  </wsdl:message>
+  <wsdl:portType name="webServiceSoap">
+    <wsdl:operation name="GetNode">
+      <wsdl:input message="tns:GetNodeSoapIn" />
+      <wsdl:output message="tns:GetNodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeValidate">
+      <wsdl:input message="tns:GetNodeValidateSoapIn" />
+      <wsdl:output message="tns:GetNodeValidateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <wsdl:input message="tns:GetDocumentSoapIn" />
+      <wsdl:output message="tns:GetDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMedia">
+      <wsdl:input message="tns:GetMediaSoapIn" />
+      <wsdl:output message="tns:GetMediaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaValidate">
+      <wsdl:input message="tns:GetMediaValidateSoapIn" />
+      <wsdl:output message="tns:GetMediaValidateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentValidate">
+      <wsdl:input message="tns:GetDocumentValidateSoapIn" />
+      <wsdl:output message="tns:GetDocumentValidateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentsBySearchValidate">
+      <wsdl:input message="tns:GetDocumentsBySearchValidateSoapIn" />
+      <wsdl:output message="tns:GetDocumentsBySearchValidateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentsBySearch">
+      <wsdl:input message="tns:GetDocumentsBySearchSoapIn" />
+      <wsdl:output message="tns:GetDocumentsBySearchSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="webServiceSoap" type="tns:webServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetNode">
+      <soap:operation soapAction="http://umbraco.org/webservices/GetNode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeValidate">
+      <soap:operation soapAction="http://umbraco.org/webservices/GetNodeValidate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <soap:operation soapAction="http://umbraco.org/webservices/GetDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMedia">
+      <soap:operation soapAction="http://umbraco.org/webservices/GetMedia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaValidate">
+      <soap:operation soapAction="http://umbraco.org/webservices/GetMediaValidate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentValidate">
+      <soap:operation soapAction="http://umbraco.org/webservices/GetDocumentValidate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentsBySearchValidate">
+      <soap:operation soapAction="http://umbraco.org/webservices/GetDocumentsBySearchValidate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentsBySearch">
+      <soap:operation soapAction="http://umbraco.org/webservices/GetDocumentsBySearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="webServiceSoap12" type="tns:webServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetNode">
+      <soap12:operation soapAction="http://umbraco.org/webservices/GetNode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNodeValidate">
+      <soap12:operation soapAction="http://umbraco.org/webservices/GetNodeValidate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <soap12:operation soapAction="http://umbraco.org/webservices/GetDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMedia">
+      <soap12:operation soapAction="http://umbraco.org/webservices/GetMedia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaValidate">
+      <soap12:operation soapAction="http://umbraco.org/webservices/GetMediaValidate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentValidate">
+      <soap12:operation soapAction="http://umbraco.org/webservices/GetDocumentValidate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentsBySearchValidate">
+      <soap12:operation soapAction="http://umbraco.org/webservices/GetDocumentsBySearchValidate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentsBySearch">
+      <soap12:operation soapAction="http://umbraco.org/webservices/GetDocumentsBySearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="webService">
+    <wsdl:port name="webServiceSoap" binding="tns:webServiceSoap">
+      <soap:address location="http://umbraco.dtl.web01.cabana.dk/umbraco/webService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="webServiceSoap12" binding="tns:webServiceSoap12">
+      <soap12:address location="http://umbraco.dtl.web01.cabana.dk/umbraco/webService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="Security.asmx.cs" Class="ExtendedSitecoreAPI5x.Security" %>

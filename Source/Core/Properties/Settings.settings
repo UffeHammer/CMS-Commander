@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SitecoreConverter.Core.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Core_Sitecore43_Sitecore_x0020_Client_x0020_API" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://udvikling.3fi.dk/sitecore/client/api/api.asmx</Value>
+    </Setting>
+    <Setting Name="Core_sitecore6_Visual_x0020_Sitecore_x0020_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.3f-fagforening.dk/sitecore/shell/webservice/service.asmx</Value>
+    </Setting>
+    <Setting Name="Core_sitecore6_Security" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://local3fsitecore/sitecore%20modules/Shell/ExtendedSitecoreAPI/Security.asmx</Value>
+    </Setting>
+    <Setting Name="Core_Sitecore5x_Visual_x0020_Sitecore_x0020_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://arkitema.web01.cabana.dk/sitecore/shell/webservice/service.asmx</Value>
+    </Setting>
+    <Setting Name="Core_net_cohaesio_instant_sdu_webred531_Security" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://internet.regioner.web01.cabana.dk/sitecore%20modules/shell/extendedsitecoreapi5x/security.asmx</Value>
+    </Setting>
+    <Setting Name="Core_Umbraco6DocumentService_documentService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://umbraco.dtl.web01.cabana.dk/umbraco/webServices/api/DocumentService.asmx</Value>
+    </Setting>
+    <Setting Name="Core_Umbraco6xWebService_webService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://umbraco.dtl.web01.cabana.dk/umbraco/webService.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

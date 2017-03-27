@@ -1,0 +1,8 @@
+c:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\bin\Release\HtmlToXhtmlPlugin.dll
+c:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\bin\Release\HtmlToXhtmlPlugin.pdb
+c:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\bin\Release\Core.dll
+c:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\bin\Release\Core.pdb
+c:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\bin\Release\Core.XmlSerializers.dll
+c:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\obj\Release\HtmlToXhtmlPlugin.csprojResolveAssemblyReference.cache
+c:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\obj\Release\HtmlToXhtmlPlugin.dll
+c:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\obj\Release\HtmlToXhtmlPlugin.pdb

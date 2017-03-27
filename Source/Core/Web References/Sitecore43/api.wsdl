@@ -1,0 +1,3337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sitecore.net/client/api/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://sitecore.net/client/api/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sitecore.net/client/api/">
+      <s:element name="About">
+        <s:complexType />
+      </s:element>
+      <s:element name="AboutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AboutResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemFromMaster">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParentItem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMaster" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemFromMasterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddItemFromMasterResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemFromMasterEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParentItem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMaster" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="register" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemFromMasterExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddItemFromMasterExResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemFromTemplate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParentItem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sTemplate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemFromTemplateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddItemFromTemplateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemFromTemplateEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParentItem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sTemplate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="register" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemFromTemplateExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddItemFromTemplateExResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemRevision">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRevision" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddItemRevisionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddItemRevisionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplyExtranetSecurityToChildren">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSecurity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sTemplate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMaster" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplyExtranetSecurityToChildrenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplyExtranetSecurityToChildrenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplySecurityToChildren">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSecurity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sTemplate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMaster" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplySecurityToChildrenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplySecurityToChildrenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplySimpleUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplySimpleUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplySimpleUpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApproveItems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApproveItemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApproveItemsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BackupDatabase">
+        <s:complexType />
+      </s:element>
+      <s:element name="BackupDatabaseResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BuildPackage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="packageName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuildPackageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuildPackageResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CanLogin">
+        <s:complexType />
+      </s:element>
+      <s:element name="CanLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CanLoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CanPublishIncrementally">
+        <s:complexType />
+      </s:element>
+      <s:element name="CanPublishIncrementallyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CanPublishIncrementallyResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CompactDatabase">
+        <s:complexType />
+      </s:element>
+      <s:element name="CompactDatabaseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompactDatabaseResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyItemTo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDestinationID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyItemToResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CopyItemToResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sParent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sMaster" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateDocumentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateMaster">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sTemplate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateMasterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateMasterResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTemplate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateTemplateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateTemplateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteChildren">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="path" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteChildrenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteChildrenResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteDocumentResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemList" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItemResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteItemVersion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sVersion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItemVersionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteItemVersions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sVersions" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItemVersionsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Duplicate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DuplicateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DuplicateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EmptyRecycleBin">
+        <s:complexType />
+      </s:element>
+      <s:element name="EmptyRecycleBinResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EmptyRecycleBinResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EndPreview">
+        <s:complexType />
+      </s:element>
+      <s:element name="EndPreviewResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EndWebEdit">
+        <s:complexType />
+      </s:element>
+      <s:element name="EndWebEditResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExpandLinkedDatabases">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="expanded" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExpandLinkedDatabasesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="FindItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="path" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="recurse" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="previousFound" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindItemResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClientLanguage">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetClientLanguageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientLanguageResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetControlHtml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="controlName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="properties">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="assemblyName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetControlHtmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetControlHtmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDotMenu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDotMenuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDotMenuResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHomeItem">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetHomeItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetHomeItemResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLocalizedString">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLocalizedStringResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLocalizedStringResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMediaInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRevision" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLanguage" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMediaInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMediaInfoResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemField">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sField" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemFieldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemFieldResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemFields">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vFields" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetItemFieldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemFieldsResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemTree">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemPath" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nSublevels" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemTreeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemTreeResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemInfoResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemsInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItems" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemsInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemsInfoResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemMasters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRevision" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLanguage" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemMastersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemMastersResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemPathResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemSecurity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemSecurityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemSecurityResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefaultItemPath">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDefaultItemPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDefaultItemPathResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemTreeXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPath" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nLevels" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemTreeXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemTreeXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRevision" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLanguage" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemXmlResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMediaItems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMediaItemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMediaItemsResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewItemXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="master" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewItemXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewItemXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParentID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParentIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParentIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParentPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="path" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParentPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParentPathResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublishingStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="handle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublishingStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPublishingStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiblingPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="path" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSiblingPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSiblingPathResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetThreadErrors">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="resetListAfterUse" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetThreadErrorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetThreadErrorsResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMethodHtml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="assemblyname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="classname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="methodname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="datasource" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMethodHtmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMethodHtmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetXslFileHtml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="path" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="datasource" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetXslFileHtmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetXslFileHtmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWebPageHtml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="datasource" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWebPageHtmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWebPageHtmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertItemTreeXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sParent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sXml" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bChangeIDs" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertItemTreeXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertItemTreeXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsLoggedIn">
+        <s:complexType />
+      </s:element>
+      <s:element name="IsLoggedInResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsLoggedInResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsSessionValid">
+        <s:complexType />
+      </s:element>
+      <s:element name="IsSessionValidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsSessionValidResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsPreviewing">
+        <s:complexType />
+      </s:element>
+      <s:element name="IsPreviewingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsPreviewingResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsWebEditing">
+        <s:complexType />
+      </s:element>
+      <s:element name="IsWebEditingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsWebEditingResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadLayout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadLayoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadLayoutResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadPublishFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadPublishFileResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LoadXslFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadXslFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadXslFileResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Logout">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogoutResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="MoveItemTo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDestinationID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MoveItemToResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MoveItemToResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewLayout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NewLayoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NewLayoutResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Ping">
+        <s:complexType />
+      </s:element>
+      <s:element name="PingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Publish">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="publishAll" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="rootItemID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="groups" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PublishResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PublishResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PublishItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="itemPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="groups" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="deep" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PublishItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PublishItemResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReloadDatabase">
+        <s:complexType />
+      </s:element>
+      <s:element name="ReloadDatabaseResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RenameItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="itemPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RenameItemResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SaveDatabase">
+        <s:complexType />
+      </s:element>
+      <s:element name="SaveDatabaseResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SaveItemChanges">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveItemChangesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveItemChangesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveItems">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveItemsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SaveLayout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHtml" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sTimestamp" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bOverwrite" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveLayoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveLayoutResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SavePackage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SavePackageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SavePageEditData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SavePageEditDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SavePageEditDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveXslFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sHtml" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sTimestamp" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bOverwrite" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveXslFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveXslFileResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetClientLanguage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLanguage" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetClientLanguageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SetLanguage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sLanguage" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetLanguageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StartPreview">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="isoDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="groups" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StartPreviewResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StartWebEdit">
+        <s:complexType />
+      </s:element>
+      <s:element name="StartWebEditResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="TidyHtml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="html" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TidyHtmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TidyHtmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TidyHtmlEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="html" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="clean" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="filter" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="tidy" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="allowedTags" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TidyHtmlExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TidyHtmlExResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateDocumentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSortorder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parentPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="list" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSortorderResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPackageInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="packageName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPackageInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPackageInfoResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPackageXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="packageName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPackageXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPackageXmlResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportPackage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="packageName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportPackageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ImportPackageResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadPackage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadPackageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadPackageResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResortChildren">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="path" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResortChildrenResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AboutSoapIn">
+    <wsdl:part name="parameters" element="tns:About" />
+  </wsdl:message>
+  <wsdl:message name="AboutSoapOut">
+    <wsdl:part name="parameters" element="tns:AboutResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddItemFromMasterSoapIn">
+    <wsdl:part name="parameters" element="tns:AddItemFromMaster" />
+  </wsdl:message>
+  <wsdl:message name="AddItemFromMasterSoapOut">
+    <wsdl:part name="parameters" element="tns:AddItemFromMasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddItemFromMasterExSoapIn">
+    <wsdl:part name="parameters" element="tns:AddItemFromMasterEx" />
+  </wsdl:message>
+  <wsdl:message name="AddItemFromMasterExSoapOut">
+    <wsdl:part name="parameters" element="tns:AddItemFromMasterExResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddItemFromTemplateSoapIn">
+    <wsdl:part name="parameters" element="tns:AddItemFromTemplate" />
+  </wsdl:message>
+  <wsdl:message name="AddItemFromTemplateSoapOut">
+    <wsdl:part name="parameters" element="tns:AddItemFromTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddItemFromTemplateExSoapIn">
+    <wsdl:part name="parameters" element="tns:AddItemFromTemplateEx" />
+  </wsdl:message>
+  <wsdl:message name="AddItemFromTemplateExSoapOut">
+    <wsdl:part name="parameters" element="tns:AddItemFromTemplateExResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddItemRevisionSoapIn">
+    <wsdl:part name="parameters" element="tns:AddItemRevision" />
+  </wsdl:message>
+  <wsdl:message name="AddItemRevisionSoapOut">
+    <wsdl:part name="parameters" element="tns:AddItemRevisionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApplyExtranetSecurityToChildrenSoapIn">
+    <wsdl:part name="parameters" element="tns:ApplyExtranetSecurityToChildren" />
+  </wsdl:message>
+  <wsdl:message name="ApplyExtranetSecurityToChildrenSoapOut">
+    <wsdl:part name="parameters" element="tns:ApplyExtranetSecurityToChildrenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApplySecurityToChildrenSoapIn">
+    <wsdl:part name="parameters" element="tns:ApplySecurityToChildren" />
+  </wsdl:message>
+  <wsdl:message name="ApplySecurityToChildrenSoapOut">
+    <wsdl:part name="parameters" element="tns:ApplySecurityToChildrenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApplySimpleUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:ApplySimpleUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ApplySimpleUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:ApplySimpleUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApproveItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:ApproveItems" />
+  </wsdl:message>
+  <wsdl:message name="ApproveItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:ApproveItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="BackupDatabaseSoapIn">
+    <wsdl:part name="parameters" element="tns:BackupDatabase" />
+  </wsdl:message>
+  <wsdl:message name="BackupDatabaseSoapOut">
+    <wsdl:part name="parameters" element="tns:BackupDatabaseResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuildPackageSoapIn">
+    <wsdl:part name="parameters" element="tns:BuildPackage" />
+  </wsdl:message>
+  <wsdl:message name="BuildPackageSoapOut">
+    <wsdl:part name="parameters" element="tns:BuildPackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="CanLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:CanLogin" />
+  </wsdl:message>
+  <wsdl:message name="CanLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:CanLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="CanPublishIncrementallySoapIn">
+    <wsdl:part name="parameters" element="tns:CanPublishIncrementally" />
+  </wsdl:message>
+  <wsdl:message name="CanPublishIncrementallySoapOut">
+    <wsdl:part name="parameters" element="tns:CanPublishIncrementallyResponse" />
+  </wsdl:message>
+  <wsdl:message name="CompactDatabaseSoapIn">
+    <wsdl:part name="parameters" element="tns:CompactDatabase" />
+  </wsdl:message>
+  <wsdl:message name="CompactDatabaseSoapOut">
+    <wsdl:part name="parameters" element="tns:CompactDatabaseResponse" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemToSoapIn">
+    <wsdl:part name="parameters" element="tns:CopyItemTo" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemToSoapOut">
+    <wsdl:part name="parameters" element="tns:CopyItemToResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateDocument" />
+  </wsdl:message>
+  <wsdl:message name="CreateDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateMasterSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateMaster" />
+  </wsdl:message>
+  <wsdl:message name="CreateMasterSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateMasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateTemplateSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateTemplate" />
+  </wsdl:message>
+  <wsdl:message name="CreateTemplateSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteChildrenSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteChildren" />
+  </wsdl:message>
+  <wsdl:message name="DeleteChildrenSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteChildrenResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteDocument" />
+  </wsdl:message>
+  <wsdl:message name="DeleteDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteItem" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteItemVersion" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteItemVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemVersionsSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteItemVersions" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemVersionsSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteItemVersionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DuplicateSoapIn">
+    <wsdl:part name="parameters" element="tns:Duplicate" />
+  </wsdl:message>
+  <wsdl:message name="DuplicateSoapOut">
+    <wsdl:part name="parameters" element="tns:DuplicateResponse" />
+  </wsdl:message>
+  <wsdl:message name="EmptyRecycleBinSoapIn">
+    <wsdl:part name="parameters" element="tns:EmptyRecycleBin" />
+  </wsdl:message>
+  <wsdl:message name="EmptyRecycleBinSoapOut">
+    <wsdl:part name="parameters" element="tns:EmptyRecycleBinResponse" />
+  </wsdl:message>
+  <wsdl:message name="EndPreviewSoapIn">
+    <wsdl:part name="parameters" element="tns:EndPreview" />
+  </wsdl:message>
+  <wsdl:message name="EndPreviewSoapOut">
+    <wsdl:part name="parameters" element="tns:EndPreviewResponse" />
+  </wsdl:message>
+  <wsdl:message name="EndWebEditSoapIn">
+    <wsdl:part name="parameters" element="tns:EndWebEdit" />
+  </wsdl:message>
+  <wsdl:message name="EndWebEditSoapOut">
+    <wsdl:part name="parameters" element="tns:EndWebEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExpandLinkedDatabasesSoapIn">
+    <wsdl:part name="parameters" element="tns:ExpandLinkedDatabases" />
+  </wsdl:message>
+  <wsdl:message name="ExpandLinkedDatabasesSoapOut">
+    <wsdl:part name="parameters" element="tns:ExpandLinkedDatabasesResponse" />
+  </wsdl:message>
+  <wsdl:message name="FindItemSoapIn">
+    <wsdl:part name="parameters" element="tns:FindItem" />
+  </wsdl:message>
+  <wsdl:message name="FindItemSoapOut">
+    <wsdl:part name="parameters" element="tns:FindItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClientLanguageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClientLanguage" />
+  </wsdl:message>
+  <wsdl:message name="GetClientLanguageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientLanguageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetControlHtmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetControlHtml" />
+  </wsdl:message>
+  <wsdl:message name="GetControlHtmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetControlHtmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDotMenuSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDotMenu" />
+  </wsdl:message>
+  <wsdl:message name="GetDotMenuSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDotMenuResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHomeItemSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHomeItem" />
+  </wsdl:message>
+  <wsdl:message name="GetHomeItemSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHomeItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLocalizedStringSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLocalizedString" />
+  </wsdl:message>
+  <wsdl:message name="GetLocalizedStringSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLocalizedStringResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMediaInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMediaInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItem" />
+  </wsdl:message>
+  <wsdl:message name="GetItemSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemFieldSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemField" />
+  </wsdl:message>
+  <wsdl:message name="GetItemFieldSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemFieldResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemFieldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemFields" />
+  </wsdl:message>
+  <wsdl:message name="GetItemFieldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemFieldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemTreeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemTree" />
+  </wsdl:message>
+  <wsdl:message name="GetItemTreeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetItemInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemsInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemsInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemMastersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemMasters" />
+  </wsdl:message>
+  <wsdl:message name="GetItemMastersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemMastersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemPathSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemPath" />
+  </wsdl:message>
+  <wsdl:message name="GetItemPathSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemSecuritySoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemSecurity" />
+  </wsdl:message>
+  <wsdl:message name="GetItemSecuritySoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemSecurityResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDefaultItemPathSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDefaultItemPath" />
+  </wsdl:message>
+  <wsdl:message name="GetDefaultItemPathSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDefaultItemPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemTreeXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemTreeXml" />
+  </wsdl:message>
+  <wsdl:message name="GetItemTreeXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemTreeXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemXml" />
+  </wsdl:message>
+  <wsdl:message name="GetItemXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMediaItems" />
+  </wsdl:message>
+  <wsdl:message name="GetMediaItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMediaItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewItemXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewItemXml" />
+  </wsdl:message>
+  <wsdl:message name="GetNewItemXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewItemXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParentIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParentID" />
+  </wsdl:message>
+  <wsdl:message name="GetParentIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParentIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParentPathSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParentPath" />
+  </wsdl:message>
+  <wsdl:message name="GetParentPathSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParentPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPublishingStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPublishingStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetPublishingStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPublishingStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSiblingPathSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiblingPath" />
+  </wsdl:message>
+  <wsdl:message name="GetSiblingPathSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSiblingPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetThreadErrorsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetThreadErrors" />
+  </wsdl:message>
+  <wsdl:message name="GetThreadErrorsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetThreadErrorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMethodHtmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMethodHtml" />
+  </wsdl:message>
+  <wsdl:message name="GetMethodHtmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMethodHtmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetXslFileHtmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetXslFileHtml" />
+  </wsdl:message>
+  <wsdl:message name="GetXslFileHtmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetXslFileHtmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWebPageHtmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWebPageHtml" />
+  </wsdl:message>
+  <wsdl:message name="GetWebPageHtmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWebPageHtmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertItemTreeXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertItemTreeXml" />
+  </wsdl:message>
+  <wsdl:message name="InsertItemTreeXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertItemTreeXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsLoggedInSoapIn">
+    <wsdl:part name="parameters" element="tns:IsLoggedIn" />
+  </wsdl:message>
+  <wsdl:message name="IsLoggedInSoapOut">
+    <wsdl:part name="parameters" element="tns:IsLoggedInResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsSessionValidSoapIn">
+    <wsdl:part name="parameters" element="tns:IsSessionValid" />
+  </wsdl:message>
+  <wsdl:message name="IsSessionValidSoapOut">
+    <wsdl:part name="parameters" element="tns:IsSessionValidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsPreviewingSoapIn">
+    <wsdl:part name="parameters" element="tns:IsPreviewing" />
+  </wsdl:message>
+  <wsdl:message name="IsPreviewingSoapOut">
+    <wsdl:part name="parameters" element="tns:IsPreviewingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsWebEditingSoapIn">
+    <wsdl:part name="parameters" element="tns:IsWebEditing" />
+  </wsdl:message>
+  <wsdl:message name="IsWebEditingSoapOut">
+    <wsdl:part name="parameters" element="tns:IsWebEditingResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadLayoutSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadLayout" />
+  </wsdl:message>
+  <wsdl:message name="LoadLayoutSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadLayoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadPublishFileSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadPublishFile" />
+  </wsdl:message>
+  <wsdl:message name="LoadPublishFileSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadPublishFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadXslFileSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadXslFile" />
+  </wsdl:message>
+  <wsdl:message name="LoadXslFileSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadXslFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapIn">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapOut">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="MoveItemToSoapIn">
+    <wsdl:part name="parameters" element="tns:MoveItemTo" />
+  </wsdl:message>
+  <wsdl:message name="MoveItemToSoapOut">
+    <wsdl:part name="parameters" element="tns:MoveItemToResponse" />
+  </wsdl:message>
+  <wsdl:message name="NewLayoutSoapIn">
+    <wsdl:part name="parameters" element="tns:NewLayout" />
+  </wsdl:message>
+  <wsdl:message name="NewLayoutSoapOut">
+    <wsdl:part name="parameters" element="tns:NewLayoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="PingSoapIn">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="PingSoapOut">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="PublishSoapIn">
+    <wsdl:part name="parameters" element="tns:Publish" />
+  </wsdl:message>
+  <wsdl:message name="PublishSoapOut">
+    <wsdl:part name="parameters" element="tns:PublishResponse" />
+  </wsdl:message>
+  <wsdl:message name="PublishItemSoapIn">
+    <wsdl:part name="parameters" element="tns:PublishItem" />
+  </wsdl:message>
+  <wsdl:message name="PublishItemSoapOut">
+    <wsdl:part name="parameters" element="tns:PublishItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReloadDatabaseSoapIn">
+    <wsdl:part name="parameters" element="tns:ReloadDatabase" />
+  </wsdl:message>
+  <wsdl:message name="ReloadDatabaseSoapOut">
+    <wsdl:part name="parameters" element="tns:ReloadDatabaseResponse" />
+  </wsdl:message>
+  <wsdl:message name="RenameItemSoapIn">
+    <wsdl:part name="parameters" element="tns:RenameItem" />
+  </wsdl:message>
+  <wsdl:message name="RenameItemSoapOut">
+    <wsdl:part name="parameters" element="tns:RenameItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveDatabaseSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveDatabase" />
+  </wsdl:message>
+  <wsdl:message name="SaveDatabaseSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveDatabaseResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveItemChangesSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveItemChanges" />
+  </wsdl:message>
+  <wsdl:message name="SaveItemChangesSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveItemChangesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveItems" />
+  </wsdl:message>
+  <wsdl:message name="SaveItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveLayoutSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveLayout" />
+  </wsdl:message>
+  <wsdl:message name="SaveLayoutSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveLayoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="SavePackageSoapIn">
+    <wsdl:part name="parameters" element="tns:SavePackage" />
+  </wsdl:message>
+  <wsdl:message name="SavePackageSoapOut">
+    <wsdl:part name="parameters" element="tns:SavePackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SavePageEditDataSoapIn">
+    <wsdl:part name="parameters" element="tns:SavePageEditData" />
+  </wsdl:message>
+  <wsdl:message name="SavePageEditDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SavePageEditDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveXslFileSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveXslFile" />
+  </wsdl:message>
+  <wsdl:message name="SaveXslFileSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveXslFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetClientLanguageSoapIn">
+    <wsdl:part name="parameters" element="tns:SetClientLanguage" />
+  </wsdl:message>
+  <wsdl:message name="SetClientLanguageSoapOut">
+    <wsdl:part name="parameters" element="tns:SetClientLanguageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetLanguageSoapIn">
+    <wsdl:part name="parameters" element="tns:SetLanguage" />
+  </wsdl:message>
+  <wsdl:message name="SetLanguageSoapOut">
+    <wsdl:part name="parameters" element="tns:SetLanguageResponse" />
+  </wsdl:message>
+  <wsdl:message name="StartPreviewSoapIn">
+    <wsdl:part name="parameters" element="tns:StartPreview" />
+  </wsdl:message>
+  <wsdl:message name="StartPreviewSoapOut">
+    <wsdl:part name="parameters" element="tns:StartPreviewResponse" />
+  </wsdl:message>
+  <wsdl:message name="StartWebEditSoapIn">
+    <wsdl:part name="parameters" element="tns:StartWebEdit" />
+  </wsdl:message>
+  <wsdl:message name="StartWebEditSoapOut">
+    <wsdl:part name="parameters" element="tns:StartWebEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="TidyHtmlSoapIn">
+    <wsdl:part name="parameters" element="tns:TidyHtml" />
+  </wsdl:message>
+  <wsdl:message name="TidyHtmlSoapOut">
+    <wsdl:part name="parameters" element="tns:TidyHtmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="TidyHtmlExSoapIn">
+    <wsdl:part name="parameters" element="tns:TidyHtmlEx" />
+  </wsdl:message>
+  <wsdl:message name="TidyHtmlExSoapOut">
+    <wsdl:part name="parameters" element="tns:TidyHtmlExResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDocument" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSortorderSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSortorder" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSortorderSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSortorderResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPackageInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPackageInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetPackageInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPackageInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPackageXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPackageXml" />
+  </wsdl:message>
+  <wsdl:message name="GetPackageXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPackageXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImportPackageSoapIn">
+    <wsdl:part name="parameters" element="tns:ImportPackage" />
+  </wsdl:message>
+  <wsdl:message name="ImportPackageSoapOut">
+    <wsdl:part name="parameters" element="tns:ImportPackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadPackageSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadPackage" />
+  </wsdl:message>
+  <wsdl:message name="LoadPackageSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadPackageResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResortChildrenSoapIn">
+    <wsdl:part name="parameters" element="tns:ResortChildren" />
+  </wsdl:message>
+  <wsdl:message name="ResortChildrenSoapOut">
+    <wsdl:part name="parameters" element="tns:ResortChildrenResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Sitecore_x0020_Client_x0020_APISoap">
+    <wsdl:operation name="About">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get About Sitecore information as html</documentation>
+      <wsdl:input message="tns:AboutSoapIn" />
+      <wsdl:output message="tns:AboutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemFromMaster">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Add an item based on a master</documentation>
+      <wsdl:input message="tns:AddItemFromMasterSoapIn" />
+      <wsdl:output message="tns:AddItemFromMasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemFromMasterEx">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Add an item based on a master</documentation>
+      <wsdl:input message="tns:AddItemFromMasterExSoapIn" />
+      <wsdl:output message="tns:AddItemFromMasterExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemFromTemplate">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Add an item based on a template</documentation>
+      <wsdl:input message="tns:AddItemFromTemplateSoapIn" />
+      <wsdl:output message="tns:AddItemFromTemplateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemFromTemplateEx">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Add an item based on a template</documentation>
+      <wsdl:input message="tns:AddItemFromTemplateExSoapIn" />
+      <wsdl:output message="tns:AddItemFromTemplateExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddItemRevision">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Add a new revision to an item</documentation>
+      <wsdl:input message="tns:AddItemRevisionSoapIn" />
+      <wsdl:output message="tns:AddItemRevisionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ApplyExtranetSecurityToChildren">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Apply extranet security to an items children</documentation>
+      <wsdl:input message="tns:ApplyExtranetSecurityToChildrenSoapIn" />
+      <wsdl:output message="tns:ApplyExtranetSecurityToChildrenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ApplySecurityToChildren">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Apply security to an items children</documentation>
+      <wsdl:input message="tns:ApplySecurityToChildrenSoapIn" />
+      <wsdl:output message="tns:ApplySecurityToChildrenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ApplySimpleUpdate">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Apply an update packet in simple format to an item</documentation>
+      <wsdl:input message="tns:ApplySimpleUpdateSoapIn" />
+      <wsdl:output message="tns:ApplySimpleUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ApproveItems">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Approve a list of items</documentation>
+      <wsdl:input message="tns:ApproveItemsSoapIn" />
+      <wsdl:output message="tns:ApproveItemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BackupDatabase">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Backup master database</documentation>
+      <wsdl:input message="tns:BackupDatabaseSoapIn" />
+      <wsdl:output message="tns:BackupDatabaseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuildPackage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Build a package (zip file)</documentation>
+      <wsdl:input message="tns:BuildPackageSoapIn" />
+      <wsdl:output message="tns:BuildPackageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CanLogin">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Checks if all licenses are used</documentation>
+      <wsdl:input message="tns:CanLoginSoapIn" />
+      <wsdl:output message="tns:CanLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CanPublishIncrementally">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Check if master database can be published incrementally</documentation>
+      <wsdl:input message="tns:CanPublishIncrementallySoapIn" />
+      <wsdl:output message="tns:CanPublishIncrementallySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CompactDatabase">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Compact master database</documentation>
+      <wsdl:input message="tns:CompactDatabaseSoapIn" />
+      <wsdl:output message="tns:CompactDatabaseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyItemTo">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Create a copy of an item below another item</documentation>
+      <wsdl:input message="tns:CopyItemToSoapIn" />
+      <wsdl:output message="tns:CopyItemToSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocument">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Create a document based on a master and initialize it</documentation>
+      <wsdl:input message="tns:CreateDocumentSoapIn" />
+      <wsdl:output message="tns:CreateDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateMaster">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Create a new master</documentation>
+      <wsdl:input message="tns:CreateMasterSoapIn" />
+      <wsdl:output message="tns:CreateMasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTemplate">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Create a new template</documentation>
+      <wsdl:input message="tns:CreateTemplateSoapIn" />
+      <wsdl:output message="tns:CreateTemplateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteChildren">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Delete all children of an item</documentation>
+      <wsdl:input message="tns:DeleteChildrenSoapIn" />
+      <wsdl:output message="tns:DeleteChildrenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDocument">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Delete a document</documentation>
+      <wsdl:input message="tns:DeleteDocumentSoapIn" />
+      <wsdl:output message="tns:DeleteDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Delete one or more items</documentation>
+      <wsdl:input message="tns:DeleteItemSoapIn" />
+      <wsdl:output message="tns:DeleteItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemVersion">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Delete a specific version of an item</documentation>
+      <wsdl:input message="tns:DeleteItemVersionSoapIn" />
+      <wsdl:output message="tns:DeleteItemVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemVersions">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Delete multiple versions of an item</documentation>
+      <wsdl:input message="tns:DeleteItemVersionsSoapIn" />
+      <wsdl:output message="tns:DeleteItemVersionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Duplicate">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Duplicate an item</documentation>
+      <wsdl:input message="tns:DuplicateSoapIn" />
+      <wsdl:output message="tns:DuplicateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EmptyRecycleBin">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Empty recycle bin</documentation>
+      <wsdl:input message="tns:EmptyRecycleBinSoapIn" />
+      <wsdl:output message="tns:EmptyRecycleBinSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EndPreview">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">End preview mode</documentation>
+      <wsdl:input message="tns:EndPreviewSoapIn" />
+      <wsdl:output message="tns:EndPreviewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EndWebEdit">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">End web edit mode</documentation>
+      <wsdl:input message="tns:EndWebEditSoapIn" />
+      <wsdl:output message="tns:EndWebEditSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExpandLinkedDatabases">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Expand linked databases</documentation>
+      <wsdl:input message="tns:ExpandLinkedDatabasesSoapIn" />
+      <wsdl:output message="tns:ExpandLinkedDatabasesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FindItem">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Find item</documentation>
+      <wsdl:input message="tns:FindItemSoapIn" />
+      <wsdl:output message="tns:FindItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientLanguage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get client language table</documentation>
+      <wsdl:input message="tns:GetClientLanguageSoapIn" />
+      <wsdl:output message="tns:GetClientLanguageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetControlHtml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get html to render a generic control</documentation>
+      <wsdl:input message="tns:GetControlHtmlSoapIn" />
+      <wsdl:output message="tns:GetControlHtmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDotMenu">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get dot menu for an item</documentation>
+      <wsdl:input message="tns:GetDotMenuSoapIn" />
+      <wsdl:output message="tns:GetDotMenuSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHomeItem">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get home item</documentation>
+      <wsdl:input message="tns:GetHomeItemSoapIn" />
+      <wsdl:output message="tns:GetHomeItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocalizedString">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get a localized string</documentation>
+      <wsdl:input message="tns:GetLocalizedStringSoapIn" />
+      <wsdl:output message="tns:GetLocalizedStringSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaInfo">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get media info (from media lib)</documentation>
+      <wsdl:input message="tns:GetMediaInfoSoapIn" />
+      <wsdl:output message="tns:GetMediaInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItem">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get an item with fields</documentation>
+      <wsdl:input message="tns:GetItemSoapIn" />
+      <wsdl:output message="tns:GetItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemField">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get single item field as xml</documentation>
+      <wsdl:input message="tns:GetItemFieldSoapIn" />
+      <wsdl:output message="tns:GetItemFieldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemFields">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get list of item fields as xml</documentation>
+      <wsdl:input message="tns:GetItemFieldsSoapIn" />
+      <wsdl:output message="tns:GetItemFieldsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemTree">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get item with children as xml (basic info)</documentation>
+      <wsdl:input message="tns:GetItemTreeSoapIn" />
+      <wsdl:output message="tns:GetItemTreeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemInfo">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get basic item info as xml</documentation>
+      <wsdl:input message="tns:GetItemInfoSoapIn" />
+      <wsdl:output message="tns:GetItemInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsInfo">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Gets basic info on a number of items as xml</documentation>
+      <wsdl:input message="tns:GetItemsInfoSoapIn" />
+      <wsdl:output message="tns:GetItemsInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemMasters">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get item masters</documentation>
+      <wsdl:input message="tns:GetItemMastersSoapIn" />
+      <wsdl:output message="tns:GetItemMastersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemPath">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get item path</documentation>
+      <wsdl:input message="tns:GetItemPathSoapIn" />
+      <wsdl:output message="tns:GetItemPathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemSecurity">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get item security</documentation>
+      <wsdl:input message="tns:GetItemSecuritySoapIn" />
+      <wsdl:output message="tns:GetItemSecuritySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultItemPath">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get default item path</documentation>
+      <wsdl:input message="tns:GetDefaultItemPathSoapIn" />
+      <wsdl:output message="tns:GetDefaultItemPathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemTreeXml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get item tree as xml</documentation>
+      <wsdl:input message="tns:GetItemTreeXmlSoapIn" />
+      <wsdl:output message="tns:GetItemTreeXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemXml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get item as xml</documentation>
+      <wsdl:input message="tns:GetItemXmlSoapIn" />
+      <wsdl:output message="tns:GetItemXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaItems">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get list of items from media library</documentation>
+      <wsdl:input message="tns:GetMediaItemsSoapIn" />
+      <wsdl:output message="tns:GetMediaItemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewItemXml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get xml of new item without creating it</documentation>
+      <wsdl:input message="tns:GetNewItemXmlSoapIn" />
+      <wsdl:output message="tns:GetNewItemXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParentID">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get the id of an items parent</documentation>
+      <wsdl:input message="tns:GetParentIDSoapIn" />
+      <wsdl:output message="tns:GetParentIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParentPath">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get the path of an items parent</documentation>
+      <wsdl:input message="tns:GetParentPathSoapIn" />
+      <wsdl:output message="tns:GetParentPathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublishingStatus">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get publishing status</documentation>
+      <wsdl:input message="tns:GetPublishingStatusSoapIn" />
+      <wsdl:output message="tns:GetPublishingStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiblingPath">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get sibling path (following or preceding)</documentation>
+      <wsdl:input message="tns:GetSiblingPathSoapIn" />
+      <wsdl:output message="tns:GetSiblingPathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetThreadErrors">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get list of thread errors (as xml)</documentation>
+      <wsdl:input message="tns:GetThreadErrorsSoapIn" />
+      <wsdl:output message="tns:GetThreadErrorsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMethodHtml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get html to render a Method control</documentation>
+      <wsdl:input message="tns:GetMethodHtmlSoapIn" />
+      <wsdl:output message="tns:GetMethodHtmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetXslFileHtml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get html to render a XslFile control</documentation>
+      <wsdl:input message="tns:GetXslFileHtmlSoapIn" />
+      <wsdl:output message="tns:GetXslFileHtmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWebPageHtml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get html to render a WebPage control</documentation>
+      <wsdl:input message="tns:GetWebPageHtmlSoapIn" />
+      <wsdl:output message="tns:GetWebPageHtmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertItemTreeXml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Insert tree of items below another item</documentation>
+      <wsdl:input message="tns:InsertItemTreeXmlSoapIn" />
+      <wsdl:output message="tns:InsertItemTreeXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsLoggedIn">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Check login status</documentation>
+      <wsdl:input message="tns:IsLoggedInSoapIn" />
+      <wsdl:output message="tns:IsLoggedInSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSessionValid">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Checks if session is valid</documentation>
+      <wsdl:input message="tns:IsSessionValidSoapIn" />
+      <wsdl:output message="tns:IsSessionValidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPreviewing">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Check preview status</documentation>
+      <wsdl:input message="tns:IsPreviewingSoapIn" />
+      <wsdl:output message="tns:IsPreviewingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsWebEditing">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Check web edit status</documentation>
+      <wsdl:input message="tns:IsWebEditingSoapIn" />
+      <wsdl:output message="tns:IsWebEditingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadLayout">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Load a layout</documentation>
+      <wsdl:input message="tns:LoadLayoutSoapIn" />
+      <wsdl:output message="tns:LoadLayoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPublishFile">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Merge a publishing file into the current web database</documentation>
+      <wsdl:input message="tns:LoadPublishFileSoapIn" />
+      <wsdl:output message="tns:LoadPublishFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadXslFile">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Load an XSL file</documentation>
+      <wsdl:input message="tns:LoadXslFileSoapIn" />
+      <wsdl:output message="tns:LoadXslFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Login to the Sitecore Client API</documentation>
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Logout from the Sitecore Client API</documentation>
+      <wsdl:input message="tns:LogoutSoapIn" />
+      <wsdl:output message="tns:LogoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveItemTo">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Move item below another item</documentation>
+      <wsdl:input message="tns:MoveItemToSoapIn" />
+      <wsdl:output message="tns:MoveItemToSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NewLayout">
+      <wsdl:input message="tns:NewLayoutSoapIn" />
+      <wsdl:output message="tns:NewLayoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Pings the Sitecore Server</documentation>
+      <wsdl:input message="tns:PingSoapIn" />
+      <wsdl:output message="tns:PingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Publish">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Publish the database</documentation>
+      <wsdl:input message="tns:PublishSoapIn" />
+      <wsdl:output message="tns:PublishSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PublishItem">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Publish an item</documentation>
+      <wsdl:input message="tns:PublishItemSoapIn" />
+      <wsdl:output message="tns:PublishItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReloadDatabase">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Reload the master database</documentation>
+      <wsdl:input message="tns:ReloadDatabaseSoapIn" />
+      <wsdl:output message="tns:ReloadDatabaseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RenameItem">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Rename an item</documentation>
+      <wsdl:input message="tns:RenameItemSoapIn" />
+      <wsdl:output message="tns:RenameItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveDatabase">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Save the master database</documentation>
+      <wsdl:input message="tns:SaveDatabaseSoapIn" />
+      <wsdl:output message="tns:SaveDatabaseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveItemChanges">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Save single item (only changed fields)</documentation>
+      <wsdl:input message="tns:SaveItemChangesSoapIn" />
+      <wsdl:output message="tns:SaveItemChangesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveItems">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Save multiple items (only changed fields)</documentation>
+      <wsdl:input message="tns:SaveItemsSoapIn" />
+      <wsdl:output message="tns:SaveItemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveLayout">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Save a layout</documentation>
+      <wsdl:input message="tns:SaveLayoutSoapIn" />
+      <wsdl:output message="tns:SaveLayoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePackage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Save a package</documentation>
+      <wsdl:input message="tns:SavePackageSoapIn" />
+      <wsdl:output message="tns:SavePackageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePageEditData">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Save data from page editing</documentation>
+      <wsdl:input message="tns:SavePageEditDataSoapIn" />
+      <wsdl:output message="tns:SavePageEditDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveXslFile">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Save an xsl file</documentation>
+      <wsdl:input message="tns:SaveXslFileSoapIn" />
+      <wsdl:output message="tns:SaveXslFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetClientLanguage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Sets the client language</documentation>
+      <wsdl:input message="tns:SetClientLanguageSoapIn" />
+      <wsdl:output message="tns:SetClientLanguageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetLanguage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Sets the current language</documentation>
+      <wsdl:input message="tns:SetLanguageSoapIn" />
+      <wsdl:output message="tns:SetLanguageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartPreview">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Start preview mode</documentation>
+      <wsdl:input message="tns:StartPreviewSoapIn" />
+      <wsdl:output message="tns:StartPreviewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StartWebEdit">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Start web edit mode</documentation>
+      <wsdl:input message="tns:StartWebEditSoapIn" />
+      <wsdl:output message="tns:StartWebEditSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TidyHtml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Tidy html</documentation>
+      <wsdl:input message="tns:TidyHtmlSoapIn" />
+      <wsdl:output message="tns:TidyHtmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TidyHtmlEx">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Tidy html</documentation>
+      <wsdl:input message="tns:TidyHtmlExSoapIn" />
+      <wsdl:output message="tns:TidyHtmlExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocument">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Update a document</documentation>
+      <wsdl:input message="tns:UpdateDocumentSoapIn" />
+      <wsdl:output message="tns:UpdateDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSortorder">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Update sort order for a list of items</documentation>
+      <wsdl:input message="tns:UpdateSortorderSoapIn" />
+      <wsdl:output message="tns:UpdateSortorderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPackageInfo">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get basic package information (from a zip file)</documentation>
+      <wsdl:input message="tns:GetPackageInfoSoapIn" />
+      <wsdl:output message="tns:GetPackageInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPackageXml">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get package xml (from a zip file)</documentation>
+      <wsdl:input message="tns:GetPackageXmlSoapIn" />
+      <wsdl:output message="tns:GetPackageXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportPackage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Import a package (zip file)</documentation>
+      <wsdl:input message="tns:ImportPackageSoapIn" />
+      <wsdl:output message="tns:ImportPackageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPackage">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Load a package</documentation>
+      <wsdl:input message="tns:LoadPackageSoapIn" />
+      <wsdl:output message="tns:LoadPackageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResortChildren">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Remove sortorder for all children of an item</documentation>
+      <wsdl:input message="tns:ResortChildrenSoapIn" />
+      <wsdl:output message="tns:ResortChildrenSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Sitecore_x0020_Client_x0020_APISoap" type="tns:Sitecore_x0020_Client_x0020_APISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="About">
+      <soap:operation soapAction="http://sitecore.net/client/api/About" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemFromMaster">
+      <soap:operation soapAction="http://sitecore.net/client/api/AddItemFromMaster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemFromMasterEx">
+      <soap:operation soapAction="http://sitecore.net/client/api/AddItemFromMasterEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemFromTemplate">
+      <soap:operation soapAction="http://sitecore.net/client/api/AddItemFromTemplate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemFromTemplateEx">
+      <soap:operation soapAction="http://sitecore.net/client/api/AddItemFromTemplateEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddItemRevision">
+      <soap:operation soapAction="http://sitecore.net/client/api/AddItemRevision" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplyExtranetSecurityToChildren">
+      <soap:operation soapAction="http://sitecore.net/client/api/ApplyExtranetSecurityToChildren" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplySecurityToChildren">
+      <soap:operation soapAction="http://sitecore.net/client/api/ApplySecurityToChildren" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplySimpleUpdate">
+      <soap:operation soapAction="http://sitecore.net/client/api/ApplySimpleUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApproveItems">
+      <soap:operation soapAction="http://sitecore.net/client/api/ApproveItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BackupDatabase">
+      <soap:operation soapAction="http://sitecore.net/client/api/BackupDatabase" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuildPackage">
+      <soap:operation soapAction="http://sitecore.net/client/api/BuildPackage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CanLogin">
+      <soap:operation soapAction="http://sitecore.net/client/api/CanLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CanPublishIncrementally">
+      <soap:operation soapAction="http://sitecore.net/client/api/CanPublishIncrementally" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompactDatabase">
+      <soap:operation soapAction="http://sitecore.net/client/api/CompactDatabase" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyItemTo">
+      <soap:operation soapAction="http://sitecore.net/client/api/CopyItemTo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocument">
+      <soap:operation soapAction="http://sitecore.net/client/api/CreateDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateMaster">
+      <soap:operation soapAction="http://sitecore.net/client/api/CreateMaster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTemplate">
+      <soap:operation soapAction="http://sitecore.net/client/api/CreateTemplate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteChildren">
+      <soap:operation soapAction="http://sitecore.net/client/api/DeleteChildren" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDocument">
+      <soap:operation soapAction="http://sitecore.net/client/api/DeleteDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <soap:operation soapAction="http://sitecore.net/client/api/DeleteItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemVersion">
+      <soap:operation soapAction="http://sitecore.net/client/api/DeleteItemVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemVersions">
+      <soap:operation soapAction="http://sitecore.net/client/api/DeleteItemVersions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Duplicate">
+      <soap:operation soapAction="http://sitecore.net/client/api/Duplicate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EmptyRecycleBin">
+      <soap:operation soapAction="http://sitecore.net/client/api/EmptyRecycleBin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndPreview">
+      <soap:operation soapAction="http://sitecore.net/client/api/EndPreview" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndWebEdit">
+      <soap:operation soapAction="http://sitecore.net/client/api/EndWebEdit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExpandLinkedDatabases">
+      <soap:operation soapAction="http://sitecore.net/client/api/ExpandLinkedDatabases" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindItem">
+      <soap:operation soapAction="http://sitecore.net/client/api/FindItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientLanguage">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetClientLanguage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetControlHtml">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetControlHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDotMenu">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetDotMenu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHomeItem">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetHomeItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocalizedString">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetLocalizedString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaInfo">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetMediaInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItem">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemField">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemField" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemFields">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemFields" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemTree">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemTree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemInfo">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsInfo">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemsInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemMasters">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemMasters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemPath">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemSecurity">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemSecurity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultItemPath">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetDefaultItemPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemTreeXml">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemTreeXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemXml">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetItemXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaItems">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetMediaItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewItemXml">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetNewItemXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParentID">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetParentID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParentPath">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetParentPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublishingStatus">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetPublishingStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiblingPath">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetSiblingPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetThreadErrors">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetThreadErrors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMethodHtml">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetMethodHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetXslFileHtml">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetXslFileHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWebPageHtml">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetWebPageHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertItemTreeXml">
+      <soap:operation soapAction="http://sitecore.net/client/api/InsertItemTreeXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsLoggedIn">
+      <soap:operation soapAction="http://sitecore.net/client/api/IsLoggedIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSessionValid">
+      <soap:operation soapAction="http://sitecore.net/client/api/IsSessionValid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPreviewing">
+      <soap:operation soapAction="http://sitecore.net/client/api/IsPreviewing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsWebEditing">
+      <soap:operation soapAction="http://sitecore.net/client/api/IsWebEditing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadLayout">
+      <soap:operation soapAction="http://sitecore.net/client/api/LoadLayout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPublishFile">
+      <soap:operation soapAction="http://sitecore.net/client/api/LoadPublishFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadXslFile">
+      <soap:operation soapAction="http://sitecore.net/client/api/LoadXslFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://sitecore.net/client/api/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://sitecore.net/client/api/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveItemTo">
+      <soap:operation soapAction="http://sitecore.net/client/api/MoveItemTo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewLayout">
+      <soap:operation soapAction="http://sitecore.net/client/api/NewLayout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://sitecore.net/client/api/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Publish">
+      <soap:operation soapAction="http://sitecore.net/client/api/Publish" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PublishItem">
+      <soap:operation soapAction="http://sitecore.net/client/api/PublishItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReloadDatabase">
+      <soap:operation soapAction="http://sitecore.net/client/api/ReloadDatabase" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenameItem">
+      <soap:operation soapAction="http://sitecore.net/client/api/RenameItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveDatabase">
+      <soap:operation soapAction="http://sitecore.net/client/api/SaveDatabase" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveItemChanges">
+      <soap:operation soapAction="http://sitecore.net/client/api/SaveItemChanges" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveItems">
+      <soap:operation soapAction="http://sitecore.net/client/api/SaveItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveLayout">
+      <soap:operation soapAction="http://sitecore.net/client/api/SaveLayout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePackage">
+      <soap:operation soapAction="http://sitecore.net/client/api/SavePackage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePageEditData">
+      <soap:operation soapAction="http://sitecore.net/client/api/SavePageEditData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveXslFile">
+      <soap:operation soapAction="http://sitecore.net/client/api/SaveXslFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetClientLanguage">
+      <soap:operation soapAction="http://sitecore.net/client/api/SetClientLanguage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetLanguage">
+      <soap:operation soapAction="http://sitecore.net/client/api/SetLanguage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartPreview">
+      <soap:operation soapAction="http://sitecore.net/client/api/StartPreview" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartWebEdit">
+      <soap:operation soapAction="http://sitecore.net/client/api/StartWebEdit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TidyHtml">
+      <soap:operation soapAction="http://sitecore.net/client/api/TidyHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TidyHtmlEx">
+      <soap:operation soapAction="http://sitecore.net/client/api/TidyHtmlEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocument">
+      <soap:operation soapAction="http://sitecore.net/client/api/UpdateDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSortorder">
+      <soap:operation soapAction="http://sitecore.net/client/api/UpdateSortorder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPackageInfo">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetPackageInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPackageXml">
+      <soap:operation soapAction="http://sitecore.net/client/api/GetPackageXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportPackage">
+      <soap:operation soapAction="http://sitecore.net/client/api/ImportPackage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPackage">
+      <soap:operation soapAction="http://sitecore.net/client/api/LoadPackage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResortChildren">
+      <soap:operation soapAction="http://sitecore.net/client/api/ResortChildren" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Sitecore_x0020_Client_x0020_API">
+    <wsdl:port name="Sitecore_x0020_Client_x0020_APISoap" binding="tns:Sitecore_x0020_Client_x0020_APISoap">
+      <soap:address location="http://udvikling.3fi.dk/sitecore/client/api/api.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

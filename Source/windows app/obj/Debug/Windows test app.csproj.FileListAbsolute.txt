@@ -1,0 +1,27 @@
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\Core.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\FilestorageConversionPlugin.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\HtmlToXhtmlPlugin.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\Core.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\FilestorageConversionPlugin.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\HtmlToXhtmlPlugin.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\Windows test app.csprojResolveAssemblyReference.cache
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.AddressForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.CompareForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.CopyOptions.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.Form1.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\CustomControls.LoginControl.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.LoginForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.ProgressForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.ScriptToolForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.SearchReplaceForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.SinglelineInputForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.ViewTextForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\Windows test app.csproj.GenerateResource.Cache
+c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\CMSCommander.exe.config
+c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\CMSCommander.exe
+c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\CMSCommander.pdb
+c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\CMSCommander.exe
+c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\CMSCommander.pdb
+c:\Work\GitHub\CMS-Commander\Source\windows app\bin\Debug\CMSCommander.exe.config
+c:\Work\GitHub\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.exe
+c:\Work\GitHub\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.pdb

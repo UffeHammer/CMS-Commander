@@ -1,0 +1,8 @@
+c:\Work\Cabana.3FSitecore\SitecoreConverter\Core\bin\Release\Core.dll.config
+c:\Work\Cabana.3FSitecore\SitecoreConverter\Core\bin\Release\Core.dll
+c:\Work\Cabana.3FSitecore\SitecoreConverter\Core\bin\Release\Core.XmlSerializers.dll
+c:\Work\Cabana.3FSitecore\SitecoreConverter\Core\bin\Release\Core.pdb
+c:\Work\Cabana.3FSitecore\SitecoreConverter\Core\obj\Release\Core.dll
+c:\Work\Cabana.3FSitecore\SitecoreConverter\Core\obj\Release\Core.pdb
+c:\Work\Cabana.3FSitecore\SitecoreConverter\Core\obj\Release\Core.XmlSerializers.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\Core\obj\Release\SitecoreConverter.Core.csprojResolveAssemblyReference.cache

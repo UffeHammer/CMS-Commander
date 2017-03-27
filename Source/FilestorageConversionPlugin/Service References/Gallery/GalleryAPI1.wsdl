@@ -1,0 +1,1143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Echo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="input" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EchoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EchoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileContextMenu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="appIsDialog" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileContextMenuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FileContextMenuResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DirectoryContextMenu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="directoryPath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DirectoryContextMenuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DirectoryContextMenuResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileExecuteAction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actionName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="option" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FileExecuteActionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DirectoryExecuteAction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actionName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="directoryPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="options" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DirectoryExecuteActionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDownloadFileUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDownloadFileUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDownloadFileUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssignFileUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAssignFileUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssignFileUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSelectFileUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSelectFileUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSelectFileUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUploadFileUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUploadFileUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUploadFileUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUploadFileFromDirectoryUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="directoryPath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUploadFileFromDirectoryUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUploadFileFromDirectoryUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeleteFileUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeleteFileUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDeleteFileUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMultiDeleteFileUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileNames" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMultiDeleteFileUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMultiDeleteFileUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRenameFileUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRenameFileUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRenameFileUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRateFileUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRateFileUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRateFileUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMetadataFileUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMetadataFileUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMetadataFileUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="directoryPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contentArray" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadFileResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUploadedFileToDirectory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="directoryPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filenameSavedAs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContentType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUploadedFileToDirectoryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRenameDirectoryUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="directoryPath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRenameDirectoryUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRenameDirectoryUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeleteDirectoryUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="directoryPath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeleteDirectoryUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDeleteDirectoryUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCreateDirectoryUi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="directoryPath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCreateDirectoryUiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCreateDirectoryUiResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterSelected">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegisterSelectedResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSelected">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSelectedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSelectedResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSelectedAsXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSelectedAsXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSelectedAsXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Search">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sPathID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPathName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchResult" type="tns:ArrayOfSearchItemStruct" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSearchItemStruct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SearchItemStruct" type="tns:SearchItemStruct" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SearchItemStruct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Path" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FullPath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRC32" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Keywords" type="tns:ArrayOfKeyValuePairThatSerializesProperlyOfStringString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Texts" type="tns:ArrayOfKeyValuePairThatSerializesProperlyOfStringString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfKeyValuePairThatSerializesProperlyOfStringString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="KeyValuePairThatSerializesProperlyOfStringString" type="tns:KeyValuePairThatSerializesProperlyOfStringString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="KeyValuePairThatSerializesProperlyOfStringString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetFileInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sFilePath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sCategories" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetFileInfoResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EchoSoapIn">
+    <wsdl:part name="parameters" element="tns:Echo" />
+  </wsdl:message>
+  <wsdl:message name="EchoSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoResponse" />
+  </wsdl:message>
+  <wsdl:message name="FileContextMenuSoapIn">
+    <wsdl:part name="parameters" element="tns:FileContextMenu" />
+  </wsdl:message>
+  <wsdl:message name="FileContextMenuSoapOut">
+    <wsdl:part name="parameters" element="tns:FileContextMenuResponse" />
+  </wsdl:message>
+  <wsdl:message name="DirectoryContextMenuSoapIn">
+    <wsdl:part name="parameters" element="tns:DirectoryContextMenu" />
+  </wsdl:message>
+  <wsdl:message name="DirectoryContextMenuSoapOut">
+    <wsdl:part name="parameters" element="tns:DirectoryContextMenuResponse" />
+  </wsdl:message>
+  <wsdl:message name="FileExecuteActionSoapIn">
+    <wsdl:part name="parameters" element="tns:FileExecuteAction" />
+  </wsdl:message>
+  <wsdl:message name="FileExecuteActionSoapOut">
+    <wsdl:part name="parameters" element="tns:FileExecuteActionResponse" />
+  </wsdl:message>
+  <wsdl:message name="DirectoryExecuteActionSoapIn">
+    <wsdl:part name="parameters" element="tns:DirectoryExecuteAction" />
+  </wsdl:message>
+  <wsdl:message name="DirectoryExecuteActionSoapOut">
+    <wsdl:part name="parameters" element="tns:DirectoryExecuteActionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDownloadFileUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDownloadFileUi" />
+  </wsdl:message>
+  <wsdl:message name="GetDownloadFileUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDownloadFileUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAssignFileUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssignFileUi" />
+  </wsdl:message>
+  <wsdl:message name="GetAssignFileUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssignFileUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSelectFileUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSelectFileUi" />
+  </wsdl:message>
+  <wsdl:message name="GetSelectFileUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSelectFileUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUploadFileUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUploadFileUi" />
+  </wsdl:message>
+  <wsdl:message name="GetUploadFileUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUploadFileUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUploadFileFromDirectoryUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUploadFileFromDirectoryUi" />
+  </wsdl:message>
+  <wsdl:message name="GetUploadFileFromDirectoryUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUploadFileFromDirectoryUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeleteFileUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDeleteFileUi" />
+  </wsdl:message>
+  <wsdl:message name="GetDeleteFileUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDeleteFileUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMultiDeleteFileUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMultiDeleteFileUi" />
+  </wsdl:message>
+  <wsdl:message name="GetMultiDeleteFileUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMultiDeleteFileUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRenameFileUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRenameFileUi" />
+  </wsdl:message>
+  <wsdl:message name="GetRenameFileUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRenameFileUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRateFileUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRateFileUi" />
+  </wsdl:message>
+  <wsdl:message name="GetRateFileUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRateFileUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMetadataFileUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMetadataFileUi" />
+  </wsdl:message>
+  <wsdl:message name="GetMetadataFileUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMetadataFileUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadFile" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUploadedFileToDirectorySoapIn">
+    <wsdl:part name="parameters" element="tns:AddUploadedFileToDirectory" />
+  </wsdl:message>
+  <wsdl:message name="AddUploadedFileToDirectorySoapOut">
+    <wsdl:part name="parameters" element="tns:AddUploadedFileToDirectoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRenameDirectoryUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRenameDirectoryUi" />
+  </wsdl:message>
+  <wsdl:message name="GetRenameDirectoryUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRenameDirectoryUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeleteDirectoryUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDeleteDirectoryUi" />
+  </wsdl:message>
+  <wsdl:message name="GetDeleteDirectoryUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDeleteDirectoryUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCreateDirectoryUiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCreateDirectoryUi" />
+  </wsdl:message>
+  <wsdl:message name="GetCreateDirectoryUiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCreateDirectoryUiResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterSelectedSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterSelected" />
+  </wsdl:message>
+  <wsdl:message name="RegisterSelectedSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterSelectedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSelectedSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSelected" />
+  </wsdl:message>
+  <wsdl:message name="GetSelectedSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSelectedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSelectedAsXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSelectedAsXml" />
+  </wsdl:message>
+  <wsdl:message name="GetSelectedAsXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSelectedAsXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapIn">
+    <wsdl:part name="parameters" element="tns:Search" />
+  </wsdl:message>
+  <wsdl:message name="SearchSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetFileInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:SetFileInfo" />
+  </wsdl:message>
+  <wsdl:message name="SetFileInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:SetFileInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GalleryAPISoap">
+    <wsdl:operation name="Echo">
+      <wsdl:input message="tns:EchoSoapIn" />
+      <wsdl:output message="tns:EchoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FileContextMenu">
+      <wsdl:input message="tns:FileContextMenuSoapIn" />
+      <wsdl:output message="tns:FileContextMenuSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DirectoryContextMenu">
+      <wsdl:input message="tns:DirectoryContextMenuSoapIn" />
+      <wsdl:output message="tns:DirectoryContextMenuSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FileExecuteAction">
+      <wsdl:input message="tns:FileExecuteActionSoapIn" />
+      <wsdl:output message="tns:FileExecuteActionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DirectoryExecuteAction">
+      <wsdl:input message="tns:DirectoryExecuteActionSoapIn" />
+      <wsdl:output message="tns:DirectoryExecuteActionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadFileUi">
+      <wsdl:input message="tns:GetDownloadFileUiSoapIn" />
+      <wsdl:output message="tns:GetDownloadFileUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAssignFileUi">
+      <wsdl:input message="tns:GetAssignFileUiSoapIn" />
+      <wsdl:output message="tns:GetAssignFileUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectFileUi">
+      <wsdl:input message="tns:GetSelectFileUiSoapIn" />
+      <wsdl:output message="tns:GetSelectFileUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUploadFileUi">
+      <wsdl:input message="tns:GetUploadFileUiSoapIn" />
+      <wsdl:output message="tns:GetUploadFileUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUploadFileFromDirectoryUi">
+      <wsdl:input message="tns:GetUploadFileFromDirectoryUiSoapIn" />
+      <wsdl:output message="tns:GetUploadFileFromDirectoryUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeleteFileUi">
+      <wsdl:input message="tns:GetDeleteFileUiSoapIn" />
+      <wsdl:output message="tns:GetDeleteFileUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMultiDeleteFileUi">
+      <wsdl:input message="tns:GetMultiDeleteFileUiSoapIn" />
+      <wsdl:output message="tns:GetMultiDeleteFileUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRenameFileUi">
+      <wsdl:input message="tns:GetRenameFileUiSoapIn" />
+      <wsdl:output message="tns:GetRenameFileUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRateFileUi">
+      <wsdl:input message="tns:GetRateFileUiSoapIn" />
+      <wsdl:output message="tns:GetRateFileUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMetadataFileUi">
+      <wsdl:input message="tns:GetMetadataFileUiSoapIn" />
+      <wsdl:output message="tns:GetMetadataFileUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <wsdl:input message="tns:UploadFileSoapIn" />
+      <wsdl:output message="tns:UploadFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUploadedFileToDirectory">
+      <wsdl:input message="tns:AddUploadedFileToDirectorySoapIn" />
+      <wsdl:output message="tns:AddUploadedFileToDirectorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRenameDirectoryUi">
+      <wsdl:input message="tns:GetRenameDirectoryUiSoapIn" />
+      <wsdl:output message="tns:GetRenameDirectoryUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeleteDirectoryUi">
+      <wsdl:input message="tns:GetDeleteDirectoryUiSoapIn" />
+      <wsdl:output message="tns:GetDeleteDirectoryUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreateDirectoryUi">
+      <wsdl:input message="tns:GetCreateDirectoryUiSoapIn" />
+      <wsdl:output message="tns:GetCreateDirectoryUiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterSelected">
+      <wsdl:input message="tns:RegisterSelectedSoapIn" />
+      <wsdl:output message="tns:RegisterSelectedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelected">
+      <wsdl:input message="tns:GetSelectedSoapIn" />
+      <wsdl:output message="tns:GetSelectedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectedAsXml">
+      <wsdl:input message="tns:GetSelectedAsXmlSoapIn" />
+      <wsdl:output message="tns:GetSelectedAsXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <wsdl:input message="tns:SearchSoapIn" />
+      <wsdl:output message="tns:SearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetFileInfo">
+      <wsdl:input message="tns:SetFileInfoSoapIn" />
+      <wsdl:output message="tns:SetFileInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GalleryAPISoap" type="tns:GalleryAPISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Echo">
+      <soap:operation soapAction="http://tempuri.org/Echo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileContextMenu">
+      <soap:operation soapAction="http://tempuri.org/FileContextMenu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectoryContextMenu">
+      <soap:operation soapAction="http://tempuri.org/DirectoryContextMenu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileExecuteAction">
+      <soap:operation soapAction="http://tempuri.org/FileExecuteAction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectoryExecuteAction">
+      <soap:operation soapAction="http://tempuri.org/DirectoryExecuteAction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadFileUi">
+      <soap:operation soapAction="http://tempuri.org/GetDownloadFileUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssignFileUi">
+      <soap:operation soapAction="http://tempuri.org/GetAssignFileUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectFileUi">
+      <soap:operation soapAction="http://tempuri.org/GetSelectFileUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUploadFileUi">
+      <soap:operation soapAction="http://tempuri.org/GetUploadFileUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUploadFileFromDirectoryUi">
+      <soap:operation soapAction="http://tempuri.org/GetUploadFileFromDirectoryUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeleteFileUi">
+      <soap:operation soapAction="http://tempuri.org/GetDeleteFileUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMultiDeleteFileUi">
+      <soap:operation soapAction="http://tempuri.org/GetMultiDeleteFileUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRenameFileUi">
+      <soap:operation soapAction="http://tempuri.org/GetRenameFileUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRateFileUi">
+      <soap:operation soapAction="http://tempuri.org/GetRateFileUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMetadataFileUi">
+      <soap:operation soapAction="http://tempuri.org/GetMetadataFileUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <soap:operation soapAction="http://tempuri.org/UploadFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUploadedFileToDirectory">
+      <soap:operation soapAction="http://tempuri.org/AddUploadedFileToDirectory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRenameDirectoryUi">
+      <soap:operation soapAction="http://tempuri.org/GetRenameDirectoryUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeleteDirectoryUi">
+      <soap:operation soapAction="http://tempuri.org/GetDeleteDirectoryUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreateDirectoryUi">
+      <soap:operation soapAction="http://tempuri.org/GetCreateDirectoryUi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterSelected">
+      <soap:operation soapAction="http://tempuri.org/RegisterSelected" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelected">
+      <soap:operation soapAction="http://tempuri.org/GetSelected" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectedAsXml">
+      <soap:operation soapAction="http://tempuri.org/GetSelectedAsXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap:operation soapAction="http://tempuri.org/Search" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFileInfo">
+      <soap:operation soapAction="http://tempuri.org/SetFileInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GalleryAPISoap12" type="tns:GalleryAPISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Echo">
+      <soap12:operation soapAction="http://tempuri.org/Echo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileContextMenu">
+      <soap12:operation soapAction="http://tempuri.org/FileContextMenu" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectoryContextMenu">
+      <soap12:operation soapAction="http://tempuri.org/DirectoryContextMenu" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileExecuteAction">
+      <soap12:operation soapAction="http://tempuri.org/FileExecuteAction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectoryExecuteAction">
+      <soap12:operation soapAction="http://tempuri.org/DirectoryExecuteAction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadFileUi">
+      <soap12:operation soapAction="http://tempuri.org/GetDownloadFileUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssignFileUi">
+      <soap12:operation soapAction="http://tempuri.org/GetAssignFileUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectFileUi">
+      <soap12:operation soapAction="http://tempuri.org/GetSelectFileUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUploadFileUi">
+      <soap12:operation soapAction="http://tempuri.org/GetUploadFileUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUploadFileFromDirectoryUi">
+      <soap12:operation soapAction="http://tempuri.org/GetUploadFileFromDirectoryUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeleteFileUi">
+      <soap12:operation soapAction="http://tempuri.org/GetDeleteFileUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMultiDeleteFileUi">
+      <soap12:operation soapAction="http://tempuri.org/GetMultiDeleteFileUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRenameFileUi">
+      <soap12:operation soapAction="http://tempuri.org/GetRenameFileUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRateFileUi">
+      <soap12:operation soapAction="http://tempuri.org/GetRateFileUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMetadataFileUi">
+      <soap12:operation soapAction="http://tempuri.org/GetMetadataFileUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <soap12:operation soapAction="http://tempuri.org/UploadFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUploadedFileToDirectory">
+      <soap12:operation soapAction="http://tempuri.org/AddUploadedFileToDirectory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRenameDirectoryUi">
+      <soap12:operation soapAction="http://tempuri.org/GetRenameDirectoryUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeleteDirectoryUi">
+      <soap12:operation soapAction="http://tempuri.org/GetDeleteDirectoryUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreateDirectoryUi">
+      <soap12:operation soapAction="http://tempuri.org/GetCreateDirectoryUi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterSelected">
+      <soap12:operation soapAction="http://tempuri.org/RegisterSelected" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelected">
+      <soap12:operation soapAction="http://tempuri.org/GetSelected" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectedAsXml">
+      <soap12:operation soapAction="http://tempuri.org/GetSelectedAsXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Search">
+      <soap12:operation soapAction="http://tempuri.org/Search" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFileInfo">
+      <soap12:operation soapAction="http://tempuri.org/SetFileInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GalleryAPI">
+    <wsdl:port name="GalleryAPISoap" binding="tns:GalleryAPISoap">
+      <soap:address location="http://gallery.web02.cabana.dk/GalleryAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GalleryAPISoap12" binding="tns:GalleryAPISoap12">
+      <soap12:address location="http://gallery.web02.cabana.dk/GalleryAPI.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

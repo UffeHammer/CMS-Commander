@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CreateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sFullName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sRoles" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bIsAdmin" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Credentials">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CustomData" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainRole" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateRoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateRoleResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRoles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRolesResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddRoleToRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainRole" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sTargetRole" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddRoleToRoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddRoleToRoleResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainRole" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteRoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteRoleResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sDomainUsers" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteUsersResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetRight">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strDatabase" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strItem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strRights" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="rightState" type="tns:AccessPermission" />
+            <s:element minOccurs="1" maxOccurs="1" name="propagationType" type="tns:PropagationType" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="AccessPermission">
+        <s:restriction base="s:string">
+          <s:enumeration value="NotSet" />
+          <s:enumeration value="Allow" />
+          <s:enumeration value="Deny" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="PropagationType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unknown" />
+          <s:enumeration value="Descendants" />
+          <s:enumeration value="Entity" />
+          <s:enumeration value="Any" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SetRightResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRight">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strDatabase" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strItem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strAccount" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="rightState" type="tns:SecurityPermission" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="SecurityPermission">
+        <s:restriction base="s:string">
+          <s:enumeration value="NotSet" />
+          <s:enumeration value="AllowAccess" />
+          <s:enumeration value="DenyAccess" />
+          <s:enumeration value="AllowInheritance" />
+          <s:enumeration value="DenyInheritance" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetRightResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRightResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccessRights">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccessRightsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccessRightsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateStandardValues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strItem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateStandardValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateStandardValuesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="buffer" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="Offset" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFileResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UploadMedia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sitecorePath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="buffer" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="Offset" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadMediaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadMediaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItemResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EnableIndexing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="enable" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnableIndexingResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InstallZipPackage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="path" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InstallZipPackageResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateRole" />
+  </wsdl:message>
+  <wsdl:message name="CreateRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRoles" />
+  </wsdl:message>
+  <wsdl:message name="GetRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddRoleToRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:AddRoleToRole" />
+  </wsdl:message>
+  <wsdl:message name="AddRoleToRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:AddRoleToRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteRole" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteUsers" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetRightSoapIn">
+    <wsdl:part name="parameters" element="tns:SetRight" />
+  </wsdl:message>
+  <wsdl:message name="SetRightSoapOut">
+    <wsdl:part name="parameters" element="tns:SetRightResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRightSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRight" />
+  </wsdl:message>
+  <wsdl:message name="GetRightSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRightResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccessRightsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccessRights" />
+  </wsdl:message>
+  <wsdl:message name="GetAccessRightsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccessRightsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateStandardValuesSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateStandardValues" />
+  </wsdl:message>
+  <wsdl:message name="CreateStandardValuesSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateStandardValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadFile" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadMediaSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadMedia" />
+  </wsdl:message>
+  <wsdl:message name="UploadMediaSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadMediaResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteItem" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnableIndexingSoapIn">
+    <wsdl:part name="parameters" element="tns:EnableIndexing" />
+  </wsdl:message>
+  <wsdl:message name="EnableIndexingSoapOut">
+    <wsdl:part name="parameters" element="tns:EnableIndexingResponse" />
+  </wsdl:message>
+  <wsdl:message name="InstallZipPackageSoapIn">
+    <wsdl:part name="parameters" element="tns:InstallZipPackage" />
+  </wsdl:message>
+  <wsdl:message name="InstallZipPackageSoapOut">
+    <wsdl:part name="parameters" element="tns:InstallZipPackageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SecuritySoap">
+    <wsdl:operation name="CreateUser">
+      <wsdl:input message="tns:CreateUserSoapIn" />
+      <wsdl:output message="tns:CreateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRole">
+      <wsdl:input message="tns:CreateRoleSoapIn" />
+      <wsdl:output message="tns:CreateRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <wsdl:input message="tns:GetRolesSoapIn" />
+      <wsdl:output message="tns:GetRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRoleToRole">
+      <wsdl:input message="tns:AddRoleToRoleSoapIn" />
+      <wsdl:output message="tns:AddRoleToRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <wsdl:input message="tns:DeleteRoleSoapIn" />
+      <wsdl:output message="tns:DeleteRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUsers">
+      <wsdl:input message="tns:DeleteUsersSoapIn" />
+      <wsdl:output message="tns:DeleteUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetRight">
+      <wsdl:input message="tns:SetRightSoapIn" />
+      <wsdl:output message="tns:SetRightSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRight">
+      <wsdl:input message="tns:GetRightSoapIn" />
+      <wsdl:output message="tns:GetRightSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccessRights">
+      <wsdl:input message="tns:GetAccessRightsSoapIn" />
+      <wsdl:output message="tns:GetAccessRightsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateStandardValues">
+      <wsdl:input message="tns:CreateStandardValuesSoapIn" />
+      <wsdl:output message="tns:CreateStandardValuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <wsdl:input message="tns:UploadFileSoapIn" />
+      <wsdl:output message="tns:UploadFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadMedia">
+      <wsdl:input message="tns:UploadMediaSoapIn" />
+      <wsdl:output message="tns:UploadMediaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <wsdl:input message="tns:DeleteItemSoapIn" />
+      <wsdl:output message="tns:DeleteItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnableIndexing">
+      <wsdl:input message="tns:EnableIndexingSoapIn" />
+      <wsdl:output message="tns:EnableIndexingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InstallZipPackage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Installs a Sitecore Zip Package.</wsdl:documentation>
+      <wsdl:input message="tns:InstallZipPackageSoapIn" />
+      <wsdl:output message="tns:InstallZipPackageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SecuritySoap" type="tns:SecuritySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://tempuri.org/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRole">
+      <soap:operation soapAction="http://tempuri.org/CreateRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <soap:operation soapAction="http://tempuri.org/GetRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRoleToRole">
+      <soap:operation soapAction="http://tempuri.org/AddRoleToRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <soap:operation soapAction="http://tempuri.org/DeleteRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUsers">
+      <soap:operation soapAction="http://tempuri.org/DeleteUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRight">
+      <soap:operation soapAction="http://tempuri.org/SetRight" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRight">
+      <soap:operation soapAction="http://tempuri.org/GetRight" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccessRights">
+      <soap:operation soapAction="http://tempuri.org/GetAccessRights" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateStandardValues">
+      <soap:operation soapAction="http://tempuri.org/CreateStandardValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <soap:operation soapAction="http://tempuri.org/UploadFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadMedia">
+      <soap:operation soapAction="http://tempuri.org/UploadMedia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <soap:operation soapAction="http://tempuri.org/DeleteItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnableIndexing">
+      <soap:operation soapAction="http://tempuri.org/EnableIndexing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InstallZipPackage">
+      <soap:operation soapAction="http://tempuri.org/InstallZipPackage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SecuritySoap12" type="tns:SecuritySoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateUser">
+      <soap12:operation soapAction="http://tempuri.org/CreateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRole">
+      <soap12:operation soapAction="http://tempuri.org/CreateRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <soap12:operation soapAction="http://tempuri.org/GetRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRoleToRole">
+      <soap12:operation soapAction="http://tempuri.org/AddRoleToRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <soap12:operation soapAction="http://tempuri.org/DeleteRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUsers">
+      <soap12:operation soapAction="http://tempuri.org/DeleteUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRight">
+      <soap12:operation soapAction="http://tempuri.org/SetRight" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRight">
+      <soap12:operation soapAction="http://tempuri.org/GetRight" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccessRights">
+      <soap12:operation soapAction="http://tempuri.org/GetAccessRights" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateStandardValues">
+      <soap12:operation soapAction="http://tempuri.org/CreateStandardValues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <soap12:operation soapAction="http://tempuri.org/UploadFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadMedia">
+      <soap12:operation soapAction="http://tempuri.org/UploadMedia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <soap12:operation soapAction="http://tempuri.org/DeleteItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnableIndexing">
+      <soap12:operation soapAction="http://tempuri.org/EnableIndexing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InstallZipPackage">
+      <soap12:operation soapAction="http://tempuri.org/InstallZipPackage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Security">
+    <wsdl:port name="SecuritySoap" binding="tns:SecuritySoap">
+      <soap:address location="http://local3fsitecore/sitecore%20modules/Shell/ExtendedSitecoreAPI/Security.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SecuritySoap12" binding="tns:SecuritySoap12">
+      <soap12:address location="http://local3fsitecore/sitecore%20modules/Shell/ExtendedSitecoreAPI/Security.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,8 @@
+C:\Work\Cabana.3FSitecore\SitecoreConverter\FilestorageConversionPlugin\bin\Debug\FilestorageConversionPlugin.dll.config
+C:\Work\Cabana.3FSitecore\SitecoreConverter\FilestorageConversionPlugin\bin\Debug\FilestorageConversionPlugin.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\FilestorageConversionPlugin\bin\Debug\FilestorageConversionPlugin.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\FilestorageConversionPlugin\bin\Debug\Core.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\FilestorageConversionPlugin\bin\Debug\Core.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.csprojResolveAssemblyReference.cache
+C:\Work\Cabana.3FSitecore\SitecoreConverter\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.pdb

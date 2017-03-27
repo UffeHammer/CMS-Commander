@@ -1,0 +1,78 @@
+
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">	
+    <head> 
+        <title>SDU pdf viewer</title>         
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <style type="text/css" media="screen"> 
+			html, body	{ height:100%; }
+			body { margin:0; padding:0; overflow:auto; }   
+			#flashContent { display:none; }
+        </style> 
+		
+		<link rel="stylesheet" type="text/css" href="css/flexpaper.css" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.extensions.min.js"></script>
+		<script type="text/javascript" src="js/flexpaper.js"></script>
+		<script type="text/javascript" src="js/flexpaper_handlers.js"></script>
+    </head> 
+    <body>
+			<div id="documentViewer" class="flexpaper_viewer" style="width:100%;height:100%"></div>
+	        
+	        <script type="text/javascript">   
+		        function getDocumentUrl(document){
+					return "services/view.ashx?doc={doc}&format={format}&page={page}".replace("{doc}",document);     
+		        }
+		        
+		        function getDocQueryServiceUrl(document){
+		        	return "services/swfsize.ashx?doc={doc}&page={page}".replace("{doc}",document);
+		        }
+
+
+		        var sInitViewMode = "TwoPage";
+
+		        
+		        var startDocument = "/mediafiles/D/0/C/{D0C8A41C-6571-4A29-B982-E228A6C980D1}folder engelsk SWF 14 01 2015.pdf";
+	        
+	            $('#documentViewer').FlexPaperViewer(
+                       {
+                           config: {
+
+                               // PDFFile: 'pdf/sitecore_search_and_indexing_guide_sc70-usletter.pdf',
+                               PDFFile: escape(startDocument),
+                               // DOC: escape(getDocumentUrl(startDocument)),
+
+                               Scale: 1.5,
+                               ZoomTransition: 'easeOut',
+                               ZoomTime: 0.5,
+                               ZoomInterval: 0.1,
+                               FitPageOnLoad: false,
+                               FitWidthOnLoad: true,
+                               FullScreenAsMaxWindow: false,
+                               ProgressiveLoading: true,
+                               MinZoomSize: 0.2,
+                               MaxZoomSize: 5,
+                               SearchMatchAll: false,
+                               InitViewMode: sInitViewMode, // TwoPage, Portrait
+                               RenderingOrder: 'html5',
+                               StartAtPage: '',
+
+                               ViewModeToolsVisible: true,
+                               ZoomToolsVisible: true,
+                               NavToolsVisible: true,
+                               CursorToolsVisible: true,
+                               SearchToolsVisible: true,
+                               WMode: 'transparent',
+
+                               JSONDataType: 'jsonp',
+                               key: '$648479dcca29e85e43f',
+
+                               localeChain: 'dn_DN'
+                           }
+                       }
+                );
+	        </script>
+   </body> 
+</html> 
