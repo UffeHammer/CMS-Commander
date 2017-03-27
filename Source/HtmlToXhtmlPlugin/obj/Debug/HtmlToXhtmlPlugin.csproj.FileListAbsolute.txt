@@ -5,3 +5,10 @@ C:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\bin\Debug\Core.pdb
 C:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.csprojResolveAssemblyReference.cache
 C:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.dll
 C:\Work\Cabana.3FSitecore\SitecoreConverter\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.pdb
+c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\HtmlToXhtmlPlugin.dll
+c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\HtmlToXhtmlPlugin.pdb
+c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\Core.dll
+c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\Core.pdb
+c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.csprojResolveAssemblyReference.cache
+c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.dll
+c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.pdb

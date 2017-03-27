@@ -53,7 +53,7 @@ namespace SitecoreConverter
         {
             lbCompareResult.Items.Clear();
             _rightItemsFound.Clear();
-            _rightItemsFound.Clear();
+            _leftItemsFound.Clear();
 
             btnCompare.Enabled = false;
             _leftStartItem.Options.Language = comboFromLanguage.Text;
@@ -80,10 +80,14 @@ namespace SitecoreConverter
         private Guid LOCKGUID = new Guid("{001dd393-96c5-490b-924a-b0f25cd9efd8}");
         
         private void Compare(IItem leftRootItem, IItem rightRootItem)
-        {
-            IItem[] rightChildren = rightRootItem.GetChildren();
-            IItem[] leftChildren = leftRootItem.GetChildren();
-            foreach (IItem leftItem in leftRootItem.GetChildren())
+        {            
+            List <IItem> rightChildren = new List<IItem>(rightRootItem.GetChildren());
+            rightChildren.Add(rightRootItem.GetItem(rightRootItem.ID));
+
+            List<IItem> leftChildren = new List<IItem>(leftRootItem.GetChildren());
+            leftChildren.Add(leftRootItem.GetItem(leftRootItem.ID));
+
+            foreach (IItem leftItem in leftChildren)
             {
                 if (_bStop)
                     return;
@@ -91,7 +95,7 @@ namespace SitecoreConverter
                 tbSearchingIn.Text = leftItem.Path;
 
                 // Find the correct right hand item
-                IItem rightItem = rightChildren.FindItem(leftItem.ID);
+                IItem rightItem = rightChildren.Find(x =>x.ID == leftItem.ID);
                 if (rightItem == null)
                 {
                     lbCompareResult.Items.Add(leftItem.Path + "  --> item not found in " + rightRootItem.Options.HostName);
@@ -136,16 +140,17 @@ namespace SitecoreConverter
                     }
 
                     // Compare all other fields than the Revision, which might always be different
-                    if ((leftField.Content.ToLower() != rightField.Content.ToLower()) &&
-                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(REVISIONGUID)) &&
-                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(UPDATEDGUID)) &&
-                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(UPDATEDBYGUID)) &&
-                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(CREATEDGUID)) &&                        
-                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(CREATEDBYGUID)) &&
-                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(OWNERGUID))
+                    if ((leftField.Content.ToLower() != rightField.Content.ToLower())// &&
+//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(REVISIONGUID)) &&
+//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(UPDATEDGUID)) &&
+//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(UPDATEDBYGUID)) &&
+//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(CREATEDGUID)) &&                        
+//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(CREATEDBYGUID)) &&
+//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(OWNERGUID))
                         )
                     {
-                        lbCompareResult.Items.Add(leftItem.Path);
+                        if (!lbCompareResult.Items.Contains(leftItem.Path))
+                            lbCompareResult.Items.Add(leftItem.Path + " - Field: " + leftField.Name + " has different content.");
                         _leftItemsFound.Add(leftItem.ID.ToString(), leftItem);
                         _rightItemsFound.Add(rightItem.ID.ToString(), rightItem);
 
@@ -167,7 +172,7 @@ namespace SitecoreConverter
             // Find left hand source
             foreach (IItem rightItem in rightChildren)
             {
-                IItem leftItem = leftChildren.FindItem(rightItem.ID);
+                IItem leftItem = leftChildren.Find(x => x.ID == rightItem.ID); 
                 if (leftItem == null)
                 {
                     lbCompareResult.Items.Add(rightItem.Path + "  --> item not found in " + leftRootItem.Options.HostName);

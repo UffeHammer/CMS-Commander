@@ -58,7 +58,7 @@ namespace SitecoreConverter.Plugins
                         (tmpItem.Templates[0].Name.ToLower() == "fff.industrysectorclubwebsite"))
                     {
                         // Try to get real gallery folder ID
-                        IField field = Util.GetFieldByName("GalleryFolderID", tmpItem.Fields);
+                        IField field = tmpItem.Fields.GetFieldByName("GalleryFolderID");
                         // We are still at the same department, _sLastDepartmentName is still valid
                         if (field.Content.ToUpper() == _sLastDepartmentID)
                             break;

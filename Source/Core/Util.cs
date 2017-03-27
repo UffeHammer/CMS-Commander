@@ -197,7 +197,7 @@ namespace SitecoreConverter.Core
             return false;
         }
 
-        public static IField GetFieldByName(string sName, IField[] fields)
+        public static IField GetFieldByName(this IField[] fields, string sName)
         {
             foreach (IField field in fields)
             {

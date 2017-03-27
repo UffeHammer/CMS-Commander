@@ -5,3 +5,10 @@ C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI\obj\Debug\Extend
 C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.pdb
 C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.dll.config
 C:\Work\Cabana.3FSitecore\SitecoreConverter\ExtendedSitecoreAPI\bin\Sitecore.Kernel.xml
+c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.csprojResolveAssemblyReference.cache
+c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.dll.config
+c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.dll
+c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.pdb
+c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\bin\Sitecore.Kernel.xml
+c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.dll
+c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.pdb

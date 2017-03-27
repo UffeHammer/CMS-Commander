@@ -45,13 +45,13 @@ namespace SitecoreConverter.Core.Plugins
                 if (sourceTemplate.Name.ToLower() != _PluginOptions[3].Value.ToLower())
                     continue;
 
-                IField field = Util.GetFieldByName("__publish", destinationItem.Fields);
+                IField field = destinationItem.Fields.GetFieldByName("__publish");
                 if (field == null)
                 {
-                    field = Util.GetFieldByName("__valid to", destinationItem.Fields);
+                    field = destinationItem.Fields.GetFieldByName("__valid to");
                     if (field == null)
                     {
-                        field = Util.GetFieldByName("__created", destinationItem.Fields);
+                        field = destinationItem.Fields.GetFieldByName("__created");
                     }
                 }
                 if (field == null)

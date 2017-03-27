@@ -4,3 +4,9 @@ C:\Work\Cabana.3FSitecore\SitecoreConverter\Core\bin\Debug\Core.pdb
 C:\Work\Cabana.3FSitecore\SitecoreConverter\Core\obj\Debug\Core.dll
 C:\Work\Cabana.3FSitecore\SitecoreConverter\Core\obj\Debug\Core.pdb
 C:\Work\Cabana.3FSitecore\SitecoreConverter\Core\obj\Debug\SitecoreConverter.Core.csprojResolveAssemblyReference.cache
+c:\Work\Github\CMS-Commander\Source\Core\bin\Debug\Core.dll.config
+c:\Work\Github\CMS-Commander\Source\Core\bin\Debug\Core.dll
+c:\Work\Github\CMS-Commander\Source\Core\bin\Debug\Core.pdb
+c:\Work\Github\CMS-Commander\Source\Core\obj\Debug\SitecoreConverter.Core.csprojResolveAssemblyReference.cache
+c:\Work\Github\CMS-Commander\Source\Core\obj\Debug\Core.dll
+c:\Work\Github\CMS-Commander\Source\Core\obj\Debug\Core.pdb

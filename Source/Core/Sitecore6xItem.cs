@@ -252,7 +252,7 @@ namespace SitecoreConverter.Core
             if (_sitecoreApi == null)
                 throw new Exception("sitecoreApi not set please call constructor with API object");
 
-            XmlNode itemNode = _sitecoreApi.GetChildren("{" + _ID.ToString().ToUpper() + "}", Util.CurrentDatabase, _credentials);
+            XmlNode itemNode = _sitecoreApi.GetChildren("{" + _ID.ToString().ToUpper() + "}", _Options.Database, _credentials);
 
             XmlNodeList nodeList = itemNode.SelectNodes("./item");
             List<Sitecore6xItem> children = new List<Sitecore6xItem>();
@@ -276,7 +276,20 @@ namespace SitecoreConverter.Core
                 else
                     attr.Value = "0";
                 item.Attributes.Append(attr);
-                children.Add(new Sitecore6xItem(item, this, _sitecoreApi, _credentials, _Options));
+                Sitecore6xItem item6X = new Sitecore6xItem(item, this, _sitecoreApi, _credentials, _Options);
+
+                // If icon is missing then get it from the templates, this cannot be done in the item constructor as it would result in Stackoverflow because of endless looping.
+                // But it will cost a little extra because some templates have to be fetched from the server.
+                if (item6X.Icon == "")
+                {
+                    foreach (Sitecore6xItem template in item6X.Templates)
+                    {
+                        if (template.Icon != "")
+                            item6X.Icon = template.Icon;
+                    }
+                }
+                children.Add(item6X);
+
 
             }
             return children.ToArray();
@@ -303,17 +316,17 @@ namespace SitecoreConverter.Core
             }
             else
             {
-/*
-                // We are copying a template item
-                if (_TemplateID == _guidTemplateForTemplates)
-                {
-                    string sTemplateIDs = Util.GuidToSitecoreID(_guidTemplateForTemplates) + "|" + baseTemplateNode.InnerText;
-                    _sTemplateIDs = sTemplateIDs.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-                }
-                // Copying normal item
-                else 
- */ 
-                    _sTemplateIDs = baseTemplateNode.InnerText.Split('|');
+                /*
+                                // We are copying a template item
+                                if (_TemplateID == _guidTemplateForTemplates)
+                                {
+                                    string sTemplateIDs = Util.GuidToSitecoreID(_guidTemplateForTemplates) + "|" + baseTemplateNode.InnerText;
+                                    _sTemplateIDs = sTemplateIDs.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                                }
+                                // Copying normal item
+                                else 
+                 */
+                _sTemplateIDs = baseTemplateNode.InnerText.Split('|'); //.Reverse().ToArray();
             }
 
             // _sParentID = itemNode.Attributes["parentid"].Value;
@@ -323,7 +336,7 @@ namespace SitecoreConverter.Core
 
             _sPath = "";
             string sItemVersion = GetItemVersion(itemNode);
-            XmlNode contentNode = _sitecoreApi.GetItemFields(Util.GuidToSitecoreID(_ID), this.Options.Language, sItemVersion, bAllFields, Util.CurrentDatabase, _credentials);
+            XmlNode contentNode = _sitecoreApi.GetItemFields(Util.GuidToSitecoreID(_ID), this.Options.Language, sItemVersion, bAllFields, _Options.Database, _credentials);
             XmlNodeList paths = contentNode.SelectNodes("/path/item");
             foreach (XmlNode path in paths)
             {
@@ -365,7 +378,10 @@ namespace SitecoreConverter.Core
                             try
                             {
                                 templateFieldNode = GetItemXml(field.TemplateFieldID);
-                                _Options.ExistingTemplateFields.Add(field.TemplateFieldID, templateFieldNode);
+                                // Test again because of error
+                                XmlNode tmpFieldNode = null;
+                                if (!_Options.ExistingTemplateFields.TryGetValue(field.TemplateFieldID, out tmpFieldNode))                                    
+                                    _Options.ExistingTemplateFields.Add(field.TemplateFieldID, templateFieldNode);
                             }
                             catch (Exception ex)
                             {
@@ -420,7 +436,7 @@ namespace SitecoreConverter.Core
             if ((_sPath.ToLower().IndexOf("/sitecore/templates") > -1) && (_sPath.ToLower().IndexOf("/sitecore/templates/Branches") == -1) && 
                 (_sName != "__Standard Values"))
             {
-                XmlNode childrenNode = _sitecoreApi.GetChildren("{" + _ID.ToString().ToUpper() + "}", Util.CurrentDatabase, _credentials);
+                XmlNode childrenNode = _sitecoreApi.GetChildren("{" + _ID.ToString().ToUpper() + "}", _Options.Database, _credentials);
 
                 XmlNodeList nodeList = childrenNode.SelectNodes("./item");
                 foreach (XmlNode node in nodeList)
@@ -431,9 +447,11 @@ namespace SitecoreConverter.Core
                     {
                         lock (_Options.ExistingTemplateFields)
                         {
-
                             item = GetItemXml(node.Attributes["id"].Value);
-                            _Options.ExistingTemplateFields.Add(node.Attributes["id"].Value, item);
+                            XmlNode tempItem = null;
+                            // Test again because of error
+                            if (!_Options.ExistingTemplateFields.TryGetValue(node.Attributes["id"].Value, out tempItem))
+                                _Options.ExistingTemplateFields.Add(node.Attributes["id"].Value, item);
                         }
                     }
 
@@ -444,7 +462,7 @@ namespace SitecoreConverter.Core
                     {
                         sSection = item.Attributes["name"].Value;
 
-                        XmlNode sectionChildNodes = _sitecoreApi.GetChildren(node.Attributes["id"].Value, Util.CurrentDatabase, _credentials);
+                        XmlNode sectionChildNodes = _sitecoreApi.GetChildren(node.Attributes["id"].Value, _Options.Database, _credentials);
                         foreach (XmlNode tempNode in sectionChildNodes.SelectNodes("./item"))
                         {
                             XmlNode templateFieldNode = null;
@@ -452,9 +470,11 @@ namespace SitecoreConverter.Core
                             {
                                 lock (_Options.ExistingTemplateFields)
                                 {
-
                                     templateFieldNode = GetItemXml(tempNode.Attributes["id"].Value);
-                                    _Options.ExistingTemplateFields.Add(tempNode.Attributes["id"].Value, templateFieldNode);
+                                    XmlNode tempItem = null;
+                                    // Test again because of error
+                                    if (!_Options.ExistingTemplateFields.TryGetValue(tempNode.Attributes["id"].Value, out tempItem))
+                                        _Options.ExistingTemplateFields.Add(tempNode.Attributes["id"].Value, templateFieldNode);
                                 }
                             }
                             Sitecore6xField field = new Sitecore6xField(
@@ -592,13 +612,13 @@ namespace SitecoreConverter.Core
 
         public void CopyTo(IItem CopyTo, string sName)
         {
-            XmlNode retVal = _sitecoreApi.CopyTo(this.ID, CopyTo.ID, sName, Util.CurrentDatabase, _credentials);
+            XmlNode retVal = _sitecoreApi.CopyTo(this.ID, CopyTo.ID, sName, _Options.Database, _credentials);
             CheckSitecoreReturnValue(retVal);
         }
 
         public bool MoveTo(IItem MoveTo)
         {
-            XmlNode retVal = _sitecoreApi.MoveTo(this.ID, MoveTo.ID, Util.CurrentDatabase, _credentials);
+            XmlNode retVal = _sitecoreApi.MoveTo(this.ID, MoveTo.ID, _Options.Database, _credentials);
             if (retVal.SelectSingleNode("status").InnerText != "ok")
                 return false;
             else
@@ -612,7 +632,7 @@ namespace SitecoreConverter.Core
 
         public void Delete()
         {
-            _sitecoreApi.Delete(Util.GuidToSitecoreID(_ID), true, Util.CurrentDatabase, _credentials);
+            _sitecoreApi.Delete(Util.GuidToSitecoreID(_ID), true, _Options.Database, _credentials);
         }
 
         public void Save()
@@ -630,7 +650,7 @@ namespace SitecoreConverter.Core
         public string AddFromTemplate(string sName, string sTemplatePath)
         {
             Sitecore6xItem template = GetSitecore61Item(sTemplatePath);
-            XmlNode resultNode = _sitecoreApi.AddFromTemplate(this.ID, template.ID, sName, Util.CurrentDatabase, _credentials);
+            XmlNode resultNode = _sitecoreApi.AddFromTemplate(this.ID, template.ID, sName, _Options.Database, _credentials);
             CheckSitecoreReturnValue(resultNode);
             return resultNode.SelectSingleNode("//data/data").InnerText;
         }
@@ -650,7 +670,7 @@ namespace SitecoreConverter.Core
 
         public string[] GetLanguages()
         {
-            XmlNode languagesNode = _sitecoreApi.GetLanguages(Util.CurrentDatabase, _credentials);
+            XmlNode languagesNode = _sitecoreApi.GetLanguages(_Options.Database, _credentials);
             XmlNodeList languageList = languagesNode.SelectNodes("language");
             string[] result = new string[languageList.Count];
             for (int t = 0; t < languageList.Count; t++)
@@ -729,7 +749,7 @@ namespace SitecoreConverter.Core
             string sItemName = Util.MakeValidNodeName(sName);
 
             // Create new template from the standard template
-            XmlNode resultNode = CheckSitecoreReturnValue(_sitecoreApi.AddFromTemplate(sParentPath, sStandardTemplateID, sItemName, Util.CurrentDatabase, _credentials));
+            XmlNode resultNode = CheckSitecoreReturnValue(_sitecoreApi.AddFromTemplate(sParentPath, sStandardTemplateID, sItemName, _Options.Database, _credentials));
 
             // Only set template id if one is given
             if (toTemplateID != "")
@@ -741,11 +761,11 @@ namespace SitecoreConverter.Core
                 newTemplateNode.Attributes["id"].Value = toTemplateID;
 
                 // Remove temporary template
-                _sitecoreApi.Delete(sNewTemplateID, false, Util.CurrentDatabase, _credentials);
+                _sitecoreApi.Delete(sNewTemplateID, false, _Options.Database, _credentials);
 
                 // Create new template with the source (CopyFrom template) id
                 CheckSitecoreReturnValue(
-                    _sitecoreApi.InsertXML(sParentPath, newTemplateNode.OuterXml, false, Util.CurrentDatabase, _credentials));
+                    _sitecoreApi.InsertXML(sParentPath, newTemplateNode.OuterXml, false, _Options.Database, _credentials));
             }
             else
             {
@@ -776,14 +796,14 @@ namespace SitecoreConverter.Core
         private XmlNode GetItemXml(string sPath)
         {
             XmlNode result = CheckSitecoreReturnValue(
-                                _sitecoreApi.GetXML(sPath, false, Util.CurrentDatabase, _credentials));
+                                _sitecoreApi.GetXML(sPath, false, _Options.Database, _credentials));
             result = result.SelectSingleNode("//item");
             return result;
         }
 
         private string GetItemAttribute(string sPath, string sAttribute)
         {
-            XmlNode itemNode = _sitecoreApi.GetXML(sPath, false, Util.CurrentDatabase, _credentials);
+            XmlNode itemNode = _sitecoreApi.GetXML(sPath, false, _Options.Database, _credentials);
             itemNode = itemNode.SelectSingleNode("//item");
             if (itemNode == null)
                 return null;
@@ -832,7 +852,7 @@ namespace SitecoreConverter.Core
             string sName = sFieldTemplate.Remove(0, sFieldTemplate.LastIndexOf("/") + 1);
             string sKey = sFieldTemplate.Remove(0, sFieldTemplate.LastIndexOf("/") + 1).ToLower();
             // Field already exist, just replace content
-            IField existingField = Util.GetFieldByName(sName, templateFieldItem.Fields);
+            IField existingField = templateFieldItem.Fields.GetFieldByName(sName);
             if (existingField != null)
                 existingField.Content = sContent;
             else
@@ -876,7 +896,7 @@ namespace SitecoreConverter.Core
             if (dataSectionID == null)
             {
                 // Create new "Template section" item from the "Template section" template
-                XmlNode resultNode = _sitecoreApi.AddFromTemplate(sTemplatePath, templateSectionID, templateSectionName, Util.CurrentDatabase, _credentials);
+                XmlNode resultNode = _sitecoreApi.AddFromTemplate(sTemplatePath, templateSectionID, templateSectionName, _Options.Database, _credentials);
                 CheckSitecoreReturnValue(resultNode);
                 dataSectionID = resultNode.SelectSingleNode("//data/data").InnerText;
                 Sitecore6xItem dataSectionItem = GetSitecore61Item(dataSectionID);
@@ -998,18 +1018,18 @@ namespace SitecoreConverter.Core
                             //                Sitecore6xItem standardValuesItem = templateItem.GetSitecore61Item(templateItem.Path + "/__Standard Values");
                             // standardValuesItem = CreateItem(templateItem.Path, Util.GuidToSitecoreID(templateItem.ID), "__Standard Values");
                             CheckSitecoreReturnValue(_sitecoreApi.AddVersion(
-                                            standardValuesItem.ID, this.Options.Language, Util.CurrentDatabase, _credentials));
+                                            standardValuesItem.ID, this.Options.Language, _Options.Database, _credentials));
 
                             // Fix issue in sitecore 8 where display name sometimes contains??
                             // But causes a lot of problems in earlier versions, do not enable!!!
-                            IField displayNameField = Util.GetFieldByName("__Display name", fromTemplate.Fields);
+                            IField displayNameField = fromTemplate.Fields.GetFieldByName("__Display name");
                             if ((displayNameField != null) && (displayNameField.Content == templateItem.Name))
                             {
                                 displayNameField.Content = "";
                             }
 
                             // Remove any locks
-                            IField destLockField = Util.GetFieldByName("__Lock", fromTemplate.Fields);
+                            IField destLockField = fromTemplate.Fields.GetFieldByName("__Lock");
                             if (destLockField != null)
                             {
                                 if (destLockField.Content.ToLower().Contains("owner"))
@@ -1317,7 +1337,7 @@ namespace SitecoreConverter.Core
                 if ((versionNodes == null) || (versionNodes.Count == 0))
                 {
                     // If language version is missing, we create it
-                    CheckSitecoreReturnValue(_sitecoreApi.AddVersion(sNewItemID, this.Options.Language, Util.CurrentDatabase, _credentials));
+                    CheckSitecoreReturnValue(_sitecoreApi.AddVersion(sNewItemID, this.Options.Language, _Options.Database, _credentials));
                     contentItem = GetItemXml(sNewItemID);
                 }
                 else
@@ -1336,7 +1356,7 @@ namespace SitecoreConverter.Core
                     }
 
                     // Paste into parent this.ID without changing ID's
-                    CheckSitecoreReturnValue(_sitecoreApi.InsertXML(this.ID, contentItem.OuterXml, false, Util.CurrentDatabase, _credentials));
+                    CheckSitecoreReturnValue(_sitecoreApi.InsertXML(this.ID, contentItem.OuterXml, false, _Options.Database, _credentials));
 
                     // Should get returnItem even though it already existed, the fields might have been updated
                     if (this.Options.CopyOperation == CopyOperations.UseNames)
@@ -1350,11 +1370,19 @@ namespace SitecoreConverter.Core
                 AddFieldFromTemplate(returnItem, "/sitecore/templates/System/Templates/Sections/Appearance/Appearance/__Sortorder", CopyFrom.SortOrder);
                 returnItem.SortOrder = CopyFrom.SortOrder;
 
+                // Name has been changed
+                if (returnItem.Name != CopyFrom.Name)
+                {
+                    CheckSitecoreReturnValue(_sitecoreApi.Rename(returnItem.ID, CopyFrom.Name, _Options.Database, _credentials));
+                    returnItem.Name = CopyFrom.Name;
+                }
+
+
                 // Copy all the fields
                 foreach (IField fromField in CopyFrom.Fields)
                 {
                     // Fetch field using Key this is neccesary because the field constructor only reads the key, not the name
-                    IField toField = Util.GetFieldByName(fromField.Key, returnItem.Fields);
+                    IField toField = returnItem.Fields.GetFieldByName(fromField.Key);
                     if (toField == null)
                     {
                         Sitecore6xField field = new Sitecore6xField(fromField.Name, fromField.Key,
@@ -1380,7 +1408,7 @@ namespace SitecoreConverter.Core
 
 
                 // Remove any locks
-                IField destLockField = Util.GetFieldByName("__Lock", returnItem.Fields);
+                IField destLockField = returnItem.Fields.GetFieldByName("__Lock");
                 if (destLockField != null)
                 {
                     if (destLockField.Content.ToLower().Contains("owner"))
@@ -1408,7 +1436,7 @@ namespace SitecoreConverter.Core
                             Util.AddWarning("Error requesting file from: " + sUrl + ", media will not be copied (message: " + ex.Message + ").");
                             break;
                         }
-                        IField extField = Util.GetFieldByName("Extension", CopyFrom.Fields);
+                        IField extField = CopyFrom.Fields.GetFieldByName("Extension");
 
                         MemoryStream memStream = new MemoryStream();
                         Util.CopyStream(stream, memStream);
@@ -1466,13 +1494,13 @@ namespace SitecoreConverter.Core
 
 
 
-                        IField blobField = Util.GetFieldByName("Blob", mediaItem.Fields);
+                        IField blobField = mediaItem.Fields.GetFieldByName("Blob");
                         // If no blob field is present then there is no media to transfer
                         if (blobField == null)
                             break;
 
                         // Copy Blob id
-                        IField destBlobField = Util.GetFieldByName("Blob", returnItem.Fields);
+                        IField destBlobField = returnItem.Fields.GetFieldByName("Blob");
                         if (destBlobField != null)
                             destBlobField.Content = blobField.Content;
                         else
@@ -1484,12 +1512,12 @@ namespace SitecoreConverter.Core
                         }
 
                         // Clear out path, because we just added a blob
-                        IField fileField = Util.GetFieldByName("File Path", returnItem.Fields);
+                        IField fileField = returnItem.Fields.GetFieldByName("File Path");
                         if (fileField != null) 
                             fileField.Content = "";
 
                         // Create destination icon field
-                        IField destIconField = Util.GetFieldByName("__Icon", returnItem.Fields);
+                        IField destIconField = returnItem.Fields.GetFieldByName("__Icon" );
                         if (destIconField != null)
                             destIconField.Content = "~/media/" + sNewItemID.Replace("{", "").Replace("}", "").Replace("-", "").ToLower() + ".ashx?h=16&thn=1&w=16";
 
@@ -1590,11 +1618,11 @@ namespace SitecoreConverter.Core
                             // Get existing rights and subtract them from the ones we want to set
                             if (! this.Options.SetItemRightsExplicitly)
                             {
-                                string sExistingRights = ExtendedWebService.GetRight(Util.CurrentDatabase, returnItem.ID, CopyFrom.Roles[t].Name,
+                                string sExistingRights = ExtendedWebService.GetRight(_Options.Database, returnItem.ID, CopyFrom.Roles[t].Name,
                                                             SitecoreConverter.Core.ExtendedSitecoreAPI.SecurityPermission.AllowAccess, credential);
                                 sRight = Util.SubtractRights(sExistingRights, sRight);
 
-                                string sExistingDenyRights = ExtendedWebService.GetRight(Util.CurrentDatabase, returnItem.ID, CopyFrom.Roles[t].Name,
+                                string sExistingDenyRights = ExtendedWebService.GetRight(_Options.Database, returnItem.ID, CopyFrom.Roles[t].Name,
                                                             SitecoreConverter.Core.ExtendedSitecoreAPI.SecurityPermission.DenyAccess, credential);
                                 sDenyRight = Util.SubtractRights(sExistingDenyRights, sDenyRight);
                             }
@@ -1634,7 +1662,7 @@ namespace SitecoreConverter.Core
                             // We also need to set rights
                             if (sRight != "")
                             {
-                                ExtendedWebService.SetRight(Util.CurrentDatabase,
+                                ExtendedWebService.SetRight(_Options.Database,
                                             returnItem.ID, sRole, sRight,
                                             SitecoreConverter.Core.ExtendedSitecoreAPI.AccessPermission.Allow,
                                             SitecoreConverter.Core.ExtendedSitecoreAPI.PropagationType.Any,
@@ -1642,7 +1670,7 @@ namespace SitecoreConverter.Core
                             }
                             if (sDenyRight != "")
                             {
-                                ExtendedWebService.SetRight(Util.CurrentDatabase,
+                                ExtendedWebService.SetRight(_Options.Database,
                                             returnItem.ID, sRole, sDenyRight,
                                             SitecoreConverter.Core.ExtendedSitecoreAPI.AccessPermission.Deny,
                                             SitecoreConverter.Core.ExtendedSitecoreAPI.PropagationType.Any,
@@ -1669,7 +1697,7 @@ namespace SitecoreConverter.Core
             // Create special XmlDocument that _sitecoreApi.Save() expects, for some 
             // weird reason this is not the same as _sitecoreApi.InsertXml().
             XmlDocument doc = new XmlDocument();
-            XmlElement sitecoreElem = doc.CreateElement("sitecore");
+            XmlElement sitecoreElem = doc.CreateElement("sitecore");            
             doc.AppendChild(sitecoreElem);
 
             // Update existing fields
@@ -1688,7 +1716,7 @@ namespace SitecoreConverter.Core
 
             }
             // Save item 
-            CheckSitecoreReturnValue(_sitecoreApi.Save(doc.OuterXml, Util.CurrentDatabase, _credentials));
+            CheckSitecoreReturnValue(_sitecoreApi.Save(doc.OuterXml, _Options.Database, _credentials));
         }
 
         /// <summary>
@@ -1823,7 +1851,7 @@ namespace SitecoreConverter.Core
                 _Options.ExistingTemplates.TryGetValue(sItemPath.ToLower(), out baseItem);
                 return baseItem as Sitecore6xItem;
             }
-            XmlNode node = _sitecoreApi.GetXML(sItemPath, false, Util.CurrentDatabase, _credentials);
+            XmlNode node = _sitecoreApi.GetXML(sItemPath, false, _Options.Database, _credentials);
             XmlNode statusNode = node.SelectSingleNode("status");
             if (statusNode.InnerText == "failed")
                 return null;
@@ -1840,7 +1868,7 @@ namespace SitecoreConverter.Core
 
         public static Sitecore6xItem GetItem(string sItemPath, Sitecore61.VisualSitecoreService sitecoreApi, Sitecore61.Credentials credentials, ConverterOptions Options)
         {
-            XmlNode node = sitecoreApi.GetXML(sItemPath, false, Util.CurrentDatabase, credentials);
+            XmlNode node = sitecoreApi.GetXML(sItemPath, false, Options.Database, credentials);
             Sitecore6xItem item = new Sitecore6xItem(node.SelectSingleNode("//item"), null, sitecoreApi, credentials, Options);
             return item;
         }

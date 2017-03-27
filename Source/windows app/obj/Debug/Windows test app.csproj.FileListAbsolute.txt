@@ -12,16 +12,17 @@ C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConver
 C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\CustomControls.LoginControl.resources
 C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.LoginForm.resources
 C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.ProgressForm.resources
-C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.ScriptToolForm.resources
 C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.SearchReplaceForm.resources
 C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.SinglelineInputForm.resources
 C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.ViewTextForm.resources
 C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\Windows test app.csproj.GenerateResource.Cache
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\CMSCommander.exe.config
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\CMSCommander.exe
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\CMSCommander.pdb
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\CMSCommander.exe
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\CMSCommander.pdb
-c:\Work\GitHub\CMS-Commander\Source\windows app\bin\Debug\CMSCommander.exe.config
-c:\Work\GitHub\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.exe
-c:\Work\GitHub\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.ScriptToolForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\CMSCommander.exe.config
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\CMSCommander.exe
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Debug\CMSCommander.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\CMSCommander.exe
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\CMSCommander.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConverter.ItemEditForm.resources
+c:\Work\Github\CMS-Commander\Source\windows app\bin\Debug\CMSCommander.exe.config
+c:\Work\Github\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.exe
+c:\Work\Github\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.pdb

@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using SitecoreConverter.Core;
 using System.Threading;
+using System.Globalization;
+using System.IO;
+using System.Diagnostics;
 
 namespace SitecoreConverter
 {
@@ -29,12 +32,12 @@ namespace SitecoreConverter
         {
             btnSearch.Enabled = false;   
             _startItem.Options.Language = comboFromLanguage.Text;
-            Search(_startItem, tbSearchFor.Text);
+            Search(_startItem, tbSearchName.Text, tbSearchForContent.Text, tbSearchForTemplate.Text);
             _bStop = false;
             btnSearch.Enabled = true;
         }
 
-        private void Search(IItem rootItem, string sFind)
+        private void Search(IItem rootItem, string sFindName, string sFindContent, string sFindTemplate)
         {            
             foreach (IItem item in rootItem.GetChildren())
             {
@@ -42,25 +45,64 @@ namespace SitecoreConverter
                     return;
 
                 tbSearchingIn.Text = item.Path;
-                foreach (IField field in item.Fields)
+                if (sFindName != "")
                 {
-                    if (field.Content.ToLower().IndexOf(sFind.ToLower()) > -1)
+                    if (item.Name.ToLower().IndexOf(sFindName.ToLower()) > -1)
                     {
                         lbSearchResult.Items.Add(item.Path);
                         lock (_itemsFound)
                         {
-                            _itemsFound.Add(item.Path, item);
-                        }                        
-                        break;
+                            if (!_itemsFound.ContainsKey(item.Path))
+                                _itemsFound.Add(item.Path, item);
+                        }
                     }
                 }
+
+                // Search for content?
+                if (sFindContent != "")
+                {
+                    foreach (IField field in item.Fields)
+                    {
+                        if (field.Content.ToLower().IndexOf(sFindContent.ToLower()) > -1)
+                        {
+                            lbSearchResult.Items.Add(item.Path);
+                            lock (_itemsFound)
+                            {
+                                if (!_itemsFound.ContainsKey(item.Path))
+                                    _itemsFound.Add(item.Path, item);
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                if (sFindTemplate != "")
+                {
+                    // {CE6AB190-29A4-4757-9FB2-122FBF4E78D9}
+                    foreach (IItem template in item.Templates)
+                    {
+                        if ((template.Name.ToLower().IndexOf(sFindTemplate.ToLower()) > -1) ||
+                            (template.ID.ToLower().IndexOf(sFindTemplate.ToLower()) > -1))
+                        {
+                            lbSearchResult.Items.Add(item.Path);
+                            lock (_itemsFound)
+                            {
+                                if (!_itemsFound.ContainsKey(item.Path))
+                                    _itemsFound.Add(item.Path, item);
+                            }
+                        }
+                    }
+
+                }
+
+
                 Application.DoEvents();
                 _myExpandNode(item);
 
                 Application.DoEvents();
                 if (item.HasChildren())
                 {
-                    Search(item, sFind);
+                    Search(item, sFindName, sFindContent, sFindTemplate);
                 }
             }            
         }
@@ -68,6 +110,13 @@ namespace SitecoreConverter
         private void SearchReplaceForm_Shown(object sender, EventArgs e)
         {
             lblFromPath.Text = _startItem.Path;
+
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            for (int t = 0; t < comboFromLanguage.Items.Count; t++)
+            {
+                if (comboFromLanguage.Items[t].ToString().ToLower() == currentCulture.TwoLetterISOLanguageName.ToLower())
+                    comboFromLanguage.SelectedIndex = t;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -89,5 +138,28 @@ namespace SitecoreConverter
             
         }
 
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            string fileName = System.IO.Path.GetTempPath() + "Report_" + Guid.NewGuid().ToString() + ".txt";
+
+            // create a writer and open the file
+            TextWriter tw = new StreamWriter(fileName);
+
+            for (int t = 0; t < lbSearchResult.Items.Count; t++)
+            {
+                // write a line of text to the file
+                tw.WriteLine(lbSearchResult.Items[t].ToString());
+            }
+
+            // close the stream
+            tw.Close();
+
+            Process notePad = new Process();
+
+            notePad.StartInfo.FileName = "notepad.exe";
+            notePad.StartInfo.Arguments = fileName;
+            notePad.Start();
+        }
     }
 }

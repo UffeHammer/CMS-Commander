@@ -1,23 +1,23 @@
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\Core.dll
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\FilestorageConversionPlugin.dll
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\HtmlToXhtmlPlugin.dll
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\Core.pdb
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\FilestorageConversionPlugin.pdb
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\HtmlToXhtmlPlugin.pdb
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\Core.XmlSerializers.dll
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\Windows test app.csprojResolveAssemblyReference.cache
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.CompareForm.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.CopyOptions.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.Form1.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\CustomControls.LoginControl.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.LoginForm.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.ProgressForm.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.SearchReplaceForm.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.SinglelineInputForm.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.ViewTextForm.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\Windows test app.csproj.GenerateResource.Cache
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\CMSCommander.exe.config
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\CMSCommander.exe
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\Core.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\FilestorageConversionPlugin.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\HtmlToXhtmlPlugin.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\Core.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\FilestorageConversionPlugin.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\HtmlToXhtmlPlugin.pdb
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\Core.XmlSerializers.dll
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\Windows test app.csprojResolveAssemblyReference.cache
 C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.AddressForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.CompareForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.CopyOptions.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.Form1.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\CustomControls.LoginControl.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.LoginForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.ProgressForm.resources
 C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.ScriptToolForm.resources
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\CMSCommander.exe.config
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\bin\Release\CMSCommander.exe
-c:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\CMSCommander.exe
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.SearchReplaceForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.SinglelineInputForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\SitecoreConverter.ViewTextForm.resources
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\Windows test app.csproj.GenerateResource.Cache
+C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Release\CMSCommander.exe

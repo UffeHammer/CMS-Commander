@@ -39,13 +39,13 @@ namespace SitecoreConverter.Core.Plugins
                 return true;
 
             // Skip if status field is set
-            IField statusField = Util.GetFieldByName(_PluginOptions[1].Value, sourceItem.Fields);
+            IField statusField = sourceItem.Fields.GetFieldByName(_PluginOptions[1].Value);
             if (statusField == null)
             {
                 foreach (IItem template in sourceItem.Templates)
                 {
                     // Template has standard values
-                    statusField = Util.GetFieldByName(_PluginOptions[1].Value, template.Fields);
+                    statusField = template.Fields.GetFieldByName(_PluginOptions[1].Value);
                     if (statusField != null)
                         break;
                 }

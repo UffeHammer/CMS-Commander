@@ -60,6 +60,8 @@ namespace SitecoreConverter
         private Button btnInstall;
         private OpenFileDialog openFileDialog1;
         private Button btnTransferFieldsTool;
+        private ComboBox comboDatabaseLeft;
+        private ComboBox comboDatabaseRight;
         private Exception _globalException = null;
 
 
@@ -95,6 +97,9 @@ namespace SitecoreConverter
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // From 8bit ugly to 32bit beautyful
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             string version = fvi.FileVersion;
@@ -232,6 +237,8 @@ namespace SitecoreConverter
             this.btnInstall = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnTransferFieldsTool = new System.Windows.Forms.Button();
+            this.comboDatabaseLeft = new System.Windows.Forms.ComboBox();
+            this.comboDatabaseRight = new System.Windows.Forms.ComboBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -239,7 +246,7 @@ namespace SitecoreConverter
             // 
             // tbLeftServerURL
             // 
-            this.tbLeftServerURL.Location = new System.Drawing.Point(94, 36);
+            this.tbLeftServerURL.Location = new System.Drawing.Point(198, 37);
             this.tbLeftServerURL.Name = "tbLeftServerURL";
             this.tbLeftServerURL.Size = new System.Drawing.Size(147, 20);
             this.tbLeftServerURL.TabIndex = 0;
@@ -248,7 +255,7 @@ namespace SitecoreConverter
             // 
             // tbLeftConnect
             // 
-            this.tbLeftConnect.Location = new System.Drawing.Point(241, 34);
+            this.tbLeftConnect.Location = new System.Drawing.Point(345, 35);
             this.tbLeftConnect.Name = "tbLeftConnect";
             this.tbLeftConnect.Size = new System.Drawing.Size(62, 20);
             this.tbLeftConnect.TabIndex = 2;
@@ -258,7 +265,7 @@ namespace SitecoreConverter
             // tbRightConnect
             // 
             this.tbRightConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRightConnect.Location = new System.Drawing.Point(732, 34);
+            this.tbRightConnect.Location = new System.Drawing.Point(1013, 34);
             this.tbRightConnect.Name = "tbRightConnect";
             this.tbRightConnect.Size = new System.Drawing.Size(60, 20);
             this.tbRightConnect.TabIndex = 4;
@@ -268,7 +275,7 @@ namespace SitecoreConverter
             // tbRightServerURL
             // 
             this.tbRightServerURL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRightServerURL.Location = new System.Drawing.Point(587, 35);
+            this.tbRightServerURL.Location = new System.Drawing.Point(868, 35);
             this.tbRightServerURL.Name = "tbRightServerURL";
             this.tbRightServerURL.Size = new System.Drawing.Size(145, 20);
             this.tbRightServerURL.TabIndex = 8;
@@ -281,10 +288,8 @@ namespace SitecoreConverter
             this.comboSiteTypeRight.Items.AddRange(new object[] {
             "Sitecore43",
             "Sitecore5x",
-            "Sitecore6x-8x",
-            // "Umbraco6x"
-            });
-            this.comboSiteTypeRight.Location = new System.Drawing.Point(497, 35);
+            "Sitecore6x-8x"});
+            this.comboSiteTypeRight.Location = new System.Drawing.Point(677, 36);
             this.comboSiteTypeRight.Name = "comboSiteTypeRight";
             this.comboSiteTypeRight.Size = new System.Drawing.Size(90, 21);
             this.comboSiteTypeRight.TabIndex = 9;
@@ -296,9 +301,7 @@ namespace SitecoreConverter
             this.comboSiteTypeLeft.Items.AddRange(new object[] {
             "Sitecore43",
             "Sitecore5x",
-            "Sitecore6x-8x",
-            //"Umbraco6x"
-            });
+            "Sitecore6x-8x"});
             this.comboSiteTypeLeft.Location = new System.Drawing.Point(8, 36);
             this.comboSiteTypeLeft.Name = "comboSiteTypeLeft";
             this.comboSiteTypeLeft.Size = new System.Drawing.Size(89, 21);
@@ -343,8 +346,8 @@ namespace SitecoreConverter
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rightTreeView);
-            this.splitContainer1.Size = new System.Drawing.Size(806, 434);
-            this.splitContainer1.SplitterDistance = 381;
+            this.splitContainer1.Size = new System.Drawing.Size(1087, 511);
+            this.splitContainer1.SplitterDistance = 513;
             this.splitContainer1.TabIndex = 13;
             this.splitContainer1.TabStop = false;
             // 
@@ -355,9 +358,10 @@ namespace SitecoreConverter
             | System.Windows.Forms.AnchorStyles.Right)));
             this.leftTreeView.FullRowSelect = true;
             this.leftTreeView.HideSelection = false;
+            this.leftTreeView.ItemHeight = 18;
             this.leftTreeView.Location = new System.Drawing.Point(3, 5);
             this.leftTreeView.Name = "leftTreeView";
-            this.leftTreeView.Size = new System.Drawing.Size(378, 429);
+            this.leftTreeView.Size = new System.Drawing.Size(510, 506);
             this.leftTreeView.TabIndex = 7;
             this.leftTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.leftTreeView_AfterExpand);
             this.leftTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.leftTreeView_AfterSelect);
@@ -372,7 +376,7 @@ namespace SitecoreConverter
             this.rightTreeView.HideSelection = false;
             this.rightTreeView.Location = new System.Drawing.Point(2, 6);
             this.rightTreeView.Name = "rightTreeView";
-            this.rightTreeView.Size = new System.Drawing.Size(419, 428);
+            this.rightTreeView.Size = new System.Drawing.Size(568, 505);
             this.rightTreeView.TabIndex = 8;
             this.rightTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.rightTreeView_AfterExpand);
             this.rightTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.rightTreeView_AfterSelect);
@@ -431,7 +435,7 @@ namespace SitecoreConverter
             // 
             // btnLeftAddressList
             // 
-            this.btnLeftAddressList.Location = new System.Drawing.Point(309, 33);
+            this.btnLeftAddressList.Location = new System.Drawing.Point(413, 34);
             this.btnLeftAddressList.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.btnLeftAddressList.Name = "btnLeftAddressList";
             this.btnLeftAddressList.Size = new System.Drawing.Size(18, 20);
@@ -444,7 +448,7 @@ namespace SitecoreConverter
             // btnRightAddressList
             // 
             this.btnRightAddressList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRightAddressList.Location = new System.Drawing.Point(798, 35);
+            this.btnRightAddressList.Location = new System.Drawing.Point(1079, 35);
             this.btnRightAddressList.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.btnRightAddressList.Name = "btnRightAddressList";
             this.btnRightAddressList.Size = new System.Drawing.Size(15, 20);
@@ -481,10 +485,39 @@ namespace SitecoreConverter
             this.btnTransferFieldsTool.Visible = false;
             this.btnTransferFieldsTool.Click += new System.EventHandler(this.btnTransferFieldsTool_Click);
             // 
+            // comboDatabaseLeft
+            // 
+            this.comboDatabaseLeft.FormattingEnabled = true;
+            this.comboDatabaseLeft.Items.AddRange(new object[] {
+            "master",
+            "web",
+            "core"});
+            this.comboDatabaseLeft.Location = new System.Drawing.Point(103, 36);
+            this.comboDatabaseLeft.Name = "comboDatabaseLeft";
+            this.comboDatabaseLeft.Size = new System.Drawing.Size(89, 21);
+            this.comboDatabaseLeft.TabIndex = 22;
+            this.comboDatabaseLeft.Text = "master";
+            // 
+            // comboDatabaseRight
+            // 
+            this.comboDatabaseRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboDatabaseRight.FormattingEnabled = true;
+            this.comboDatabaseRight.Items.AddRange(new object[] {
+            "master",
+            "web",
+            "core"});
+            this.comboDatabaseRight.Location = new System.Drawing.Point(773, 35);
+            this.comboDatabaseRight.Name = "comboDatabaseRight";
+            this.comboDatabaseRight.Size = new System.Drawing.Size(89, 21);
+            this.comboDatabaseRight.TabIndex = 23;
+            this.comboDatabaseRight.Text = "master";
+            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(824, 506);
+            this.ClientSize = new System.Drawing.Size(1105, 583);
+            this.Controls.Add(this.comboDatabaseRight);
+            this.Controls.Add(this.comboDatabaseLeft);
             this.Controls.Add(this.btnTransferFieldsTool);
             this.Controls.Add(this.btnInstall);
             this.Controls.Add(this.btnRightAddressList);
@@ -505,6 +538,7 @@ namespace SitecoreConverter
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(583, 347);
             this.Name = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "CMS Commander";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -528,7 +562,7 @@ namespace SitecoreConverter
 			Application.Run(new Form1());
 		}
 
-        private void ConnectSitecore43(TreeView treeView, string sServerUrl, string sSiteType)
+        private void ConnectSitecore43(TreeView treeView, string sServerUrl, string sSiteType, string sDatabase)
         {
             SitecoreConverter.Core.Sitecore43.SitecoreClientAPI sitecoreApi = new SitecoreConverter.Core.Sitecore43.SitecoreClientAPI();
             sitecoreApi.Url = sServerUrl + "/sitecore/client/api/api.asmx";
@@ -563,6 +597,7 @@ namespace SitecoreConverter
             item.Options.LoginName = sLoginName;
             item.Options.LoginPassword = sLoginPassword;
             item.Options.HostName = sServerUrl;
+            item.Options.Database = sDatabase;
 
             treeView.Nodes.Clear();
             TreeNode newNode = new TreeNode(item.Name);
@@ -571,7 +606,7 @@ namespace SitecoreConverter
             treeView.SelectedNode = newNode;
         }
 
-        private IItem ConnectSitecore61(TreeView treeView, string sServerUrl, string sSiteType)
+        private IItem ConnectSitecore61(TreeView treeView, string sServerUrl, string sSiteType, string sDatabase)
         {
             SitecoreConverter.Core.Sitecore61.VisualSitecoreService sitecoreApi = new SitecoreConverter.Core.Sitecore61.VisualSitecoreService();
             sitecoreApi.Url = sServerUrl + "/sitecore/shell/webservice/service.asmx";
@@ -617,21 +652,23 @@ namespace SitecoreConverter
                 return null;
             credential.UserName = "sitecore\\" + login.loginControl1.Username;
             credential.Password = login.loginControl1.Password;
-            
+
+            ConverterOptions Options = new ConverterOptions();
+            Options.LoginName = credential.UserName;
+            Options.LoginPassword = credential.Password;
+            Options.HostName = sServerUrl;
+            Options.Database = sDatabase;
 
             Sitecore6xItem item = null;
             try
             {
-                item = Sitecore6xItem.GetItem("/sitecore", sitecoreApi, credential, new ConverterOptions());
+                item = Sitecore6xItem.GetItem("/sitecore", sitecoreApi, credential, Options);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error logging into site, wrong username or password?\nError message: " + ex.Message);
                 return null;
             }
-            item.Options.LoginName = credential.UserName;
-            item.Options.LoginPassword = credential.Password;
-            item.Options.HostName = sServerUrl;
 
             if (item.ExtendedWebService != null)
             {
@@ -659,7 +696,7 @@ namespace SitecoreConverter
             return item;
         }
 
-        private void ConnectSitecore5x(TreeView treeView, string sServerUrl, string sSiteType)
+        private void ConnectSitecore5x(TreeView treeView, string sServerUrl, string sSiteType, string sDatabase)
         {
             SitecoreConverter.Core.Sitecore5x.VisualSitecoreService sitecoreApi = new SitecoreConverter.Core.Sitecore5x.VisualSitecoreService();
             sitecoreApi.Url = sServerUrl + "/sitecore/shell/webservice/service.asmx";
@@ -682,19 +719,22 @@ namespace SitecoreConverter
             credential.Password = login.loginControl1.Password;
 
 
+            ConverterOptions Options = new ConverterOptions();
+            Options.LoginName = credential.UserName;
+            Options.LoginPassword = credential.Password;
+            Options.HostName = sServerUrl;
+            Options.Database = sDatabase;
+
             Sitecore5xItem item = null;
             try
             {
-                item = Sitecore5xItem.GetItem("/sitecore", sitecoreApi, credential);
+                item = Sitecore5xItem.GetItem("/sitecore", sitecoreApi, credential, Options);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error logging into site, wrong username or password?\nError message: " + ex.Message);
                 return;
             }
-            item.Options.LoginName = credential.UserName;
-            item.Options.LoginPassword = credential.Password;
-            item.Options.HostName = sServerUrl;
 
 
             treeView.Nodes.Clear();
@@ -747,15 +787,15 @@ namespace SitecoreConverter
 		{
             if (comboSiteTypeLeft.Text == "Sitecore43")
             {
-                ConnectSitecore43(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text);
+                ConnectSitecore43(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text, comboDatabaseLeft.Text);
             }
             else if (comboSiteTypeLeft.Text.Contains("Sitecore6x"))
             {
-                ConnectSitecore61(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text);
+                ConnectSitecore61(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text, comboDatabaseLeft.Text);
             }
             else if (comboSiteTypeLeft.Text == "Sitecore5x")
             {
-                ConnectSitecore5x(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text);
+                ConnectSitecore5x(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text, comboDatabaseLeft.Text);
             }            
             else if (comboSiteTypeLeft.Text == "Umbraco6x")
             {
@@ -767,15 +807,15 @@ namespace SitecoreConverter
         {
             if (comboSiteTypeRight.Text == "Sitecore43")
             {
-                ConnectSitecore43(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text);
+                ConnectSitecore43(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text, comboDatabaseRight.Text);
             }
             else if (comboSiteTypeRight.Text.Contains("Sitecore6x"))
             {
-                ConnectSitecore61(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text);
+                ConnectSitecore61(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text, comboDatabaseRight.Text);
             }
             else if (comboSiteTypeRight.Text == "Sitecore5x")
             {
-                ConnectSitecore5x(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text);
+                ConnectSitecore5x(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text, comboDatabaseRight.Text);
             }
             else if (comboSiteTypeRight.Text == "Umbraco6x")
             {
@@ -802,6 +842,7 @@ namespace SitecoreConverter
                 if (view.ImageList == null)
                 {
                     view.ImageList = new ImageList();
+                    view.ImageList.ColorDepth = ColorDepth.Depth32Bit;
                     view.ImageList.Images.Add(imageList1.Images[1]);
                 }
 
@@ -1169,6 +1210,25 @@ namespace SitecoreConverter
             IItem selItem = null;
             selItem = _lastSelectedTreeView.SelectedNode.Tag as IItem;
 
+            ItemEditForm itemEditForm = new ItemEditForm();
+
+            string[] sLanguages = selItem.GetLanguages();
+            foreach (string sLang in sLanguages)
+            {
+                itemEditForm.comboFromLanguage.Items.Add(sLang);
+            }
+
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            for (int t = 0; t < itemEditForm.comboFromLanguage.Items.Count; t++)
+            {
+                if (itemEditForm.comboFromLanguage.Items[t].ToString().ToLower() == currentCulture.TwoLetterISOLanguageName.ToLower())
+                    itemEditForm.comboFromLanguage.SelectedIndex = t;
+            }
+
+            itemEditForm._startItem = selItem;
+            itemEditForm.ShowDialog(this);
+
+/*
             ViewTextForm viewTextForm = new ViewTextForm();
             viewTextForm.RichEdit.Text = selItem.GetOuterXml();
             viewTextForm.ShowDialog(this);
@@ -1180,6 +1240,7 @@ namespace SitecoreConverter
                     field.Content = "";
                 selItem.Save();
             }
+*/
         }
         
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -1282,7 +1343,10 @@ namespace SitecoreConverter
                 ShowException(ex.InnerException, viewTextForm);
             }
             else
+            {
                 viewTextForm.ShowDialog();
+                Util.WarningList.Clear();
+            }
         }
 
         private void ShowGlobalWarninglist()
@@ -1294,6 +1358,7 @@ namespace SitecoreConverter
                 foreach (string sWarning in Util.WarningList)
                     viewTextForm.RichEdit.Text += sWarning + "\n";
                 viewTextForm.ShowDialog(this);
+                Util.WarningList.Clear();
             }
         }
 
@@ -1320,9 +1385,11 @@ namespace SitecoreConverter
                     // Get item again in case we are copying from another language layer
                     _srcItem = _srcItem.GetItem(_srcItem.ID);
 
-                    // 
+                    
+                    // Ask user whether it is ok to overwrite destination
                     IItem targetItem = _destItem.GetItem(_srcItem.ID);
-                    if (targetItem != null)
+                    if ((targetItem != null) && 
+                        ((_destItem.Options.CopyOperation == CopyOperations.Overwrite) || (_destItem.Options.CopyOperation == CopyOperations.UseNames)))
                     {
                         _delegateShowOverwriteDialog = new ShowOverwriteDialog(ShowOverwriteDialogMethod);
                         Invoke(_delegateShowOverwriteDialog, _srcItem, targetItem);
@@ -1406,15 +1473,7 @@ namespace SitecoreConverter
             {
                 searchReplaceForm.comboFromLanguage.Items.Add(sLang);
             }
-
-            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
             searchReplaceForm.comboFromLanguage.SelectedIndex = 0;
-            for (int t = 0; t < searchReplaceForm.comboFromLanguage.Items.Count; t++)
-            {
-                if (searchReplaceForm.comboFromLanguage.Items[t].ToString().ToLower() == currentCulture.TwoLetterISOLanguageName.ToLower())
-                    searchReplaceForm.comboFromLanguage.SelectedIndex = t;
-            }
-
             searchReplaceForm._myExpandNode = new SearchReplaceForm.ExpandNode(ExpandNode);
 
             searchReplaceForm.Show(this);
@@ -1465,16 +1524,13 @@ namespace SitecoreConverter
             {
                 compareForm.comboFromLanguage.Items.Add(sLang);
             }
-            compareForm.comboFromLanguage.SelectedIndex = 0;
 
             CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
-            compareForm.comboFromLanguage.SelectedIndex = 0;
             for (int t = 0; t < compareForm.comboFromLanguage.Items.Count; t++)
             {
                 if (compareForm.comboFromLanguage.Items[t].ToString().ToLower() == currentCulture.TwoLetterISOLanguageName.ToLower())
                     compareForm.comboFromLanguage.SelectedIndex = t;
             }
-
             compareForm._myExpandNode = new CompareForm.ExpandNode(ExpandNode);
 
             compareForm.Show(this);
@@ -1534,7 +1590,7 @@ namespace SitecoreConverter
 
 
                     // Connect to site
-                    Sitecore6xItem item = ConnectSitecore61(null, selectedLoginInfo.SiteUrl, selectedLoginInfo.SiteType) as Sitecore6xItem;
+                    Sitecore6xItem item = ConnectSitecore61(null, selectedLoginInfo.SiteUrl, selectedLoginInfo.SiteType, "Master") as Sitecore6xItem;
                     // Timeout = 3000 seconds (default 10)
                     item.ExtendedWebService.Timeout = 3000000;
 

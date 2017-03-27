@@ -451,7 +451,7 @@ namespace SitecoreConverter.Core
             string[] result = new string[languages.Length];
             for (int t = 0; t < languages.Length; t++)
             {
-                IField field = Util.GetFieldByName("Iso", languages[t].Fields);
+                IField field = languages[t].Fields.GetFieldByName("Iso");
                 result[t] = field.Content;
             }
             

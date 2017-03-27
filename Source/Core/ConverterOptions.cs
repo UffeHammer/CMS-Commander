@@ -30,7 +30,7 @@ namespace SitecoreConverter.Core
         public string LoginName = "";
         public string LoginPassword = "";
         public string HostName = "";
-        public string Database = "master";
+        public string Database = "core";
         // Caching of template items 
         public Dictionary<string, IItem> ExistingTemplates = new Dictionary<string, IItem>();
         // Caching of template fields items 
