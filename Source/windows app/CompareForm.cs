@@ -140,21 +140,32 @@ namespace SitecoreConverter
                     }
 
                     // Compare all other fields than the Revision, which might always be different
-                    if ((leftField.Content.ToLower() != rightField.Content.ToLower())// &&
-//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(REVISIONGUID)) &&
-//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(UPDATEDGUID)) &&
-//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(UPDATEDBYGUID)) &&
-//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(CREATEDGUID)) &&                        
-//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(CREATEDBYGUID)) &&
-//                        (leftField.TemplateFieldID != Util.GuidToSitecoreID(OWNERGUID))
-                        )
+                    if (leftField.Content.ToLower() != rightField.Content.ToLower())
                     {
-                        if (!lbCompareResult.Items.Contains(leftItem.Path))
-                            lbCompareResult.Items.Add(leftItem.Path + " - Field: " + leftField.Name + " has different content.");
-                        _leftItemsFound.Add(leftItem.ID.ToString(), leftItem);
-                        _rightItemsFound.Add(rightItem.ID.ToString(), rightItem);
 
-                        break;
+                        if ((cbIgnoreStandardFields.Checked) &&
+                        ((leftField.TemplateFieldID == Util.GuidToSitecoreID(REVISIONGUID)) ||
+                        (leftField.TemplateFieldID == Util.GuidToSitecoreID(UPDATEDGUID)) ||
+                        (leftField.TemplateFieldID == Util.GuidToSitecoreID(UPDATEDBYGUID)) ||
+                        (leftField.TemplateFieldID == Util.GuidToSitecoreID(CREATEDGUID)) ||
+                        (leftField.TemplateFieldID == Util.GuidToSitecoreID(CREATEDBYGUID)) ||
+                        (leftField.TemplateFieldID == Util.GuidToSitecoreID(OWNERGUID))))
+                        {
+                            // Ignore this field 
+                        }
+                        else
+                        {
+
+                            if (!lbCompareResult.Items.Contains(leftItem.Path))
+                                lbCompareResult.Items.Add(leftItem.Path + " - Field: " + leftField.Name + " has different content.");
+                            if (!_leftItemsFound.ContainsKey(leftItem.ID.ToString()))
+                                _leftItemsFound.Add(leftItem.ID.ToString(), leftItem);
+
+                            if (!_rightItemsFound.ContainsKey(rightItem.ID.ToString()))
+                                _rightItemsFound.Add(rightItem.ID.ToString(), rightItem);
+
+                            //break;
+                        }
                     }
                 }
 

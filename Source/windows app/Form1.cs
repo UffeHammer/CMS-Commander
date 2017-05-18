@@ -62,6 +62,7 @@ namespace SitecoreConverter
         private Button btnTransferFieldsTool;
         private ComboBox comboDatabaseLeft;
         private ComboBox comboDatabaseRight;
+        private Button btnLocateOnOtherSide;
         private Exception _globalException = null;
 
 
@@ -239,6 +240,7 @@ namespace SitecoreConverter
             this.btnTransferFieldsTool = new System.Windows.Forms.Button();
             this.comboDatabaseLeft = new System.Windows.Forms.ComboBox();
             this.comboDatabaseRight = new System.Windows.Forms.ComboBox();
+            this.btnLocateOnOtherSide = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -336,7 +338,7 @@ namespace SitecoreConverter
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(8, 59);
+            this.splitContainer1.Location = new System.Drawing.Point(8, 63);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -346,7 +348,7 @@ namespace SitecoreConverter
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rightTreeView);
-            this.splitContainer1.Size = new System.Drawing.Size(1087, 511);
+            this.splitContainer1.Size = new System.Drawing.Size(1087, 508);
             this.splitContainer1.SplitterDistance = 513;
             this.splitContainer1.TabIndex = 13;
             this.splitContainer1.TabStop = false;
@@ -361,7 +363,7 @@ namespace SitecoreConverter
             this.leftTreeView.ItemHeight = 18;
             this.leftTreeView.Location = new System.Drawing.Point(3, 5);
             this.leftTreeView.Name = "leftTreeView";
-            this.leftTreeView.Size = new System.Drawing.Size(510, 506);
+            this.leftTreeView.Size = new System.Drawing.Size(510, 503);
             this.leftTreeView.TabIndex = 7;
             this.leftTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.leftTreeView_AfterExpand);
             this.leftTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.leftTreeView_AfterSelect);
@@ -376,7 +378,7 @@ namespace SitecoreConverter
             this.rightTreeView.HideSelection = false;
             this.rightTreeView.Location = new System.Drawing.Point(2, 6);
             this.rightTreeView.Name = "rightTreeView";
-            this.rightTreeView.Size = new System.Drawing.Size(568, 505);
+            this.rightTreeView.Size = new System.Drawing.Size(568, 502);
             this.rightTreeView.TabIndex = 8;
             this.rightTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.rightTreeView_AfterExpand);
             this.rightTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.rightTreeView_AfterSelect);
@@ -460,8 +462,9 @@ namespace SitecoreConverter
             // 
             // btnInstall
             // 
+            this.btnInstall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInstall.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInstall.Location = new System.Drawing.Point(571, 9);
+            this.btnInstall.Location = new System.Drawing.Point(1013, 8);
             this.btnInstall.Name = "btnInstall";
             this.btnInstall.Size = new System.Drawing.Size(88, 20);
             this.btnInstall.TabIndex = 20;
@@ -476,7 +479,7 @@ namespace SitecoreConverter
             // btnTransferFieldsTool
             // 
             this.btnTransferFieldsTool.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTransferFieldsTool.Location = new System.Drawing.Point(665, 12);
+            this.btnTransferFieldsTool.Location = new System.Drawing.Point(919, 8);
             this.btnTransferFieldsTool.Name = "btnTransferFieldsTool";
             this.btnTransferFieldsTool.Size = new System.Drawing.Size(88, 20);
             this.btnTransferFieldsTool.TabIndex = 21;
@@ -512,10 +515,22 @@ namespace SitecoreConverter
             this.comboDatabaseRight.TabIndex = 23;
             this.comboDatabaseRight.Text = "master";
             // 
+            // btnLocateOnOtherSide
+            // 
+            this.btnLocateOnOtherSide.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLocateOnOtherSide.Location = new System.Drawing.Point(571, 8);
+            this.btnLocateOnOtherSide.Name = "btnLocateOnOtherSide";
+            this.btnLocateOnOtherSide.Size = new System.Drawing.Size(116, 20);
+            this.btnLocateOnOtherSide.TabIndex = 25;
+            this.btnLocateOnOtherSide.Text = "Locate opposite side";
+            this.btnLocateOnOtherSide.UseVisualStyleBackColor = true;
+            this.btnLocateOnOtherSide.Click += new System.EventHandler(this.btnLocateWithLeft_Click);
+            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(1105, 583);
+            this.Controls.Add(this.btnLocateOnOtherSide);
             this.Controls.Add(this.comboDatabaseRight);
             this.Controls.Add(this.comboDatabaseLeft);
             this.Controls.Add(this.btnTransferFieldsTool);
@@ -1491,7 +1506,7 @@ namespace SitecoreConverter
             FindNode(selectedNode, item, ref theTreeNode);
             if (theTreeNode != null)
             {
-                selectedTreeView.SelectedNode = theTreeNode;
+//                selectedTreeView.SelectedNode = theTreeNode;
                 return;
             }
 
@@ -1662,9 +1677,127 @@ namespace SitecoreConverter
             scriptToolForm.ShowDialog();
 
         }
-	}
 
-    
+        private void btnLocateWithRight_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private TreeNode FindRootNode(TreeNode treeNode)
+        {
+            while (treeNode.Parent != null)
+            {
+                treeNode = treeNode.Parent;
+            }
+            return treeNode;
+        }
+
+        /// <summary>
+        /// Find tree node item and expand to it
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="sName"></param>
+        /// <param name="sPath"></param>
+        /// <returns></returns>
+        private void FindTreeNode(TreeNode node, IItem item, string sName, string sPath, ref TreeNode foundNode)
+        {
+            sName = sName.Replace("/", "");
+
+            if (item.Name == sName)
+            {
+                item.GetChildren();
+                int iFoundPos = sPath.IndexOf("/", 1);
+                if (iFoundPos > -1)
+                {
+                    sName = sPath.Substring(iFoundPos + 1);
+                    if (sName.IndexOf("/") > -1)
+                        sName = sName.Remove(sName.IndexOf("/"));
+
+                    sPath = sPath.Remove(0, sPath.IndexOf("/", 1));
+                }
+            }
+//            node = node.TreeView.SelectedNode;
+
+            foreach (IItem child in item.GetChildren())
+            {
+                ExpandNode(child, node, node.TreeView);
+
+                if (child.Name == sName)
+                {                    
+                    if (sPath.IndexOf("/", 1) > -1)
+                    {
+                        sName = sPath.Substring(sPath.IndexOf("/", 1) + 1);
+                        if (sName.IndexOf("/") > -1)
+                            sName = sName.Remove(sName.IndexOf("/"));
+
+                        sPath = sPath.Remove(0, sPath.IndexOf("/", 1));
+
+                        Application.DoEvents();
+                        FindTreeNode(node, child, sName, sPath, ref foundNode);
+                    }
+                    else
+                    {
+                        // Found node select and return it
+                        // child.TreeView.SelectedNode = child;
+                        // return child;
+                        /// ExpandNode(child, node, node.TreeView);
+                        // TreeNode foundNode = null;
+                        FindNode(node, child, ref foundNode);
+                        //if (foundNode != null)
+                        //    node = foundNode;
+                    }
+                }
+            }
+        }
+
+        private void ExpandToNode(TreeView treeView, string sPath)
+        {
+            // ExpandNode(item, _LastSelectedNode, _lastSelectedTreeView);
+            string sElementName = "";
+            if (sPath.IndexOf("/") > -1)
+                sElementName = sPath.Substring(0, sPath.IndexOf("/", 1));
+
+            if (treeView.SelectedNode == null)
+            {
+                MessageBox.Show("Connect to site first.");
+                return;
+            }
+
+            TreeNode root = FindRootNode(treeView.SelectedNode);
+            TreeNode foundNode = null;
+            FindTreeNode(root, root.Tag as IItem, sElementName, sPath, ref foundNode);
+
+            treeView.SelectedNode = foundNode;
+
+        }
+
+        private void btnLocateWithLeft_Click(object sender, EventArgs e)
+        {
+            if (_lastSelectedTreeView == null)
+            {
+                MessageBox.Show("Connect to site first.");
+                return;
+            }
+
+            _progressForm = new ProgressForm();
+            _progressForm.Show(this);
+            _progressForm.lblCopyingTo.Text = "";
+            _progressForm.lblCopyingFrom.Text = "";
+            _progressForm.Text = "Locating content...";
+
+            IItem selItem = _lastSelectedTreeView.SelectedNode.Tag as IItem;
+            _LastSelectedNode = _lastSelectedTreeView.SelectedNode;
+            if (_lastSelectedTreeView == rightTreeView)
+                ExpandToNode(leftTreeView, selItem.Path);
+            else
+                ExpandToNode(rightTreeView, selItem.Path);
+
+
+            _progressForm.Close();
+        }
+    }
+
+
 
     public class BackgroundWorkerArgument
     {

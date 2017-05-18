@@ -26,8 +26,8 @@ namespace SitecoreConverter.Core
         private string _sIcon = "";
         private Guid _TemplateID = Guid.Empty;
         private string _sTemplateName = "";
-        private Sitecore6xItem[] _Templates = null;
         private string[] _sTemplateIDs = null;
+        private List<Sitecore6xItem> _Templates = new List<Sitecore6xItem>();
         private List<Sitecore6xField> _fields = new List<Sitecore6xField>();
         private Sitecore61.VisualSitecoreService _sitecoreApi = null;
         private Sitecore61.Credentials _credentials = null;
@@ -160,30 +160,30 @@ namespace SitecoreConverter.Core
         {
             get
             {
-                if (_Templates == null)
+                if (_Templates.Count == 0)
                 {
                     // We are copying a template item
                     if ((_TemplateID == _guidTemplateForTemplates) &&
                         ((_itemCopyingFrom != null) && (_itemCopyingFrom.Path.IndexOf("/sitecore/templates") > -1)
                                                     && (_itemCopyingFrom.Path.IndexOf("/sitecore/templates/Branches") == -1)))
                     {
-                        _Templates = new Sitecore6xItem[1];
-                        _Templates[0] = GetSitecore61Item("/sitecore/templates/System/Templates/template");
+                        _Templates.Add(GetSitecore61Item("/sitecore/templates/System/Templates/template"));
                         AddItemToCache(_Templates[0]);
                     }
                     // Copying normal item
                     else 
-                    {
-                        _Templates = new Sitecore6xItem[_sTemplateIDs.Length];
-                        for (int t = 0; t < _Templates.Length; t++)
+                    {                        
+                        for (int t = 0; t < _sTemplateIDs.Length; t++)
                         {
-                            _Templates[t] = GetSitecore61Item(_sTemplateIDs[t]);
-                            if (_Templates[t] != null)
-                                AddItemToCache(_Templates[t]);
+                            Sitecore6xItem template = GetSitecore61Item(_sTemplateIDs[t]);
+                            // Very important that template is added to list even if it is null, copy functionality is depending upon this to spot missing templates
+                            _Templates.Add(template);
+                            if (template != null)
+                                AddItemToCache(template);
                         }
                     }
                 }
-                return _Templates;
+                return _Templates.ToArray();
             }
         }
 
@@ -278,15 +278,19 @@ namespace SitecoreConverter.Core
                 item.Attributes.Append(attr);
                 Sitecore6xItem item6X = new Sitecore6xItem(item, this, _sitecoreApi, _credentials, _Options);
 
-                // If icon is missing then get it from the templates, this cannot be done in the item constructor as it would result in Stackoverflow because of endless looping.
-                // But it will cost a little extra because some templates have to be fetched from the server.
                 if (item6X.Icon == "")
                 {
-                    foreach (Sitecore6xItem template in item6X.Templates)
-                    {
-                        if (template.Icon != "")
-                            item6X.Icon = template.Icon;
-                    }
+                    if (node.Attributes["icon"] != null)
+                        item6X.Icon = node.Attributes["icon"].Value;
+                    /*                
+                        // If icon is missing then get it from the templates, this cannot be done in the item constructor as it would result in Stackoverflow because of endless looping.
+                        // But it will cost a little extra because some templates have to be fetched from the server.
+                        foreach (Sitecore6xItem template in item6X.Templates)
+                        {
+                            if ((template != null) && (template.Icon != ""))
+                                item6X.Icon = template.Icon;
+                        }
+                    */
                 }
                 children.Add(item6X);
 

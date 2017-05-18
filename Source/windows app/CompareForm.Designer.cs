@@ -38,6 +38,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tbSearchingIn = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbIgnoreStandardFields = new System.Windows.Forms.CheckBox();
             this.cbMissingFields = new System.Windows.Forms.CheckBox();
             this.lblRightFromPath = new System.Windows.Forms.Label();
             this.lblLeftFromPath = new System.Windows.Forms.Label();
@@ -59,7 +60,7 @@
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button2.Location = new System.Drawing.Point(581, 58);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(72, 20);
             this.button2.TabIndex = 14;
@@ -75,7 +76,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl2.Controls.Add(this.tabSearchResult);
             this.tabControl2.Location = new System.Drawing.Point(10, 215);
-            this.tabControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl2.Multiline = true;
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
@@ -86,9 +87,9 @@
             // 
             this.tabSearchResult.Controls.Add(this.lbCompareResult);
             this.tabSearchResult.Location = new System.Drawing.Point(4, 4);
-            this.tabSearchResult.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabSearchResult.Margin = new System.Windows.Forms.Padding(2);
             this.tabSearchResult.Name = "tabSearchResult";
-            this.tabSearchResult.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabSearchResult.Padding = new System.Windows.Forms.Padding(2);
             this.tabSearchResult.Size = new System.Drawing.Size(554, 252);
             this.tabSearchResult.TabIndex = 0;
             this.tabSearchResult.Text = "Compare result";
@@ -101,7 +102,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbCompareResult.FormattingEnabled = true;
             this.lbCompareResult.Location = new System.Drawing.Point(13, 13);
-            this.lbCompareResult.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lbCompareResult.Margin = new System.Windows.Forms.Padding(2);
             this.lbCompareResult.Name = "lbCompareResult";
             this.lbCompareResult.Size = new System.Drawing.Size(533, 225);
             this.lbCompareResult.TabIndex = 0;
@@ -110,7 +111,7 @@
             // 
             this.btnCompare.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnCompare.Location = new System.Drawing.Point(581, 33);
-            this.btnCompare.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCompare.Margin = new System.Windows.Forms.Padding(2);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(72, 20);
             this.btnCompare.TabIndex = 12;
@@ -135,7 +136,7 @@
             this.tabPageMain.Controls.Add(this.groupBox1);
             this.tabPageMain.Location = new System.Drawing.Point(4, 22);
             this.tabPageMain.Name = "tabPageMain";
-            this.tabPageMain.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageMain.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageMain.Size = new System.Drawing.Size(558, 173);
             this.tabPageMain.TabIndex = 0;
             this.tabPageMain.Text = "Main options";
@@ -147,9 +148,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.tbSearchingIn);
             this.groupBox3.Location = new System.Drawing.Point(13, 90);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(533, 73);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
@@ -160,7 +161,7 @@
             this.tbSearchingIn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSearchingIn.Location = new System.Drawing.Point(7, 20);
-            this.tbSearchingIn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbSearchingIn.Margin = new System.Windows.Forms.Padding(2);
             this.tbSearchingIn.Multiline = true;
             this.tbSearchingIn.Name = "tbSearchingIn";
             this.tbSearchingIn.Size = new System.Drawing.Size(522, 40);
@@ -170,6 +171,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cbIgnoreStandardFields);
             this.groupBox1.Controls.Add(this.cbMissingFields);
             this.groupBox1.Controls.Add(this.lblRightFromPath);
             this.groupBox1.Controls.Add(this.lblLeftFromPath);
@@ -184,12 +186,23 @@
             this.groupBox1.Text = "Compare:";
             this.groupBox1.UseCompatibleTextRendering = true;
             // 
+            // cbIgnoreStandardFields
+            // 
+            this.cbIgnoreStandardFields.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbIgnoreStandardFields.AutoSize = true;
+            this.cbIgnoreStandardFields.Location = new System.Drawing.Point(395, 31);
+            this.cbIgnoreStandardFields.Name = "cbIgnoreStandardFields";
+            this.cbIgnoreStandardFields.Size = new System.Drawing.Size(127, 17);
+            this.cbIgnoreStandardFields.TabIndex = 10;
+            this.cbIgnoreStandardFields.Text = "Ignore standard fields";
+            this.cbIgnoreStandardFields.UseVisualStyleBackColor = true;
+            // 
             // cbMissingFields
             // 
             this.cbMissingFields.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbMissingFields.AutoSize = true;
             this.cbMissingFields.Location = new System.Drawing.Point(395, 53);
-            this.cbMissingFields.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbMissingFields.Margin = new System.Windows.Forms.Padding(2);
             this.cbMissingFields.Name = "cbMissingFields";
             this.cbMissingFields.Size = new System.Drawing.Size(133, 17);
             this.cbMissingFields.TabIndex = 9;
@@ -249,7 +262,7 @@
             // 
             this.btnSaveToLeftSide.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnSaveToLeftSide.Location = new System.Drawing.Point(581, 221);
-            this.btnSaveToLeftSide.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSaveToLeftSide.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveToLeftSide.Name = "btnSaveToLeftSide";
             this.btnSaveToLeftSide.Size = new System.Drawing.Size(73, 34);
             this.btnSaveToLeftSide.TabIndex = 15;
@@ -261,7 +274,7 @@
             // 
             this.btnSaveToRightSide.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnSaveToRightSide.Location = new System.Drawing.Point(581, 260);
-            this.btnSaveToRightSide.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSaveToRightSide.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveToRightSide.Name = "btnSaveToRightSide";
             this.btnSaveToRightSide.Size = new System.Drawing.Size(73, 37);
             this.btnSaveToRightSide.TabIndex = 16;
@@ -273,7 +286,7 @@
             // 
             this.btnGenerateReport.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnGenerateReport.Location = new System.Drawing.Point(583, 301);
-            this.btnGenerateReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnGenerateReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnGenerateReport.Name = "btnGenerateReport";
             this.btnGenerateReport.Size = new System.Drawing.Size(72, 34);
             this.btnGenerateReport.TabIndex = 17;
@@ -330,5 +343,6 @@
         private System.Windows.Forms.Button btnSaveToRightSide;
         private System.Windows.Forms.CheckBox cbMissingFields;
         private System.Windows.Forms.Button btnGenerateReport;
+        private System.Windows.Forms.CheckBox cbIgnoreStandardFields;
     }
 }
