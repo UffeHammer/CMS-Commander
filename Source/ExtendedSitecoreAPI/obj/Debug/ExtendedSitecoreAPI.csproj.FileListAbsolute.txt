@@ -12,3 +12,11 @@ c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.
 c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\bin\Sitecore.Kernel.xml
 c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.dll
 c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.pdb
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.dll.config
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.dll
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.pdb
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.csproj.CoreCompileInputs.cache
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.csproj.CopyComplete
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.dll
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.pdb
+C:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.csprojAssemblyReference.cache

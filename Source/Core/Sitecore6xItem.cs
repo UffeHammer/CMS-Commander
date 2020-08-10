@@ -29,9 +29,11 @@ namespace SitecoreConverter.Core
         private string[] _sTemplateIDs = null;
         private List<Sitecore6xItem> _Templates = new List<Sitecore6xItem>();
         private List<Sitecore6xField> _fields = new List<Sitecore6xField>();
+        private List<string> _CopiedBlobs = new List<string>();
         private Sitecore61.VisualSitecoreService _sitecoreApi = null;
         private Sitecore61.Credentials _credentials = null;
         private string _sXmlNode = "";
+        private string _sParentID = "";
         private IItem _Parent = null;
         private string _sSortOrder = "";
         private bool _bHasChildren = false;
@@ -242,6 +244,10 @@ namespace SitecoreConverter.Core
         {
             get
             {
+                if ((_Parent == null) && (_sParentID != ""))
+                {
+                    _Parent = this.GetItem(_sParentID);
+                }
                 return _Parent;
             }
         }
@@ -333,7 +339,7 @@ namespace SitecoreConverter.Core
                 _sTemplateIDs = baseTemplateNode.InnerText.Split('|'); //.Reverse().ToArray();
             }
 
-            // _sParentID = itemNode.Attributes["parentid"].Value;
+            _sParentID = itemNode.Attributes["parentid"].Value;
             _sSortOrder = itemNode.Attributes["sortorder"].Value;
             if ((itemNode.Attributes["haschildren"] != null) && (itemNode.Attributes["haschildren"].Value == "1"))
                 _bHasChildren = true;
@@ -577,7 +583,8 @@ namespace SitecoreConverter.Core
                         newItem = parentItem.CopyItemTo(child);
 
                     // recursively copy children
-                    if (newItem != null)
+                    IField neverPublish = child.Fields.GetFieldByName("__Never publish");
+                    if ((newItem != null) && ((neverPublish != null) && (neverPublish.Content != "1")))
                         CopyChildren(newItem, child);
                 }
                 catch (Exception ex)
@@ -593,7 +600,7 @@ namespace SitecoreConverter.Core
             }
         }
 
-        public void CopyTo(IItem CopyFrom, bool bRecursive)
+        public void CopyTo(IItem CopyFrom, bool bRecursive, bool bOnlyChildren)
         {
             // Clear out cached list of templates and Template fields in case we are copying to a new language layer
             lock (_Options.ExistingTemplates)
@@ -607,10 +614,21 @@ namespace SitecoreConverter.Core
 
             _itemCopyingFrom = CopyFrom;
 
-            Sitecore6xItem rootItem = this.CopyItemTo(CopyFrom);
-            if ((bRecursive) && (rootItem != null))
+            if (bOnlyChildren)
             {
-                CopyChildren(rootItem, CopyFrom);
+                foreach (IItem child in CopyFrom.GetChildren())
+                {
+                    Sitecore6xItem rootItem = this.CopyItemTo(child);
+                    CopyChildren(rootItem, child);
+                }
+            }
+            else
+            {
+                Sitecore6xItem rootItem = this.CopyItemTo(CopyFrom);
+                if ((bRecursive) && (rootItem != null))
+                {
+                    CopyChildren(rootItem, CopyFrom);
+                }
             }
         }
 
@@ -631,6 +649,12 @@ namespace SitecoreConverter.Core
                 this.Path = MoveTo.Path + "/" + this.Name;
                 return true;
             }
+        }
+
+        public void Rename(string Name)
+        {
+            XmlNode retVal = _sitecoreApi.Rename(this.ID, Name, _Options.Database, _credentials);
+            CheckSitecoreReturnValue(retVal);
         }
 
 
@@ -699,10 +723,15 @@ namespace SitecoreConverter.Core
             }
             else if (retVal.SelectSingleNode("status").InnerText != "ok")
             {
+                // The clone source does not exist
+                if (retVal.SelectSingleNode("error").InnerText.Contains("The clone source has incorrect value. Please fix '__Source Item' value"))
+                    return retVal;
+
                 throw new Exception("Sitecore webservice returned " + retVal.SelectSingleNode("status").InnerText + ": " +
                                     retVal.SelectSingleNode("error").InnerText  + "\n"+
                                     "Complete error block: " + retVal.OuterXml);
             }
+
             return retVal;
         }
 
@@ -1377,7 +1406,7 @@ namespace SitecoreConverter.Core
                 // Name has been changed
                 if (returnItem.Name != CopyFrom.Name)
                 {
-                    CheckSitecoreReturnValue(_sitecoreApi.Rename(returnItem.ID, CopyFrom.Name, _Options.Database, _credentials));
+                    CheckSitecoreReturnValue(_sitecoreApi.Rename(returnItem.ID, Util.MakeValidNodeName(CopyFrom.Name), _Options.Database, _credentials));
                     returnItem.Name = CopyFrom.Name;
                 }
 
@@ -1419,13 +1448,26 @@ namespace SitecoreConverter.Core
                         destLockField.Content = "<r />";
                 }
 
+                // Item is cloned from another item
+                IField sourceField = returnItem.Fields.GetFieldByName("__Source");
+                if ((sourceField != null) && (sourceField.Content.IndexOf("?") >= 0))
+                {
+                    Sitecore6xField sourceItemField = new Sitecore6xField("__Source Item", "__source item", sourceField.Type,
+                                                    new Guid("{19B597D3-2EDD-4AE2-AEFE-4A94C7F10E31}"),
+                                                    sourceField.Content.Remove(sourceField.Content.IndexOf("?")),
+                                                    sourceField.SortOrder,
+                                                    sourceField.Section);
+                    returnItem._fields.Add(sourceItemField);
+                }
+
 
                 // Copy media item blob value
                 foreach (IField field in CopyFrom.Fields)
                 {
                     // We have a Blob - media field
                     if ((_bNoWebApiInstalled == false) &&
-                        ((field.TemplateFieldID == "{40E50ED9-BA07-4702-992E-A912738D32DC}") || (field.Name == "Blob") || field.Name == "File Path"))
+                        ((field.TemplateFieldID == "{40E50ED9-BA07-4702-992E-A912738D32DC}") || (field.Name == "Blob") || field.Name == "File Path") && 
+                        (! _CopiedBlobs.Contains(CopyFrom.ID.ToString())))
                     {
                         Uri sitecoreUri = new Uri(_sitecoreApi.Url);
                         string sUrl = CopyFrom.Options.HostName + "/~/media/" + CopyFrom.ID.ToString().Replace("{", "").Replace("}", "").Replace("-", "").ToLower();
@@ -1456,8 +1498,8 @@ namespace SitecoreConverter.Core
 
 
                         // Upload Blob to destination
-                        string sName = CopyFrom.Name;
-                        if (extField.Content != "")
+                        string sName = Util.MakeValidNodeName(CopyFrom.Name);
+                        if ((extField != null) && (extField.Content != ""))
                             sName += "." + extField.Content;
                         string sNewMediaID = "";
                         try
@@ -1527,6 +1569,9 @@ namespace SitecoreConverter.Core
 
                         // Remove temporary mediaitem
                         mediaItem.Delete();
+
+                        // Add Blob to list of copied media items, so that they are not copied several times for each language layer
+                        _CopiedBlobs.Add(CopyFrom.ID.ToString());
 
                         break;
                     }
@@ -1689,6 +1734,58 @@ namespace SitecoreConverter.Core
                         Util.AddWarning("The security exception was: " + ex.Message + "\n" + ex.StackTrace);
                     }
                 }
+
+                // Copy referenced media items
+                foreach (IField field in CopyFrom.Fields)
+                {
+                    // We have files or images that reference Media Items
+                    if ((_bNoWebApiInstalled == false) &&
+                        (/*field.Type == "Image" || field.Type == "File" ||*/ field.Type == "Images" || field.Type == "Files" ||field.Type == "Visuallist"))
+                    {
+                        string[] mediaIDList = field.Content.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (string sID in mediaIDList)
+                        {
+                            IItem srcItem = CopyFrom.GetItem(sID);
+                            if (srcItem == null)
+                            {
+                                continue;
+                            }
+                            IItem dstItem = this.GetItem(srcItem.ID);
+
+                            // MediaItem is missing in destination
+                            if ((srcItem != null) && (dstItem == null))
+                            {
+                                // Disable update of GUI
+                                CopyItemCallback oldCopyItemCallback = this.Options.CopyItem;
+                                this.Options.CopyItem = null;
+
+                                // Recreate the entire path to the MediaItem
+                                Stack<IItem> itemStack = new Stack<IItem>();
+                                do
+                                {
+                                    itemStack.Push(srcItem);
+                                    dstItem = this.GetItem(srcItem.Parent.ID);
+                                    if (dstItem == null)
+                                    {
+                                        srcItem = srcItem.Parent;
+                                    }
+                                }
+                                while (dstItem == null);
+
+                                do
+                                {
+                                    srcItem = itemStack.Pop();
+                                    dstItem.CopyTo(srcItem, false, false);
+                                    dstItem = this.GetItem(srcItem.ID);
+                                }
+                                while (itemStack.Count > 0);
+
+                                this.Options.CopyItem = oldCopyItemCallback;
+                            }
+                        }
+                    }
+                }
+
             }
             return returnItem;
         }

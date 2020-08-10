@@ -40,6 +40,7 @@
             this.comboToLanguage = new System.Windows.Forms.ComboBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbIgnoreErrors = new System.Windows.Forms.CheckBox();
             this.cbRecursive = new System.Windows.Forms.CheckBox();
             this.rbUseNames = new System.Windows.Forms.RadioButton();
             this.rbCreateNewItemIDs = new System.Windows.Forms.RadioButton();
@@ -55,7 +56,7 @@
             this.cbCopySecurity = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
-            this.cbIgnoreErrors = new System.Windows.Forms.CheckBox();
+            this.cbOnlyChildren = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -68,6 +69,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cbOnlyChildren);
             this.groupBox1.Controls.Add(this.lblFromPath);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label1);
@@ -193,6 +195,17 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Copy operation";
+            // 
+            // cbIgnoreErrors
+            // 
+            this.cbIgnoreErrors.AutoSize = true;
+            this.cbIgnoreErrors.Location = new System.Drawing.Point(438, 42);
+            this.cbIgnoreErrors.Margin = new System.Windows.Forms.Padding(2);
+            this.cbIgnoreErrors.Name = "cbIgnoreErrors";
+            this.cbIgnoreErrors.Size = new System.Drawing.Size(85, 17);
+            this.cbIgnoreErrors.TabIndex = 5;
+            this.cbIgnoreErrors.Text = "Ignore errors";
+            this.cbIgnoreErrors.UseVisualStyleBackColor = true;
             // 
             // cbRecursive
             // 
@@ -361,16 +374,16 @@
             this.tabPageMain.Text = "Main options";
             this.tabPageMain.UseVisualStyleBackColor = true;
             // 
-            // cbIgnoreErrors
+            // cbOnlyChildren
             // 
-            this.cbIgnoreErrors.AutoSize = true;
-            this.cbIgnoreErrors.Location = new System.Drawing.Point(438, 42);
-            this.cbIgnoreErrors.Margin = new System.Windows.Forms.Padding(2);
-            this.cbIgnoreErrors.Name = "cbIgnoreErrors";
-            this.cbIgnoreErrors.Size = new System.Drawing.Size(85, 17);
-            this.cbIgnoreErrors.TabIndex = 5;
-            this.cbIgnoreErrors.Text = "Ignore errors";
-            this.cbIgnoreErrors.UseVisualStyleBackColor = true;
+            this.cbOnlyChildren.AutoSize = true;
+            this.cbOnlyChildren.Location = new System.Drawing.Point(438, 12);
+            this.cbOnlyChildren.Margin = new System.Windows.Forms.Padding(2);
+            this.cbOnlyChildren.Name = "cbOnlyChildren";
+            this.cbOnlyChildren.Size = new System.Drawing.Size(87, 17);
+            this.cbOnlyChildren.TabIndex = 5;
+            this.cbOnlyChildren.Text = "Only children";
+            this.cbOnlyChildren.UseVisualStyleBackColor = true;
             // 
             // CopyOptions
             // 
@@ -428,5 +441,6 @@
         public System.Windows.Forms.CheckBox cbRecursive;
         public System.Windows.Forms.CheckBox cbSetItemRightsExplicitly;
         public System.Windows.Forms.CheckBox cbIgnoreErrors;
+        public System.Windows.Forms.CheckBox cbOnlyChildren;
     }
 }

@@ -41,7 +41,7 @@ namespace SitecoreConverter
                 }
 
                 tbResult.Text += sPath + "\r\n";
-                dstItem.CopyTo(srcItem, false);
+                dstItem.CopyTo(srcItem, false, false);
 
 /*
                 foreach (IField field in srcItem.Fields)

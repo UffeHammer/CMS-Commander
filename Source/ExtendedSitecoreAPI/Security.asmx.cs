@@ -372,7 +372,7 @@ namespace ExtendedSitecoreAPI
             // Remove file extension from item name
             options.IncludeExtensionInItemName = false;
             // Overwrite any existing file with the same name
-            options.KeepExisting = false;
+//            options.KeepExisting = false;
             // Do not make a versioned template
             options.Versioned = false;
             // set the path

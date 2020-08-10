@@ -63,6 +63,7 @@ namespace SitecoreConverter
         private ComboBox comboDatabaseLeft;
         private ComboBox comboDatabaseRight;
         private Button btnLocateOnOtherSide;
+        private Button btnRename;
         private Exception _globalException = null;
 
 
@@ -241,6 +242,8 @@ namespace SitecoreConverter
             this.comboDatabaseLeft = new System.Windows.Forms.ComboBox();
             this.comboDatabaseRight = new System.Windows.Forms.ComboBox();
             this.btnLocateOnOtherSide = new System.Windows.Forms.Button();
+            this.btnRename = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -325,7 +328,7 @@ namespace SitecoreConverter
             // btnDelete
             // 
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDelete.Location = new System.Drawing.Point(290, 9);
+            this.btnDelete.Location = new System.Drawing.Point(388, 8);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(88, 20);
             this.btnDelete.TabIndex = 12;
@@ -405,7 +408,7 @@ namespace SitecoreConverter
             // btnNewFolder
             // 
             this.btnNewFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnNewFolder.Location = new System.Drawing.Point(197, 9);
+            this.btnNewFolder.Location = new System.Drawing.Point(294, 8);
             this.btnNewFolder.Name = "btnNewFolder";
             this.btnNewFolder.Size = new System.Drawing.Size(88, 20);
             this.btnNewFolder.TabIndex = 15;
@@ -416,7 +419,7 @@ namespace SitecoreConverter
             // btnFind
             // 
             this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFind.Location = new System.Drawing.Point(383, 9);
+            this.btnFind.Location = new System.Drawing.Point(482, 9);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(89, 20);
             this.btnFind.TabIndex = 16;
@@ -427,7 +430,7 @@ namespace SitecoreConverter
             // btnCompare
             // 
             this.btnCompare.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCompare.Location = new System.Drawing.Point(477, 9);
+            this.btnCompare.Location = new System.Drawing.Point(577, 8);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(88, 20);
             this.btnCompare.TabIndex = 17;
@@ -518,7 +521,7 @@ namespace SitecoreConverter
             // btnLocateOnOtherSide
             // 
             this.btnLocateOnOtherSide.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLocateOnOtherSide.Location = new System.Drawing.Point(571, 8);
+            this.btnLocateOnOtherSide.Location = new System.Drawing.Point(671, 8);
             this.btnLocateOnOtherSide.Name = "btnLocateOnOtherSide";
             this.btnLocateOnOtherSide.Size = new System.Drawing.Size(116, 20);
             this.btnLocateOnOtherSide.TabIndex = 25;
@@ -526,10 +529,22 @@ namespace SitecoreConverter
             this.btnLocateOnOtherSide.UseVisualStyleBackColor = true;
             this.btnLocateOnOtherSide.Click += new System.EventHandler(this.btnLocateWithLeft_Click);
             // 
+            // btnRename
+            // 
+            this.btnRename.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRename.Location = new System.Drawing.Point(198, 8);
+            this.btnRename.Name = "btnRename";
+            this.btnRename.Size = new System.Drawing.Size(90, 20);
+            this.btnRename.TabIndex = 26;
+            this.btnRename.Text = "F2 Rename";
+            this.btnRename.UseVisualStyleBackColor = true;
+            this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
+            // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(1105, 583);
+            this.Controls.Add(this.btnRename);
             this.Controls.Add(this.btnLocateOnOtherSide);
             this.Controls.Add(this.comboDatabaseRight);
             this.Controls.Add(this.comboDatabaseLeft);
@@ -561,6 +576,7 @@ namespace SitecoreConverter
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -640,8 +656,8 @@ namespace SitecoreConverter
             catch (System.Net.WebException ex)
             {
                 
-                if ((ex.Status == System.Net.WebExceptionStatus.ProtocolError) &&
-                    (ex.Message.IndexOf("401: Unauthorized") > -1))
+                if ((ex.Status == System.Net.WebExceptionStatus.ProtocolError) /* &&
+                    (ex.Message.IndexOf("401: Unauthorized") > -1)*/ )
                 {
                     LoginForm BasicAuthLogin = new LoginForm();
                     BasicAuthLogin.SiteUrl = sServerUrl + "/Basic authentication";
@@ -1135,6 +1151,7 @@ namespace SitecoreConverter
             else if (CopyOptionsForm.rbUseNames.Checked)
                 _destItem.Options.CopyOperation = CopyOperations.UseNames;
             _destItem.Options.RecursiveOperation = CopyOptionsForm.cbRecursive.Checked;
+            _destItem.Options.CopyOnlyChildren = CopyOptionsForm.cbOnlyChildren.Checked;
             _destItem.Options.IgnoreErrors = CopyOptionsForm.cbIgnoreErrors.Checked;
 
 //            _srcItem.Options.Database = CopyOptionsForm.tbFromDatabase.Text;
@@ -1159,6 +1176,29 @@ namespace SitecoreConverter
 //            if (item != null)
 //                item.ExtendedWebService.EnableIndexing(true);
         }
+
+        private void btnRename_Click(object sender, EventArgs e)
+        {
+            if ((_lastSelectedTreeView == null) || (_lastSelectedTreeView.SelectedNode == null))
+            {
+                MessageBox.Show("Please select an item first.");
+                return;
+            }
+
+            IItem selItem = _lastSelectedTreeView.SelectedNode.Tag as IItem;
+            SinglelineInputForm createFolderForm = new SinglelineInputForm();
+            createFolderForm.tbResult.Text = selItem.Name;
+            createFolderForm.lblInput.Text = "Enter new name of item";
+            createFolderForm.ShowDialog(this);
+            if (createFolderForm.OkClicked)
+            {
+                selItem.Rename(createFolderForm.tbResult.Text);
+
+                _lastSelectedTreeView.SelectedNode.Text = createFolderForm.tbResult.Text;
+            }
+
+        }
+
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -1260,7 +1300,11 @@ namespace SitecoreConverter
         
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F3)
+            if (e.KeyCode == Keys.F2)
+            {
+                btnRename.PerformClick();
+            }
+            else if (e.KeyCode == Keys.F3)
             {
                 btnView.PerformClick();
             }
@@ -1412,7 +1456,7 @@ namespace SitecoreConverter
                             return;
                     }
 
-                    _destItem.CopyTo(_srcItem, _destItem.Options.RecursiveOperation);
+                    _destItem.CopyTo(_srcItem, _destItem.Options.RecursiveOperation, _destItem.Options.CopyOnlyChildren);
 
                     // Show warnings
                     if (Util.WarningList.Count > 0)
@@ -1752,6 +1796,9 @@ namespace SitecoreConverter
 
         private void ExpandToNode(TreeView treeView, string sPath)
         {
+            if (sPath == "")
+                return;
+
             // ExpandNode(item, _LastSelectedNode, _lastSelectedTreeView);
             string sElementName = "";
             if (sPath.IndexOf("/") > -1)

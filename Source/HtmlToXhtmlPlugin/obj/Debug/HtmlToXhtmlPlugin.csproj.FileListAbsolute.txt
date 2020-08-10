@@ -12,3 +12,13 @@ c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\Core.pdb
 c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.csprojResolveAssemblyReference.cache
 c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.dll
 c:\Work\Github\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.pdb
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\HtmlToXhtmlPlugin.dll
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\HtmlToXhtmlPlugin.pdb
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\Core.dll
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\Core.pdb
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\bin\Debug\Core.dll.config
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.csprojAssemblyReference.cache
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.csproj.CoreCompileInputs.cache
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.csproj.CopyComplete
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.dll
+c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.pdb

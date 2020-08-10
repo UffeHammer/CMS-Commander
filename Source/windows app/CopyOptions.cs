@@ -27,14 +27,18 @@ namespace SitecoreConverter
             {
                 TabPage page = tabControl1.TabPages[d];
                 IPluginOption[] options = null;
-                for (int t = 0; t < _itemCopyPlugins.Length; t++)
+                if (_itemCopyPlugins != null)
                 {
-                    if (page.Name == _itemCopyPlugins[t].Name)
+                    for (int t = 0; t < _itemCopyPlugins.Length; t++)
                     {
-                        options = _itemCopyPlugins[t].PluginOptions;
-                        break;
+                        if (page.Name == _itemCopyPlugins[t].Name)
+                        {
+                            options = _itemCopyPlugins[t].PluginOptions;
+                            break;
+                        }
                     }
                 }
+
                 // Found an option that matched a page
                 if (options != null)
                 {

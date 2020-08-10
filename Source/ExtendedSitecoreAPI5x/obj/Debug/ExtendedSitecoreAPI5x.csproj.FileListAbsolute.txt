@@ -15,3 +15,14 @@ c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI5x\bin\Core.dll
 c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI5x\bin\Core.pdb
 c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.dll
 c:\Work\Github\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.pdb
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\bin\ExtendedSitecoreAPI5x.dll.config
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\bin\ExtendedSitecoreAPI5x.dll
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\bin\ExtendedSitecoreAPI5x.pdb
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\bin\Core.dll
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\bin\Core.pdb
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\bin\Core.dll.config
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.csprojAssemblyReference.cache
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.csproj.CoreCompileInputs.cache
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.csproj.CopyComplete
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.dll
+c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.pdb

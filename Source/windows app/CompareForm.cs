@@ -219,12 +219,12 @@ namespace SitecoreConverter
             {
                 IItem leftItem = null;
                 if (_leftItemsFound.TryGetValue(rightItem.ID.ToString(), out leftItem))
-                    leftItem.CopyTo(rightItem, false);
+                    leftItem.CopyTo(rightItem, false, false);
                 else if (_rightStartItem.GetItem(rightItem.Parent.ID.ToString()) != null)
                 {
                     leftItem = _leftStartItem.GetItem(rightItem.Parent.ID.ToString());
                     if (leftItem != null)
-                        leftItem.CopyTo(rightItem, true);
+                        leftItem.CopyTo(rightItem, true, false);
                 }
             }
             Reset();
@@ -236,12 +236,12 @@ namespace SitecoreConverter
             {
                 IItem rightItem = null;
                 if (_rightItemsFound.TryGetValue(leftItem.ID.ToString(), out rightItem))
-                    rightItem.CopyTo(leftItem, false);
+                    rightItem.CopyTo(leftItem, false, false);
                 else if (_rightStartItem.GetItem(leftItem.Parent.ID.ToString()) != null)
                 {
                     rightItem = _rightStartItem.GetItem(leftItem.Parent.ID.ToString());
                     if (rightItem != null)
-                        rightItem.CopyTo(leftItem, true);
+                        rightItem.CopyTo(leftItem, true, false);
                 }
             }
 

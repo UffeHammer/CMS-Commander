@@ -10,3 +10,10 @@ c:\Work\Github\CMS-Commander\Source\Core\bin\Debug\Core.pdb
 c:\Work\Github\CMS-Commander\Source\Core\obj\Debug\SitecoreConverter.Core.csprojResolveAssemblyReference.cache
 c:\Work\Github\CMS-Commander\Source\Core\obj\Debug\Core.dll
 c:\Work\Github\CMS-Commander\Source\Core\obj\Debug\Core.pdb
+c:\udvikling\CMS-Commander\Source\Core\obj\Debug\SitecoreConverter.Core.csproj.CoreCompileInputs.cache
+c:\udvikling\CMS-Commander\Source\Core\obj\Debug\Core.dll
+c:\udvikling\CMS-Commander\Source\Core\obj\Debug\Core.pdb
+c:\udvikling\CMS-Commander\Source\Core\bin\Debug\Core.dll.config
+c:\udvikling\CMS-Commander\Source\Core\bin\Debug\Core.dll
+c:\udvikling\CMS-Commander\Source\Core\bin\Debug\Core.pdb
+C:\udvikling\CMS-Commander\Source\Core\obj\Debug\SitecoreConverter.Core.csprojAssemblyReference.cache

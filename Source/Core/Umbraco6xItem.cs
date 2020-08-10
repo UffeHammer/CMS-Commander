@@ -182,12 +182,17 @@ namespace SitecoreConverter.Core
             throw new NotImplementedException();
         }
 
-        public void CopyTo(IItem CopyFrom, bool bRecursive)
+        public void CopyTo(IItem CopyFrom, bool bRecursive, bool bOnlyChildren)
         {
             throw new NotImplementedException();
         }
 
         public bool MoveTo(IItem MoveTo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Rename(string Name)
         {
             throw new NotImplementedException();
         }

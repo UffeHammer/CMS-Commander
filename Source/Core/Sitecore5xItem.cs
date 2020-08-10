@@ -181,6 +181,7 @@ namespace SitecoreConverter.Core
                         // Timeout = 30 seconds (default 10)
                         _security.Timeout = 300000;
                     }
+/*
                     ExtendedSitecoreAPI5x.RoleStruct[] rolesStruct = _security.GetItemSecurity(_ID.ToString());
                     _Roles = new BaseRole[rolesStruct.Length];
                     for (int t = 0; t < rolesStruct.Length; t++)
@@ -196,6 +197,7 @@ namespace SitecoreConverter.Core
                             _Roles[t].UserSettings.Add("Roles", rolesStruct[t].Roles);
                         }
                     }
+*/
                 }
                 return _Roles;
             }
@@ -216,6 +218,7 @@ namespace SitecoreConverter.Core
                         // Timeout = 30 seconds (default 10)
                         _security.Timeout = 300000;
                     }
+/*
                     ExtendedSitecoreAPI5x.RoleStruct[] rolesStruct = _security.GetUsers("sitecore");
                     _Users = new BaseRole[rolesStruct.Length];
                     for (int t = 0; t < rolesStruct.Length; t++)
@@ -231,6 +234,7 @@ namespace SitecoreConverter.Core
                             _Users[t].UserSettings.Add("Roles", rolesStruct[t].Roles);
                         }
                     }
+*/
                 }
                 return _Users;
             }
@@ -485,7 +489,7 @@ namespace SitecoreConverter.Core
         }
 
 
-        public void CopyTo(IItem CopyFrom, bool bRecursive)
+        public void CopyTo(IItem CopyFrom, bool bRecursive, bool bOnlyChildren)
         {
             throw new Exception("Error CopyTo is not implemented.");
         }
@@ -503,6 +507,11 @@ namespace SitecoreConverter.Core
             }
         }
 
+        public void Rename(string Name)
+        {
+            XmlNode retVal = _sitecoreApi.Rename(this.ID, Name, _Options.Database, _credentials);
+            CheckSitecoreReturnValue(retVal);
+        }
 
         public void Delete()
         {

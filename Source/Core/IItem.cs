@@ -24,8 +24,9 @@ namespace SitecoreConverter.Core
         IItem[] GetChildren();
         IItem GetItem(string sItemPath);
 
-        void CopyTo(IItem CopyFrom, bool bRecursive);
+        void CopyTo(IItem CopyFrom, bool bRecursive, bool bOnlyChildren);
         bool MoveTo(IItem MoveTo);
+        void Rename(string Name);
         void Delete();
         void Save();
         string AddFromTemplate(string sName, string sTemplatePath);

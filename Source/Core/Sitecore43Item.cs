@@ -396,7 +396,7 @@ namespace SitecoreConverter.Core
             _sitecoreApi = sitecoreApi;
         }
 
-        public void CopyTo(IItem CopyFrom, bool bRecursive)
+        public void CopyTo(IItem CopyFrom, bool bRecursive, bool bOnlyChildren)
         {
             throw new Exception("Error CopyTo is not implemented.");
         }
@@ -409,6 +409,10 @@ namespace SitecoreConverter.Core
             else
                 return true;
 
+        }
+        public void Rename(string Name)
+        {
+            _sitecoreApi.RenameItem(this.ID, Name);
         }
 
         public void Delete()

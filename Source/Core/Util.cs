@@ -115,13 +115,23 @@ namespace SitecoreConverter.Core
             return !regexPattern.IsMatch(strToCheck);
         }
 
+        public static string doWeirdMapping(string arg)
+        {
+            Encoding w1252 = Encoding.GetEncoding(1252);
+            return Encoding.UTF8.GetString(w1252.GetBytes(arg));
+        }
         public static string MakeValidNodeName(string name)
         {
             if (name != null)
             {
                 // The setting InvalidItemNameChars only contains these characters: "\/:?&quot;&lt;&gt;|[]"
                 // But there is a lot of other characters that aren't accepted, they are compiled here.                
-                char[] replaceChars = new char[] { '%', '#', '/', '<', '>', '[', ']', '\'', '\"', '”', '?', /*'.',*/ '&', ':', /*'*',*/ '|', '–', /*'-',*/ ',', '!', /*'(', ')',*/ '\'', '´', '+', '@', '\\', '…', '§', '¾', ';', '’', '=', '`', '½' };
+                char[] replaceChars = new char[] { '%', '#', '/', '<', '>', '[', ']', '\'', '\"', '”', '?', /*'.',*/ '&', ':', /*'*',*/ '|', '–', /*'-',*/ ',', '!', /*'(', ')',*/ '\'', '´', '+', '@', '\\', '…', '§', '¾', ';', '’', '=', '`', '½', '̊', 'Ã', 'é' };
+
+                name = name.Replace("È", "E");
+                name = name.Replace("è", "e");
+                name = name.Replace("É", "E");
+                name = name.Replace("é", "e");
 
                 foreach (char c in replaceChars)
                 {
@@ -132,6 +142,8 @@ namespace SitecoreConverter.Core
                     // the name is only invalid if it starts with the dash - character, otherwise we don't have to remove it.
                     if (IsInvalid(name[t].ToString()) && ((t == 0) || (name[t] != '-')))
                         name = name.Replace(name[t], '_');
+                    if (IsInvalid(name[t].ToString()) && (name[t] != '-'))
+                        name = name.Replace(name[t], '_');
                 }
 
                 name = name.Trim();
@@ -139,9 +151,22 @@ namespace SitecoreConverter.Core
                 // Fix "Item name cannot end with period char
                 if (name.EndsWith("."))
                     name = name.Remove(name.LastIndexOf("."));
+
+                // There is windows 1252 codepage characters, replace them with underscore
+                string sWindowsEncodedName = doWeirdMapping(name);
+                if (sWindowsEncodedName != name)
+                    sWindowsEncodedName = sWindowsEncodedName.Replace("�", "_");
+
+                // New sitecore has max length 100
+                if (name.Length > 100)
+                    name = name.Remove(100);
             }
             return name;
         }
+
+
+
+
 
         public static string MakeValidRoleName(string name)
         {

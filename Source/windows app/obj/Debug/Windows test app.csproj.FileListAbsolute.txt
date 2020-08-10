@@ -26,3 +26,32 @@ C:\Work\Cabana.3FSitecore\SitecoreConverter\windows app\obj\Debug\SitecoreConver
 c:\Work\Github\CMS-Commander\Source\windows app\bin\Debug\CMSCommander.exe.config
 c:\Work\Github\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.exe
 c:\Work\Github\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.pdb
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\CMSCommander.exe.config
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\CMSCommander.exe
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\CMSCommander.pdb
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\Core.dll
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\FilestorageConversionPlugin.dll
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\HtmlToXhtmlPlugin.dll
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\Core.pdb
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\Core.dll.config
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\FilestorageConversionPlugin.pdb
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\FilestorageConversionPlugin.dll.config
+c:\udvikling\CMS-Commander\Source\windows app\bin\Debug\HtmlToXhtmlPlugin.pdb
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\Windows test app.csprojAssemblyReference.cache
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.AddressForm.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.CompareForm.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.CopyOptions.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.Form1.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.ItemEditForm.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\CustomControls.LoginControl.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.LoginForm.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.ProgressForm.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.ScriptToolForm.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.SearchReplaceForm.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.SinglelineInputForm.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\SitecoreConverter.ViewTextForm.resources
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\Windows test app.csproj.GenerateResource.cache
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\Windows test app.csproj.CoreCompileInputs.cache
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\Windows test app.csproj.CopyComplete
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.exe
+c:\udvikling\CMS-Commander\Source\windows app\obj\Debug\CMSCommander.pdb

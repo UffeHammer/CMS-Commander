@@ -3,8 +3,8 @@
 
 #define MyAppName "CMS Commander"
 #define MyAppVersion "1.0"
-#define MyAppPublisher "Cabana"
-#define MyAppURL "http://www.cabana.dk"
+#define MyAppPublisher "Uffe Hammer"
+#define MyAppURL "https://github.com/UffeHammer/CMS-Commander"
 #define MyAppExeName "CMSCommander.exe"
 
 [Setup]
@@ -24,7 +24,7 @@ DefaultGroupName={#MyAppName}
 OutputBaseFilename=Setup CMS Commander
 Compression=lzma
 SolidCompression=yes
-OutputDir=.
+OutputDir=.                                                
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -45,11 +45,14 @@ Source: "..\bin\Release\FilestorageConversionPlugin.dll"; DestDir: "{app}"
 Source: "..\bin\Release\FilestorageConversionPlugin.pdb"; DestDir: "{app}"
 Source: "..\bin\Release\HtmlToXhtmlPlugin.dll"; DestDir: "{app}"
 Source: "..\bin\Release\HtmlToXhtmlPlugin.pdb"; DestDir: "{app}"
+Source: "CMS Commander usage.docx"; DestDir: "{userdocs}\CMS Commander"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 Name: "{group}\CMS Commander package folder"; Filename: "{userdocs}\CMS Commander"; IconFilename: "{userdocs}\CMS Commander\Sitecore webservice installer.zip"
+Name: "{group}\CMS Commander usage"; Filename: "{userdocs}\CMS Commander\CMS Commander usage.docx"; IconFilename: "{userdocs}\CMS Commander\CMS Commander usage.docx"
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+Filename: "{userdocs}\CMS Commander\CMS Commander usage.docx"; Flags: shellexec postinstall skipifsilent; Description: "View readme file "
+Filename: "{app}\{#MyAppExeName}"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"
