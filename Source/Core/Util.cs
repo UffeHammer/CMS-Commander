@@ -132,6 +132,8 @@ namespace SitecoreConverter.Core
                 name = name.Replace("è", "e");
                 name = name.Replace("É", "E");
                 name = name.Replace("é", "e");
+                name = name.Replace("Ä", "A");
+                name = name.Replace("ä", "a");
 
                 foreach (char c in replaceChars)
                 {
@@ -146,8 +148,6 @@ namespace SitecoreConverter.Core
                         name = name.Replace(name[t], '_');
                 }
 
-                name = name.Trim();
-
                 // Fix "Item name cannot end with period char
                 if (name.EndsWith("."))
                     name = name.Remove(name.LastIndexOf("."));
@@ -160,6 +160,8 @@ namespace SitecoreConverter.Core
                 // New sitecore has max length 100
                 if (name.Length > 100)
                     name = name.Remove(100);
+
+                name = name.Trim();
             }
             return name;
         }

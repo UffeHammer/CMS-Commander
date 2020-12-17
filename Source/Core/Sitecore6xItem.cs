@@ -584,7 +584,11 @@ namespace SitecoreConverter.Core
 
                     // recursively copy children
                     IField neverPublish = child.Fields.GetFieldByName("__Never publish");
-                    if ((newItem != null) && ((neverPublish != null) && (neverPublish.Content != "1")))
+                    bool bNeverPublish = false;
+                    if ((neverPublish != null) && (neverPublish.Content != "1"))
+                        bNeverPublish = true;
+
+                    if ((newItem != null) && (! bNeverPublish))
                         CopyChildren(newItem, child);
                 }
                 catch (Exception ex)
@@ -619,7 +623,10 @@ namespace SitecoreConverter.Core
                 foreach (IItem child in CopyFrom.GetChildren())
                 {
                     Sitecore6xItem rootItem = this.CopyItemTo(child);
-                    CopyChildren(rootItem, child);
+                    if ((bRecursive) && (rootItem != null))
+                    {
+                        CopyChildren(rootItem, child);
+                    }
                 }
             }
             else
@@ -1740,9 +1747,24 @@ namespace SitecoreConverter.Core
                 {
                     // We have files or images that reference Media Items
                     if ((_bNoWebApiInstalled == false) &&
-                        (/*field.Type == "Image" || field.Type == "File" ||*/ field.Type == "Images" || field.Type == "Files" ||field.Type == "Visuallist"))
+                        (field.Type == "Image" || field.Type == "File" || field.Type == "Images" || field.Type == "Files" ||field.Type == "Visuallist"))
                     {
                         string[] mediaIDList = field.Content.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (field.Type == "Image" || field.Type == "File")
+                        {
+                            XmlDocument doc = Sgml.SgmlUtil.ParseHtml(field.Content);
+                            XmlNode mediaNode = doc.SelectSingleNode("//image");
+                            if (mediaNode == null)
+                                mediaNode = doc.SelectSingleNode("//file");
+
+                            if (mediaNode != null)
+                            {
+                                string sMediaID = Util.GetAttributeValue(mediaNode.Attributes["mediaid"]);
+                                mediaIDList = new string[1];
+                                mediaIDList[0] = sMediaID;
+                            }
+                        }
+
                         foreach (string sID in mediaIDList)
                         {
                             IItem srcItem = CopyFrom.GetItem(sID);

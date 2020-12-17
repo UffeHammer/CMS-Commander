@@ -62,7 +62,8 @@ namespace ExtendedSitecoreAPI
                 {
                     return;
                 }
-                Sitecore.Context.Logout();
+                // Sitecore.Context.Logout();
+                Sitecore.Security.Authentication.AuthenticationManager.Logout();
             }
             Assert.IsTrue(Membership.ValidateUser(credentials.UserName, credentials.Password), "Unknown username or password.");
             UserSwitcher.Enter(Sitecore.Security.Accounts.User.FromName(credentials.UserName, true));
