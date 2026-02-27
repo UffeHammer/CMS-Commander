@@ -22,3 +22,13 @@ c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.
 c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.csproj.CopyComplete
 c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.dll
 c:\udvikling\CMS-Commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.pdb
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\bin\Debug\HtmlToXhtmlPlugin.dll
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\bin\Debug\HtmlToXhtmlPlugin.pdb
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\bin\Debug\Core.dll
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\bin\Debug\Core.pdb
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\bin\Debug\Core.dll.config
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.csproj.AssemblyReference.cache
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.csproj.CoreCompileInputs.cache
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXh.CA21FF6C.Up2Date
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.dll
+C:\Projects\CMS-commander\Source\HtmlToXhtmlPlugin\obj\Debug\HtmlToXhtmlPlugin.pdb

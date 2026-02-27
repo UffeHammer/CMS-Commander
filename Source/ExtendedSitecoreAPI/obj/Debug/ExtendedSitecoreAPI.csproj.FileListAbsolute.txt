@@ -20,3 +20,13 @@ c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecore
 c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.dll
 c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.pdb
 C:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.csprojAssemblyReference.cache
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.dll.config
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.dll
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\bin\ExtendedSitecoreAPI.pdb
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.csproj.AssemblyReference.cache
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.csproj.CoreCompileInputs.cache
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\obj\Debug\Extended.DCA7C170.Up2Date
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.dll
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.pdb
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\bin\Newtonsoft.Json.dll
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\bin\Sitecore.ContentSearch.xml

@@ -26,3 +26,14 @@ c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSiteco
 c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.csproj.CopyComplete
 c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.dll
 c:\udvikling\CMS-Commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.pdb
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\bin\ExtendedSitecoreAPI5x.dll.config
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\bin\ExtendedSitecoreAPI5x.dll
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\bin\ExtendedSitecoreAPI5x.pdb
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\bin\Core.dll
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\bin\Core.pdb
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\bin\Core.dll.config
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.csproj.AssemblyReference.cache
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.csproj.CoreCompileInputs.cache
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\obj\Debug\Extended.48DDDD2D.Up2Date
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.dll
+C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI5x\obj\Debug\ExtendedSitecoreAPI5x.pdb

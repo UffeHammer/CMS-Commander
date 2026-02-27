@@ -25,3 +25,14 @@ c:\udvikling\CMS-Commander\Source\FilestorageConversionPlugin\obj\Debug\Filestor
 c:\udvikling\CMS-Commander\Source\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.csproj.CopyComplete
 c:\udvikling\CMS-Commander\Source\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.dll
 c:\udvikling\CMS-Commander\Source\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.pdb
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\bin\Debug\FilestorageConversionPlugin.dll.config
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\bin\Debug\FilestorageConversionPlugin.dll
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\bin\Debug\FilestorageConversionPlugin.pdb
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\bin\Debug\Core.dll
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\bin\Debug\Core.pdb
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\bin\Debug\Core.dll.config
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.csproj.AssemblyReference.cache
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.csproj.CoreCompileInputs.cache
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\obj\Debug\Filestor.00C31771.Up2Date
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.dll
+C:\Projects\CMS-commander\Source\FilestorageConversionPlugin\obj\Debug\FilestorageConversionPlugin.pdb

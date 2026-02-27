@@ -23,7 +23,7 @@ using Sitecore.Install.Framework;
 using Sitecore.Install.Items;
 
 using System.IO;
-// using Sitecore.ContentSearch.Maintenance;
+using Sitecore.ContentSearch.Maintenance;
 
 namespace ExtendedSitecoreAPI
 {
@@ -424,15 +424,25 @@ namespace ExtendedSitecoreAPI
         {
             Login(credentials);
 
-            // setting the file location to be saved in the server. 
-            // reading from the web.config file 
+            // setting the file location to be saved in the server.
+            // reading from the web.config file
             string FilePath = Path.Combine(Server.MapPath("/temp"), FileName);
 
             // Upload the file
             UploadFile(FileName, buffer, Offset, credentials);
 
-            MediaItem result = AddFile(FilePath, sitecorePath, FileName);
-            return result.ID.ToString();
+            // Disable indexing to prevent ContentSearch ContentExtraction from
+            // trying to read the media stream before it is fully available
+            EnableIndexing(false);
+            try
+            {
+                MediaItem result = AddFile(FilePath, sitecorePath, FileName);
+                return result.ID.ToString();
+            }
+            finally
+            {
+                EnableIndexing(true);
+            }
         }
 
 
@@ -461,15 +471,14 @@ namespace ExtendedSitecoreAPI
         [WebMethod]
         public void EnableIndexing(bool enable)
         {
-            // index rebuilding before Sitecore 7 
+            // index rebuilding before Sitecore 7
             Sitecore.Configuration.Settings.Indexing.Enabled = enable;
-/*
-            // How to pause indexing in Sitecore 7.0 Update-1 (rev130810) and later 
+
+            // Sitecore 7.0 Update-1 (rev130810) and later
             if (enable == false)
                 IndexCustodian.PauseIndexing();
             else
                 IndexCustodian.ResumeIndexing();
- */ 
         }
 
 

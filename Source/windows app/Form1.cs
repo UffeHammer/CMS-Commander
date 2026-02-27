@@ -124,6 +124,7 @@ namespace SitecoreConverter
             }
 
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(ValidateServerCertificate);
         }
 
@@ -641,10 +642,8 @@ namespace SitecoreConverter
         {
             SitecoreConverter.Core.Sitecore61.VisualSitecoreService sitecoreApi = new SitecoreConverter.Core.Sitecore61.VisualSitecoreService();
             sitecoreApi.Url = sServerUrl + "/sitecore/shell/webservice/service.asmx";
-            sitecoreApi.Credentials = CredentialCache.DefaultCredentials; //new System.Net.NetworkCredential();
             SitecoreConverter.Core.Sitecore61.Credentials credential = new SitecoreConverter.Core.Sitecore61.Credentials();
             sitecoreApi.CookieContainer = new CookieContainer();
-            sitecoreApi.UnsafeAuthenticatedConnectionSharing = true;
             // Timeout = 3000 seconds (default 10)
             sitecoreApi.Timeout = 3000000;
             sitecoreApi.EnableDecompression = true;
@@ -656,8 +655,7 @@ namespace SitecoreConverter
             catch (System.Net.WebException ex)
             {
                 
-                if ((ex.Status == System.Net.WebExceptionStatus.ProtocolError) /* &&
-                    (ex.Message.IndexOf("401: Unauthorized") > -1)*/ )
+                if ((ex.Status == System.Net.WebExceptionStatus.ProtocolError))
                 {
                     LoginForm BasicAuthLogin = new LoginForm();
                     BasicAuthLogin.SiteUrl = sServerUrl + "/Basic authentication";

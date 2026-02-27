@@ -17,3 +17,10 @@ c:\udvikling\CMS-Commander\Source\Core\bin\Debug\Core.dll.config
 c:\udvikling\CMS-Commander\Source\Core\bin\Debug\Core.dll
 c:\udvikling\CMS-Commander\Source\Core\bin\Debug\Core.pdb
 C:\udvikling\CMS-Commander\Source\Core\obj\Debug\SitecoreConverter.Core.csprojAssemblyReference.cache
+C:\Projects\CMS-commander\Source\Core\bin\Debug\Core.dll.config
+C:\Projects\CMS-commander\Source\Core\bin\Debug\Core.dll
+C:\Projects\CMS-commander\Source\Core\bin\Debug\Core.pdb
+C:\Projects\CMS-commander\Source\Core\obj\Debug\SitecoreConverter.Core.csproj.AssemblyReference.cache
+C:\Projects\CMS-commander\Source\Core\obj\Debug\SitecoreConverter.Core.csproj.CoreCompileInputs.cache
+C:\Projects\CMS-commander\Source\Core\obj\Debug\Core.dll
+C:\Projects\CMS-commander\Source\Core\obj\Debug\Core.pdb

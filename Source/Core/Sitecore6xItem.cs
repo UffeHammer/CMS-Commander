@@ -54,9 +54,10 @@ namespace SitecoreConverter.Core
                 {
                     _security = new SitecoreConverter.Core.ExtendedSitecoreAPI.Security();
                     Uri securityUri = new Uri(_sitecoreApi.Url);
-                    _security.Url = securityUri.Scheme + "://" + securityUri.Host + "/sitecore%20modules/shell/ExtendedSitecoreAPI/security.asmx";
+                    _security.Url = securityUri.Scheme + "://" + securityUri.Authority + "/sitecore%20modules/Shell/ExtendedSitecoreAPI/security.asmx";
                     // Timeout = 30 seconds (default 10)
                     _security.Timeout = 300000;
+                    _security.CookieContainer = _sitecoreApi.CookieContainer;
                 }
                 return _security;
             }
