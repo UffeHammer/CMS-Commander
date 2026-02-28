@@ -84,3 +84,4 @@ C:\Projects\CMS-commander\Source\windows app\obj\Debug\Windows test app.csproj.C
 C:\Projects\CMS-commander\Source\windows app\obj\Debug\Windows .519C7FC8.Up2Date
 C:\Projects\CMS-commander\Source\windows app\obj\Debug\CMSCommander.exe
 C:\Projects\CMS-commander\Source\windows app\obj\Debug\CMSCommander.pdb
+C:\Projects\CMS-commander\Source\windows app\obj\Debug\CMSCommander.exe.config

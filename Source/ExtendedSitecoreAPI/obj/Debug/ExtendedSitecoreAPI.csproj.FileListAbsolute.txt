@@ -29,4 +29,3 @@ C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\obj\Debug\Extended.DCA7C170
 C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.dll
 C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\obj\Debug\ExtendedSitecoreAPI.pdb
 C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\bin\Newtonsoft.Json.dll
-C:\Projects\CMS-commander\Source\ExtendedSitecoreAPI\bin\Sitecore.ContentSearch.xml

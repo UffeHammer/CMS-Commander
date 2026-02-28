@@ -701,6 +701,7 @@ namespace SitecoreConverter
 
             if (item.ExtendedWebService != null)
             {
+                string savedExtendedUrl = item.ExtendedWebService.Url;
                 try
                 {
                     item.ExtendedWebService.Discover();
@@ -708,10 +709,13 @@ namespace SitecoreConverter
                 catch (Exception ex)
                 {
                     //  \nError message:\n " + ex.Message
-                    MessageBox.Show("Error connecting to custom CMS Commander webservice, is it installed?\n\n" + 
+                    MessageBox.Show("Error connecting to custom CMS Commander webservice, is it installed?\n\n" +
                                     "Please install it using the \"My Documents\\CMS Commander\\Sitecore webservice installer.zip\" package.");
                     return null;
                 }
+                // Restore the original URL - Discover() may overwrite it with an
+                // internal HTTP URL from the WSDL (e.g. behind a Docker reverse proxy)
+                item.ExtendedWebService.Url = savedExtendedUrl;
             }
 
             if (treeView != null)

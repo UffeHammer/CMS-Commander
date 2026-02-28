@@ -24,6 +24,7 @@ using Sitecore.Install.Items;
 
 using System.IO;
 using Sitecore.ContentSearch.Maintenance;
+using Sitecore.Events;
 
 namespace ExtendedSitecoreAPI
 {
@@ -431,17 +432,15 @@ namespace ExtendedSitecoreAPI
             // Upload the file
             UploadFile(FileName, buffer, Offset, credentials);
 
-            // Disable indexing to prevent ContentSearch ContentExtraction from
-            // trying to read the media stream before it is fully available
-            EnableIndexing(false);
-            try
+            // Use EventDisabler to suppress all item events (item:created, item:saved, etc.)
+            // This prevents ContentSearch ContentExtraction from firing during media creation,
+            // which would fail with "Cannot get a media stream" and corrupt the blob storage.
+            // Also use SecurityDisabler to ensure full write access during blob storage.
+//            using (new Sitecore.Data.Events.EventDisabler())
+            using (new SecurityDisabler())
             {
                 MediaItem result = AddFile(FilePath, sitecorePath, FileName);
                 return result.ID.ToString();
-            }
-            finally
-            {
-                EnableIndexing(true);
             }
         }
 
