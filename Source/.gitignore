@@ -1,5 +1,9 @@
 Standard dotnet git ignore file:
 
+bin
+obj
+Debug
+
 www/
 bin/
 obj/
