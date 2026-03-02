@@ -1,5 +1,12 @@
 Standard dotnet git ignore file:
 
+bin
+obj
+Debug
+
+www/
+bin/
+obj/
 # package-lock.json
 
 lib/license.xml
