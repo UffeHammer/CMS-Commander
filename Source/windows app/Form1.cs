@@ -294,12 +294,12 @@ namespace SitecoreConverter
             this.comboSiteTypeRight.Items.AddRange(new object[] {
             "Sitecore43",
             "Sitecore5x",
-            "Sitecore6x-8x"});
+            "Sitecore6-10"});
             this.comboSiteTypeRight.Location = new System.Drawing.Point(677, 36);
             this.comboSiteTypeRight.Name = "comboSiteTypeRight";
             this.comboSiteTypeRight.Size = new System.Drawing.Size(90, 21);
             this.comboSiteTypeRight.TabIndex = 9;
-            this.comboSiteTypeRight.Text = "Sitecore6x-8x";
+            this.comboSiteTypeRight.Text = "Sitecore6-10";
             // 
             // comboSiteTypeLeft
             // 
@@ -307,7 +307,7 @@ namespace SitecoreConverter
             this.comboSiteTypeLeft.Items.AddRange(new object[] {
             "Sitecore43",
             "Sitecore5x",
-            "Sitecore6x-8x"});
+            "Sitecore6-10"});
             this.comboSiteTypeLeft.Location = new System.Drawing.Point(8, 36);
             this.comboSiteTypeLeft.Name = "comboSiteTypeLeft";
             this.comboSiteTypeLeft.Size = new System.Drawing.Size(89, 21);
@@ -822,7 +822,7 @@ namespace SitecoreConverter
             {
                 ConnectSitecore43(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text, comboDatabaseLeft.Text);
             }
-            else if (comboSiteTypeLeft.Text.Contains("Sitecore6x"))
+            else if (comboSiteTypeLeft.Text.Contains("Sitecore6-10"))
             {
                 ConnectSitecore61(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text, comboDatabaseLeft.Text);
             }
@@ -842,7 +842,7 @@ namespace SitecoreConverter
             {
                 ConnectSitecore43(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text, comboDatabaseRight.Text);
             }
-            else if (comboSiteTypeRight.Text.Contains("Sitecore6x"))
+            else if (comboSiteTypeRight.Text.Contains("Sitecore6-10"))
             {
                 ConnectSitecore61(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text, comboDatabaseRight.Text);
             }
