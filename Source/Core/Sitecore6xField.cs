@@ -126,7 +126,8 @@ namespace SitecoreConverter.Core
                 else
                     _sName = fieldNode.Attributes["key"].Value;
                 _sKey = fieldNode.Attributes["key"].Value;
-                _sType = fieldNode.Attributes["type"].Value;
+                string typeValue = fieldNode.Attributes["type"].Value;
+                _sType = string.IsNullOrEmpty(typeValue) ? "Single-Line Text" : typeValue;
                 _TemplateFieldID = new Guid(fieldNode.Attributes["tfid"].Value);
                 if (fieldNode.Attributes["sortorder"] != null)
                     _sSortOrder = fieldNode.Attributes["sortorder"].Value;
@@ -137,7 +138,8 @@ namespace SitecoreConverter.Core
             {
                 _sName = fieldNode.Attributes["name"].Value;
                 _sKey = _sName.ToLower();
-                _sType = fieldNode.Attributes["type"].Value;
+                string typeValue2 = fieldNode.Attributes["type"].Value;
+                _sType = string.IsNullOrEmpty(typeValue2) ? "Single-Line Text" : typeValue2;
                 _TemplateFieldID = new Guid(fieldNode.Attributes["fieldid"].Value);
                 _sContent = fieldNode.SelectSingleNode("value").InnerText;
             }
@@ -147,7 +149,7 @@ namespace SitecoreConverter.Core
         {
             _sName = sName;
             _sKey = sKey;
-            _sType = sType;
+            _sType = string.IsNullOrEmpty(sType) ? "Single-Line Text" : sType;
             _TemplateFieldID = TemplateFieldID;
             _sContent = sContent;
             if (sSortOrder != null)

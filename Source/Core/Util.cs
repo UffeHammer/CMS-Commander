@@ -277,6 +277,13 @@ namespace SitecoreConverter.Core
 
         public static string TranslateToNewFieldTypes(string sFieldType)
         {
+            // Prevent blank field types which cause InvalidOperationException: fieldTypeItem in Sitecore
+            if (string.IsNullOrEmpty(sFieldType))
+            {
+                AddWarning("Field type was empty, defaulting to 'Single-Line Text'");
+                return "Single-Line Text";
+            }
+
             NameValueCollection deprecatedCollection = new NameValueCollection();
             deprecatedCollection.Add("text", "Single-Line Text");
             deprecatedCollection.Add("memo", "Multi-Line Text");

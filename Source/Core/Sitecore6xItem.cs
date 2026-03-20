@@ -816,7 +816,7 @@ namespace SitecoreConverter.Core
             return sParentPath + "/" + sItemName;
         }
 
-
+/*
         /// <summary>
         /// Create template from standard template
         /// </summary>
@@ -833,7 +833,7 @@ namespace SitecoreConverter.Core
         {
             return CreateTemplateItemWithSpecificID(sParentPath, sFromTemplatePath, "", sTemplateName);
         }
-
+*/
         private XmlNode GetItemXml(string sPath)
         {
             XmlNode result = CheckSitecoreReturnValue(
@@ -909,281 +909,274 @@ namespace SitecoreConverter.Core
             return templateFieldItem;
         }
 
-
-        /// <summary>
-        /// Adds a new field to a template using the IField fromField object
-        /// IMPORTANT!! The parameter sTemplatePath should always be a valid path, never an ID.
-        /// </summary>
-        private void AddTemplateField(string sTemplatePath, IField fromField, IItem fromTemplate)
-        {
-            // Get "Template section" template
-            XmlNode templateSection = GetItemXml("/sitecore/templates/System/Templates/Template section");
-            string templateSectionID = templateSection.Attributes["id"].Value;
-
-            string templateSectionName = "Data";
-            if ((fromField.Section != "") && (fromField.Section != null))
-                templateSectionName = fromField.Section;
-
-            string dataSectionID = GetItemAttribute(sTemplatePath + "/" + templateSectionName, "id");
-/*
-            string dataSectionID = null;
-            XmlNode dataSectionNode = GetItemXml(sTemplatePath + "/" + templateSectionName);
-            if (dataSectionNode != null)
-            {
-                dataSectionNode = dataSectionNode.SelectSingleNode("//item");
-                dataSectionID = dataSectionNode.Attributes["id"].Value;
-            }
-*/
-            if (dataSectionID == null)
-            {
-                // Create new "Template section" item from the "Template section" template
-                XmlNode resultNode = _sitecoreApi.AddFromTemplate(sTemplatePath, templateSectionID, templateSectionName, _Options.Database, _credentials);
-                CheckSitecoreReturnValue(resultNode);
-                dataSectionID = resultNode.SelectSingleNode("//data/data").InnerText;
-                Sitecore6xItem dataSectionItem = GetSitecore61Item(dataSectionID);
-
-                sTemplatePath = sTemplatePath.Replace("//", "/");
-                IItem fromTemplateSectionItem = fromTemplate.GetItem(sTemplatePath + "/" + templateSectionName);
-                if (fromTemplateSectionItem != null)
-                    dataSectionItem.SortOrder = fromTemplateSectionItem.SortOrder; // Util.GetNodeFieldValue(dataSectionNode, "//field[@key='__sortorder']/content");
-                dataSectionItem.Save();
-            }
-
-            // Create new field below Section
-            CreateTemplateItemWithSpecificID(dataSectionID, "/sitecore/templates/System/Templates/Template field", fromField.TemplateFieldID, fromField.Name);
-
-            Sitecore6xItem templateFieldItem = GetSitecore61Item(fromField.TemplateFieldID);
-
-            // Add "Sort order" to template
-            AddFieldFromTemplate(templateFieldItem, "/sitecore/templates/System/Templates/Sections/Appearance/Appearance/__Sortorder", fromField.SortOrder);
-
-            // Add "Field type" to template
-            string sFromFieldTranslated = Util.TranslateToNewFieldTypes(fromField.Type);
-            AddFieldFromTemplate(templateFieldItem, "/sitecore/templates/System/Templates/Template field/Data/Type", sFromFieldTranslated);
-
-            // Add "Field source" to template
-            AddFieldFromTemplate(templateFieldItem, "/sitecore/templates/System/Templates/Template field/Data/Source", fromField.Source);
-
-            // Add "LanguageTitle" to template
-            AddFieldFromTemplate(templateFieldItem, "/sitecore/templates/System/Templates/Template field/Data/Title", fromField.LanguageTitle);
-           
-            templateFieldItem.Save(templateFieldItem.Fields, this.Options.Language, "1");
-        }
-
-
-        private string CreateTemplate(IItem fromTemplate, string sTemplatePath, string sInheritedTemplateIDs)
-        {
-            Sitecore6xItem templateItem = GetSitecore61Item(sTemplatePath);
-            if (templateItem == null)
-            {
-                if (sTemplatePath.ToLower().IndexOf("/sitecore/templates/system/") > -1)
-                    throw new Exception("'/sitecore/templates/system/xxx' templates must not be written to! This template path is: " + sTemplatePath);
-
-                // Create new template
-                if (fromTemplate.ID == this.BaseTemplate.ID)
-                    // Never create a template with the same id as the base template, as this will cause the "standard template" to be overwritten
-                    sTemplatePath = CreateTemplateItemWithSpecificID(fromTemplate.Path.Remove(fromTemplate.Path.LastIndexOf("/") + 1), "/sitecore/templates/System/Templates/Template", "", fromTemplate.Name);
-                else
+        /*
+                /// <summary>
+                /// Adds a new field to a template using the IField fromField object
+                /// IMPORTANT!! The parameter sTemplatePath should always be a valid path, never an ID.
+                /// </summary>
+                private void AddTemplateField(string sTemplatePath, IField fromField, IItem fromTemplate)
                 {
-                    if (CREATE_NEW_BASE_TEMPLATE)                        
-                        sTemplatePath = CreateTemplateItemWithSpecificID(TEMPLATE_IMPORT_FOLDER, "/sitecore/templates/System/Templates/Template", fromTemplate.ID, fromTemplate.Name);
-                    else
+                    // Get "Template section" template
+                    XmlNode templateSection = GetItemXml("/sitecore/templates/System/Templates/Template section");
+                    string templateSectionID = templateSection.Attributes["id"].Value;
+
+                    string templateSectionName = "Data";
+                    if ((fromField.Section != "") && (fromField.Section != null))
+                        templateSectionName = fromField.Section;
+
+                    string dataSectionID = GetItemAttribute(sTemplatePath + "/" + templateSectionName, "id");
+                    if (dataSectionID == null)
                     {
-                        string sFolder = fromTemplate.Path.Remove(fromTemplate.Path.LastIndexOf("/") + 1);
-                        Sitecore6xItem folderItem = GetSitecore61Item(sFolder);
-                        // Folders to the template are missing
-                        if (folderItem == null)
-                        {
-                            if (sFolder.IndexOf("/sitecore/templates/") == -1)
-                                throw new Exception("Error template source path not in /sitecore/templates/, the illegal path was:" + sFolder);
-                            // Create all missing template folders
-                            string sTempName = sFolder.Remove( 0, "/sitecore/templates/".Length);
-                            string sMissingFolder = "/sitecore/templates/";
-                            while (sTempName != "")
-                            {
-                                string sMissingFolderName = sTempName.Remove(sTempName.IndexOf("/"), sTempName.Length - sTempName.IndexOf("/"));
-                                folderItem = GetSitecore61Item(sMissingFolder + sMissingFolderName);
-                                if (folderItem == null)
-                                    CreateTemplate(sMissingFolder, "/sitecore/templates/System/Templates/Template Folder", sMissingFolderName);
+                        // Create new "Template section" item from the "Template section" template
+                        XmlNode resultNode = _sitecoreApi.AddFromTemplate(sTemplatePath, templateSectionID, templateSectionName, _Options.Database, _credentials);
+                        CheckSitecoreReturnValue(resultNode);
+                        dataSectionID = resultNode.SelectSingleNode("//data/data").InnerText;
+                        Sitecore6xItem dataSectionItem = GetSitecore61Item(dataSectionID);
 
-                                sMissingFolder = sMissingFolder + sMissingFolderName + "/";
-                                sTempName = sTempName.Remove(0, sTempName.IndexOf("/") + 1);
-                            }
-                        }
-                        sTemplatePath = CreateTemplateItemWithSpecificID(fromTemplate.Path.Remove(fromTemplate.Path.LastIndexOf("/") + 1), "/sitecore/templates/System/Templates/Template", fromTemplate.ID, fromTemplate.Name);
+                        sTemplatePath = sTemplatePath.Replace("//", "/");
+                        IItem fromTemplateSectionItem = fromTemplate.GetItem(sTemplatePath + "/" + templateSectionName);
+                        if (fromTemplateSectionItem != null)
+                            dataSectionItem.SortOrder = fromTemplateSectionItem.SortOrder; // Util.GetNodeFieldValue(dataSectionNode, "//field[@key='__sortorder']/content");
+                        dataSectionItem.Save();
                     }
-                }
-                
 
+                    // Create new field below Section
+                    CreateTemplateItemWithSpecificID(dataSectionID, "/sitecore/templates/System/Templates/Template field", fromField.TemplateFieldID, fromField.Name);
 
-                // Get new templateItem
-                templateItem = GetSitecore61Item(sTemplatePath);
+                    Sitecore6xItem templateFieldItem = GetSitecore61Item(fromField.TemplateFieldID);
 
-                // Add icon path                
-                AddFieldFromTemplate(templateItem, "/sitecore/templates/System/Templates/Sections/Appearance/Appearance/__Icon", fromTemplate.Icon);
+                    // Add "Sort order" to template
+                    AddFieldFromTemplate(templateFieldItem, "/sitecore/templates/System/Templates/Sections/Appearance/Appearance/__Sortorder", fromField.SortOrder);
 
-                // Change template inheritance - MUST BE AFTER ADDING FIELD VALUES OTHERWISE IT DOESN'T WORK
-                if (sInheritedTemplateIDs != "")
-                    templateItem._fields.Add(new Sitecore6xField("__base template", "__base template", "tree list", new Guid("{12C33F3F-86C5-43A5-AEB4-5598CEC45116}"), sInheritedTemplateIDs, null, ""));
+                    // Add "Field type" to template
+                    // string sFromFieldTranslated = Util.TranslateToNewFieldTypes(fromField.Type);
+                    AddFieldFromTemplate(templateFieldItem, "/sitecore/templates/System/Templates/Template field/Data/Type", fromField.Type);
 
-                templateItem.Save(templateItem.Fields, this.Options.Language, "1");
+                    // Add "Field source" to template
+                    AddFieldFromTemplate(templateFieldItem, "/sitecore/templates/System/Templates/Template field/Data/Source", fromField.Source);
 
-                // Create all template fields
-                foreach (IField field in fromTemplate.Fields)
-                {
-                    // It is better to check for missing fields using id, because then it will also be found even if it is placed elsewhere                    
-                    if (! Util.IsTemplateFieldOnIgnoreList(field.TemplateFieldID.ToString()) &&
-                       (GetItem(field.TemplateFieldID) == null))
-                        AddTemplateField(sTemplatePath, field, fromTemplate);
-                }
+                    // Add "LanguageTitle" to template
+                    AddFieldFromTemplate(templateFieldItem, "/sitecore/templates/System/Templates/Template field/Data/Title", fromField.LanguageTitle);
 
-                // Create standard values
-                if (templateItem.Path.IndexOf("/sitecore/templates/System") == -1)
-                {
-                    bool bContainsStandardValues = false;
-                    foreach (IField field in fromTemplate.Fields)
-                    {
-                        if (field.Content != "")
-                            bContainsStandardValues = true;
-                    }
-                    if (bContainsStandardValues)
-                    {
-                        ExtendedSitecoreAPI.Credentials credential = new ExtendedSitecoreAPI.Credentials();
-                        credential.UserName = _credentials.UserName;
-                        credential.Password = _credentials.Password;
-                        try
-                        {
-                            string sID = ExtendedWebService.CreateStandardValues(templateItem.ID, credential);
-
-                            Sitecore6xItem standardValuesItem = templateItem.GetSitecore61Item(sID);
-                            //                Sitecore6xItem standardValuesItem = templateItem.GetSitecore61Item(templateItem.Path + "/__Standard Values");
-                            // standardValuesItem = CreateItem(templateItem.Path, Util.GuidToSitecoreID(templateItem.ID), "__Standard Values");
-                            CheckSitecoreReturnValue(_sitecoreApi.AddVersion(
-                                            standardValuesItem.ID, this.Options.Language, _Options.Database, _credentials));
-
-                            // Fix issue in sitecore 8 where display name sometimes contains??
-                            // But causes a lot of problems in earlier versions, do not enable!!!
-                            IField displayNameField = fromTemplate.Fields.GetFieldByName("__Display name");
-                            if ((displayNameField != null) && (displayNameField.Content == templateItem.Name))
-                            {
-                                displayNameField.Content = "";
-                            }
-
-                            // Remove any locks
-                            IField destLockField = fromTemplate.Fields.GetFieldByName("__Lock");
-                            if (destLockField != null)
-                            {
-                                if (destLockField.Content.ToLower().Contains("owner"))
-                                    destLockField.Content = "";
-                            }
-                            // The standard values are saved on the template fields
-                            standardValuesItem.Save(fromTemplate.Fields, this.Options.Language, "1.0");
-                        }
-                        catch (Exception ex)
-                        {
-                            Util.AddWarning("Standard values exception in Sitecore6xItem: " + ex.Message + "\n" + ex.StackTrace);
-                        }
-                    }
+                    templateFieldItem.Save(templateFieldItem.Fields, this.Options.Language, "1");
                 }
 
 
-                // Set sortorder on sections
+                private string CreateTemplate(IItem fromTemplate, string sTemplatePath, string sInheritedTemplateIDs)
                 {
-                    int t = 10;
-                    // Basetemplate section sortorder begins from 1000
-                    if ((fromTemplate.BaseTemplate != null) && (templateItem.Key == fromTemplate.BaseTemplate.Key))
-                        t = 1000;
-                    IItem[] childSections = templateItem.GetChildren();
-                    foreach (IItem section in childSections)
+                    Sitecore6xItem templateItem = GetSitecore61Item(sTemplatePath);
+                    if (templateItem == null)
                     {
-                        if (section.Templates[0] == null)
-                            continue;
+                        if (sTemplatePath.ToLower().IndexOf("/sitecore/templates/system/") > -1)
+                            throw new Exception("'/sitecore/templates/system/xxx' templates must not be written to! This template path is: " + sTemplatePath);
 
-                        if (section.Templates[0].Key == "template section")
-                        {
-                            if (section.SortOrder != t.ToString())
-                            {
-                                section.SortOrder = t.ToString();
-                                section.Save();
-                            }
-                            // Basetemplate section sortorder is increased by 1000
-                            if ((fromTemplate.BaseTemplate != null) && (templateItem.Key == fromTemplate.BaseTemplate.Key))
-                                t += 1000;
-                            else
-                                t += 10;
-                        }
-                    }
-                }
-
-                // Call plugins and update user interface
-                if (this.Options.CopyItem != null)
-                {
-                    //                    templateItem = GetSitecore61Item(sTemplatePath);
-                    this.Options.CopyItem(fromTemplate, templateItem.Parent, templateItem);
-                    // Never use templateItem.Save(); below, that gave a lot of trouble because it overwrote a lot of fields for some reason, this version works.
-                    templateItem.Save(templateItem.Fields, this.Options.Language, "1");
-                }
-            }
-            // Template already exists, but it is not in the cache
-            else if (!_Options.ExistingTemplates.ContainsKey(templateItem.ID.ToLower()))
-            {
-                // Does all the fields exist?
-                foreach (IField field in fromTemplate.Fields)
-                {
-                    // A new field exists
-                    if (Util.GetFieldByID(field.TemplateFieldID, templateItem.Fields) == null)
-                    {
-                        // Create and add it to the template
-                        if (! Util.IsTemplateFieldOnIgnoreList(field.TemplateFieldID) &&
-                           (GetItem(field.TemplateFieldID) == null))
-                        {
-                            AddTemplateField(templateItem.Path, field, fromTemplate);
-                            Util.AddWarning("Added new field to template: " + templateItem.Path + "\nField name:" + field.Name);
-                        }
-                    }
-                }
-            }
-            // Always cache the template
-            AddItemToCache(templateItem);
-
-            return sTemplatePath;
-        }
-
-        private void RecursivelyCreateTemplates(IItem CopyFrom, out string sInheritedTemplateIDs, string sBaseTemplatePath)
-        {
-            sInheritedTemplateIDs = sBaseTemplatePath;
-            if (CopyFrom.Templates[0] != null)
-            {
-                foreach (IItem fromTemplate in CopyFrom.Templates)
-                {
-                    if ((fromTemplate.Templates == null) || (fromTemplate.Templates[0] == null))
-                    {
-                        // Create templates with only the standard template
-                        CreateTemplate(fromTemplate, fromTemplate.ID, sBaseTemplatePath);
-                        continue;
-                    }
-
-                    string sLocalInheritedTemplateIDs = "";
-                    if ((fromTemplate.Templates.Length == 1) && (fromTemplate.Templates[0].Key == "standard template"))
-                        sLocalInheritedTemplateIDs = fromTemplate.Templates[0].ID;
-                    //                        sLocalInheritedTemplateIDs = sBaseTemplatePath;
-                    else if (fromTemplate.Templates[0].Key == "template")
-                        sLocalInheritedTemplateIDs = ""; //fromTemplate.Templates[0].ID;
-                    else
-                        RecursivelyCreateTemplates(fromTemplate, out sLocalInheritedTemplateIDs, sBaseTemplatePath);
-
-                    CreateTemplate(fromTemplate, fromTemplate.ID, sLocalInheritedTemplateIDs);
-                    // if this is not a template item that we are creating
-                    if (/* (sBaseTemplatePath != Util.GuidToSitecoreID(_guidTemplateForTemplates)) && */ (!sInheritedTemplateIDs.Contains(fromTemplate.ID)))
-                    {
-                        if (sInheritedTemplateIDs != "")
-                            sInheritedTemplateIDs += "|" + fromTemplate.ID;
+                        // Create new template
+                        if (fromTemplate.ID == this.BaseTemplate.ID)
+                            // Never create a template with the same id as the base template, as this will cause the "standard template" to be overwritten
+                            sTemplatePath = CreateTemplateItemWithSpecificID(fromTemplate.Path.Remove(fromTemplate.Path.LastIndexOf("/") + 1), "/sitecore/templates/System/Templates/Template", "", fromTemplate.Name);
                         else
-                            sInheritedTemplateIDs = fromTemplate.ID;
+                        {
+                            if (CREATE_NEW_BASE_TEMPLATE)                        
+                                sTemplatePath = CreateTemplateItemWithSpecificID(TEMPLATE_IMPORT_FOLDER, "/sitecore/templates/System/Templates/Template", fromTemplate.ID, fromTemplate.Name);
+                            else
+                            {
+                                string sFolder = fromTemplate.Path.Remove(fromTemplate.Path.LastIndexOf("/") + 1);
+                                Sitecore6xItem folderItem = GetSitecore61Item(sFolder);
+                                // Folders to the template are missing
+                                if (folderItem == null)
+                                {
+                                    if (sFolder.IndexOf("/sitecore/templates/") == -1)
+                                        throw new Exception("Error template source path not in /sitecore/templates/, the illegal path was:" + sFolder);
+                                    // Create all missing template folders
+                                    string sTempName = sFolder.Remove( 0, "/sitecore/templates/".Length);
+                                    string sMissingFolder = "/sitecore/templates/";
+                                    while (sTempName != "")
+                                    {
+                                        string sMissingFolderName = sTempName.Remove(sTempName.IndexOf("/"), sTempName.Length - sTempName.IndexOf("/"));
+                                        folderItem = GetSitecore61Item(sMissingFolder + sMissingFolderName);
+                                        if (folderItem == null)
+                                            CreateTemplate(sMissingFolder, "/sitecore/templates/System/Templates/Template Folder", sMissingFolderName);
+
+                                        sMissingFolder = sMissingFolder + sMissingFolderName + "/";
+                                        sTempName = sTempName.Remove(0, sTempName.IndexOf("/") + 1);
+                                    }
+                                }
+                                sTemplatePath = CreateTemplateItemWithSpecificID(fromTemplate.Path.Remove(fromTemplate.Path.LastIndexOf("/") + 1), "/sitecore/templates/System/Templates/Template", fromTemplate.ID, fromTemplate.Name);
+                            }
+                        }
+
+
+
+                        // Get new templateItem
+                        templateItem = GetSitecore61Item(sTemplatePath);
+
+                        // Add icon path                
+                        AddFieldFromTemplate(templateItem, "/sitecore/templates/System/Templates/Sections/Appearance/Appearance/__Icon", fromTemplate.Icon);
+
+                        // Change template inheritance - MUST BE AFTER ADDING FIELD VALUES OTHERWISE IT DOESN'T WORK
+                        if (sInheritedTemplateIDs != "")
+                            templateItem._fields.Add(new Sitecore6xField("__base template", "__base template", "tree list", new Guid("{12C33F3F-86C5-43A5-AEB4-5598CEC45116}"), sInheritedTemplateIDs, null, ""));
+
+                        templateItem.Save(templateItem.Fields, this.Options.Language, "1");
+
+                        // Create all template fields
+                        foreach (IField field in fromTemplate.Fields)
+                        {
+                            // It is better to check for missing fields using id, because then it will also be found even if it is placed elsewhere                    
+                            if (! Util.IsTemplateFieldOnIgnoreList(field.TemplateFieldID.ToString()) &&
+                               (GetItem(field.TemplateFieldID) == null))
+                                AddTemplateField(sTemplatePath, field, fromTemplate);
+                        }
+
+                        // Create standard values
+                        if (templateItem.Path.IndexOf("/sitecore/templates/System") == -1)
+                        {
+                            bool bContainsStandardValues = false;
+                            foreach (IField field in fromTemplate.Fields)
+                            {
+                                if (field.Content != "")
+                                    bContainsStandardValues = true;
+                            }
+                            if (bContainsStandardValues)
+                            {
+                                ExtendedSitecoreAPI.Credentials credential = new ExtendedSitecoreAPI.Credentials();
+                                credential.UserName = _credentials.UserName;
+                                credential.Password = _credentials.Password;
+                                try
+                                {
+                                    string sID = ExtendedWebService.CreateStandardValues(templateItem.ID, credential);
+
+                                    Sitecore6xItem standardValuesItem = templateItem.GetSitecore61Item(sID);
+                                    //                Sitecore6xItem standardValuesItem = templateItem.GetSitecore61Item(templateItem.Path + "/__Standard Values");
+                                    // standardValuesItem = CreateItem(templateItem.Path, Util.GuidToSitecoreID(templateItem.ID), "__Standard Values");
+                                    CheckSitecoreReturnValue(_sitecoreApi.AddVersion(
+                                                    standardValuesItem.ID, this.Options.Language, _Options.Database, _credentials));
+
+                                    // Fix issue in sitecore 8 where display name sometimes contains??
+                                    // But causes a lot of problems in earlier versions, do not enable!!!
+                                    IField displayNameField = fromTemplate.Fields.GetFieldByName("__Display name");
+                                    if ((displayNameField != null) && (displayNameField.Content == templateItem.Name))
+                                    {
+                                        displayNameField.Content = "";
+                                    }
+
+                                    // Remove any locks
+                                    IField destLockField = fromTemplate.Fields.GetFieldByName("__Lock");
+                                    if (destLockField != null)
+                                    {
+                                        if (destLockField.Content.ToLower().Contains("owner"))
+                                            destLockField.Content = "";
+                                    }
+                                    // The standard values are saved on the template fields
+                                    standardValuesItem.Save(fromTemplate.Fields, this.Options.Language, "1.0");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Util.AddWarning("Standard values exception in Sitecore6xItem: " + ex.Message + "\n" + ex.StackTrace);
+                                }
+                            }
+                        }
+
+
+                        // Set sortorder on sections
+                        {
+                            int t = 10;
+                            // Basetemplate section sortorder begins from 1000
+                            if ((fromTemplate.BaseTemplate != null) && (templateItem.Key == fromTemplate.BaseTemplate.Key))
+                                t = 1000;
+                            IItem[] childSections = templateItem.GetChildren();
+                            foreach (IItem section in childSections)
+                            {
+                                if (section.Templates[0] == null)
+                                    continue;
+
+                                if (section.Templates[0].Key == "template section")
+                                {
+                                    if (section.SortOrder != t.ToString())
+                                    {
+                                        section.SortOrder = t.ToString();
+                                        section.Save();
+                                    }
+                                    // Basetemplate section sortorder is increased by 1000
+                                    if ((fromTemplate.BaseTemplate != null) && (templateItem.Key == fromTemplate.BaseTemplate.Key))
+                                        t += 1000;
+                                    else
+                                        t += 10;
+                                }
+                            }
+                        }
+
+                        // Call plugins and update user interface
+                        if (this.Options.CopyItem != null)
+                        {
+                            //                    templateItem = GetSitecore61Item(sTemplatePath);
+                            this.Options.CopyItem(fromTemplate, templateItem.Parent, templateItem);
+                            // Never use templateItem.Save(); below, that gave a lot of trouble because it overwrote a lot of fields for some reason, this version works.
+                            templateItem.Save(templateItem.Fields, this.Options.Language, "1");
+                        }
+                    }
+                    // Template already exists, but it is not in the cache
+                    else if (!_Options.ExistingTemplates.ContainsKey(templateItem.ID.ToLower()))
+                    {
+                        // Does all the fields exist?
+                        foreach (IField field in fromTemplate.Fields)
+                        {
+                            // A new field exists
+                            if (Util.GetFieldByID(field.TemplateFieldID, templateItem.Fields) == null)
+                            {
+                                // Create and add it to the template
+                                if (! Util.IsTemplateFieldOnIgnoreList(field.TemplateFieldID) &&
+                                   (GetItem(field.TemplateFieldID) == null))
+                                {
+                                    AddTemplateField(templateItem.Path, field, fromTemplate);
+                                    Util.AddWarning("Added new field to template: " + templateItem.Path + "\nField name:" + field.Name);
+                                }
+                            }
+                        }
+                    }
+                    // Always cache the template
+                    AddItemToCache(templateItem);
+
+                    return sTemplatePath;
+                }
+
+                private void RecursivelyCreateTemplates(IItem CopyFrom, out string sInheritedTemplateIDs, string sBaseTemplatePath)
+                {
+                    sInheritedTemplateIDs = sBaseTemplatePath;
+                    if (CopyFrom.Templates[0] != null)
+                    {
+                        foreach (IItem fromTemplate in CopyFrom.Templates)
+                        {
+                            if ((fromTemplate.Templates == null) || (fromTemplate.Templates[0] == null))
+                            {
+                                // Create templates with only the standard template
+                                CreateTemplate(fromTemplate, fromTemplate.ID, sBaseTemplatePath);
+                                continue;
+                            }
+
+                            string sLocalInheritedTemplateIDs = "";
+                            if ((fromTemplate.Templates.Length == 1) && (fromTemplate.Templates[0].Key == "standard template"))
+                                sLocalInheritedTemplateIDs = fromTemplate.Templates[0].ID;
+                            //                        sLocalInheritedTemplateIDs = sBaseTemplatePath;
+                            else if (fromTemplate.Templates[0].Key == "template")
+                                sLocalInheritedTemplateIDs = ""; //fromTemplate.Templates[0].ID;
+                            else
+                                RecursivelyCreateTemplates(fromTemplate, out sLocalInheritedTemplateIDs, sBaseTemplatePath);
+
+                            CreateTemplate(fromTemplate, fromTemplate.ID, sLocalInheritedTemplateIDs);
+                            // if this is not a template item that we are creating
+                            if ( // (sBaseTemplatePath != Util.GuidToSitecoreID(_guidTemplateForTemplates)) && 
+                                    (!sInheritedTemplateIDs.Contains(fromTemplate.ID)))
+                            {
+                                if (sInheritedTemplateIDs != "")
+                                    sInheritedTemplateIDs += "|" + fromTemplate.ID;
+                                else
+                                    sInheritedTemplateIDs = fromTemplate.ID;
+                            }
+                        }
                     }
                 }
-            }
-        }
+        */
 
         private string GetItemVersion(XmlNode contentItem)
         {
@@ -1240,6 +1233,7 @@ namespace SitecoreConverter.Core
             }
             else
             {
+/*
                 if (CREATE_NEW_BASE_TEMPLATE)
                 {
                     // Check to see if Template import folder has been created
@@ -1253,7 +1247,7 @@ namespace SitecoreConverter.Core
                     else
                         AddItemToCache(templateFolder);
                 }
-
+*/
 
                 // *** Find and create base template from current item ***
                 string sBaseTemplatePath = "";
@@ -1282,7 +1276,7 @@ namespace SitecoreConverter.Core
                 // *** Create Template from current item ***
                 string sInheritedTemplateIDs = "";
                 // Create the templates inherited templates
-                RecursivelyCreateTemplates(CopyFrom, out sInheritedTemplateIDs, sBaseTemplatePath);
+                // RecursivelyCreateTemplates(CopyFrom, out sInheritedTemplateIDs, sBaseTemplatePath);
 
                 // Finally create the items template
                 sTemplatePath = CopyFrom.Templates[0].ID;
