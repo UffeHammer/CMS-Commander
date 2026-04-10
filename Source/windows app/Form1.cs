@@ -252,18 +252,18 @@ namespace SitecoreConverter
             // 
             // tbLeftServerURL
             // 
-            this.tbLeftServerURL.Location = new System.Drawing.Point(198, 37);
+            this.tbLeftServerURL.Location = new System.Drawing.Point(317, 54);
             this.tbLeftServerURL.Name = "tbLeftServerURL";
-            this.tbLeftServerURL.Size = new System.Drawing.Size(147, 20);
+            this.tbLeftServerURL.Size = new System.Drawing.Size(235, 26);
             this.tbLeftServerURL.TabIndex = 0;
             this.tbLeftServerURL.Text = "http://";
             this.tbLeftServerURL.TextChanged += new System.EventHandler(this.tbLeftServerURL_TextChanged);
             // 
             // tbLeftConnect
             // 
-            this.tbLeftConnect.Location = new System.Drawing.Point(345, 35);
+            this.tbLeftConnect.Location = new System.Drawing.Point(552, 51);
             this.tbLeftConnect.Name = "tbLeftConnect";
-            this.tbLeftConnect.Size = new System.Drawing.Size(62, 20);
+            this.tbLeftConnect.Size = new System.Drawing.Size(99, 29);
             this.tbLeftConnect.TabIndex = 2;
             this.tbLeftConnect.Text = "Connect";
             this.tbLeftConnect.Click += new System.EventHandler(this.tbLeftConnect_Click);
@@ -271,9 +271,9 @@ namespace SitecoreConverter
             // tbRightConnect
             // 
             this.tbRightConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRightConnect.Location = new System.Drawing.Point(1013, 34);
+            this.tbRightConnect.Location = new System.Drawing.Point(958, 50);
             this.tbRightConnect.Name = "tbRightConnect";
-            this.tbRightConnect.Size = new System.Drawing.Size(60, 20);
+            this.tbRightConnect.Size = new System.Drawing.Size(96, 29);
             this.tbRightConnect.TabIndex = 4;
             this.tbRightConnect.Text = "Connect";
             this.tbRightConnect.Click += new System.EventHandler(this.tbRightConnect_Click);
@@ -281,9 +281,9 @@ namespace SitecoreConverter
             // tbRightServerURL
             // 
             this.tbRightServerURL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRightServerURL.Location = new System.Drawing.Point(868, 35);
+            this.tbRightServerURL.Location = new System.Drawing.Point(726, 51);
             this.tbRightServerURL.Name = "tbRightServerURL";
-            this.tbRightServerURL.Size = new System.Drawing.Size(145, 20);
+            this.tbRightServerURL.Size = new System.Drawing.Size(232, 26);
             this.tbRightServerURL.TabIndex = 8;
             this.tbRightServerURL.Text = "http://";
             // 
@@ -295,9 +295,9 @@ namespace SitecoreConverter
             "Sitecore43",
             "Sitecore5x",
             "Sitecore6-10"});
-            this.comboSiteTypeRight.Location = new System.Drawing.Point(677, 36);
+            this.comboSiteTypeRight.Location = new System.Drawing.Point(420, 53);
             this.comboSiteTypeRight.Name = "comboSiteTypeRight";
-            this.comboSiteTypeRight.Size = new System.Drawing.Size(90, 21);
+            this.comboSiteTypeRight.Size = new System.Drawing.Size(144, 28);
             this.comboSiteTypeRight.TabIndex = 9;
             this.comboSiteTypeRight.Text = "Sitecore6-10";
             // 
@@ -308,9 +308,9 @@ namespace SitecoreConverter
             "Sitecore43",
             "Sitecore5x",
             "Sitecore6-10"});
-            this.comboSiteTypeLeft.Location = new System.Drawing.Point(8, 36);
+            this.comboSiteTypeLeft.Location = new System.Drawing.Point(13, 53);
             this.comboSiteTypeLeft.Name = "comboSiteTypeLeft";
-            this.comboSiteTypeLeft.Size = new System.Drawing.Size(89, 21);
+            this.comboSiteTypeLeft.Size = new System.Drawing.Size(142, 28);
             this.comboSiteTypeLeft.TabIndex = 10;
             this.comboSiteTypeLeft.Text = "Sitecore43";
             this.comboSiteTypeLeft.SelectedIndexChanged += new System.EventHandler(this.comboSiteTypeLeft_SelectedIndexChanged);
@@ -318,9 +318,9 @@ namespace SitecoreConverter
             // btnCopyToRight
             // 
             this.btnCopyToRight.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCopyToRight.Location = new System.Drawing.Point(102, 9);
+            this.btnCopyToRight.Location = new System.Drawing.Point(163, 13);
             this.btnCopyToRight.Name = "btnCopyToRight";
-            this.btnCopyToRight.Size = new System.Drawing.Size(90, 20);
+            this.btnCopyToRight.Size = new System.Drawing.Size(144, 29);
             this.btnCopyToRight.TabIndex = 11;
             this.btnCopyToRight.Text = "F5 Copy -->";
             this.btnCopyToRight.UseVisualStyleBackColor = true;
@@ -329,9 +329,9 @@ namespace SitecoreConverter
             // btnDelete
             // 
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDelete.Location = new System.Drawing.Point(388, 8);
+            this.btnDelete.Location = new System.Drawing.Point(621, 12);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(88, 20);
+            this.btnDelete.Size = new System.Drawing.Size(141, 29);
             this.btnDelete.TabIndex = 12;
             this.btnDelete.Text = "F8 Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -342,7 +342,7 @@ namespace SitecoreConverter
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(8, 63);
+            this.splitContainer1.Location = new System.Drawing.Point(13, 92);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -352,8 +352,8 @@ namespace SitecoreConverter
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rightTreeView);
-            this.splitContainer1.Size = new System.Drawing.Size(1087, 508);
-            this.splitContainer1.SplitterDistance = 513;
+            this.splitContainer1.Size = new System.Drawing.Size(1076, 474);
+            this.splitContainer1.SplitterDistance = 507;
             this.splitContainer1.TabIndex = 13;
             this.splitContainer1.TabStop = false;
             // 
@@ -365,9 +365,9 @@ namespace SitecoreConverter
             this.leftTreeView.FullRowSelect = true;
             this.leftTreeView.HideSelection = false;
             this.leftTreeView.ItemHeight = 18;
-            this.leftTreeView.Location = new System.Drawing.Point(3, 5);
+            this.leftTreeView.Location = new System.Drawing.Point(5, 7);
             this.leftTreeView.Name = "leftTreeView";
-            this.leftTreeView.Size = new System.Drawing.Size(510, 503);
+            this.leftTreeView.Size = new System.Drawing.Size(502, 467);
             this.leftTreeView.TabIndex = 7;
             this.leftTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.leftTreeView_AfterExpand);
             this.leftTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.leftTreeView_AfterSelect);
@@ -380,9 +380,9 @@ namespace SitecoreConverter
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rightTreeView.FullRowSelect = true;
             this.rightTreeView.HideSelection = false;
-            this.rightTreeView.Location = new System.Drawing.Point(2, 6);
+            this.rightTreeView.Location = new System.Drawing.Point(3, 9);
             this.rightTreeView.Name = "rightTreeView";
-            this.rightTreeView.Size = new System.Drawing.Size(568, 502);
+            this.rightTreeView.Size = new System.Drawing.Size(562, 465);
             this.rightTreeView.TabIndex = 8;
             this.rightTreeView.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.rightTreeView_AfterExpand);
             this.rightTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.rightTreeView_AfterSelect);
@@ -391,9 +391,9 @@ namespace SitecoreConverter
             // btnView
             // 
             this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnView.Location = new System.Drawing.Point(9, 9);
+            this.btnView.Location = new System.Drawing.Point(14, 13);
             this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(88, 20);
+            this.btnView.Size = new System.Drawing.Size(141, 29);
             this.btnView.TabIndex = 14;
             this.btnView.Text = "F3 View";
             this.btnView.UseVisualStyleBackColor = true;
@@ -409,9 +409,9 @@ namespace SitecoreConverter
             // btnNewFolder
             // 
             this.btnNewFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnNewFolder.Location = new System.Drawing.Point(294, 8);
+            this.btnNewFolder.Location = new System.Drawing.Point(470, 12);
             this.btnNewFolder.Name = "btnNewFolder";
-            this.btnNewFolder.Size = new System.Drawing.Size(88, 20);
+            this.btnNewFolder.Size = new System.Drawing.Size(141, 29);
             this.btnNewFolder.TabIndex = 15;
             this.btnNewFolder.Text = "F7 NewFolder";
             this.btnNewFolder.UseVisualStyleBackColor = true;
@@ -420,9 +420,9 @@ namespace SitecoreConverter
             // btnFind
             // 
             this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFind.Location = new System.Drawing.Point(482, 9);
+            this.btnFind.Location = new System.Drawing.Point(771, 13);
             this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(89, 20);
+            this.btnFind.Size = new System.Drawing.Size(143, 29);
             this.btnFind.TabIndex = 16;
             this.btnFind.Text = "Alt + F7 Find";
             this.btnFind.UseVisualStyleBackColor = true;
@@ -431,9 +431,9 @@ namespace SitecoreConverter
             // btnCompare
             // 
             this.btnCompare.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCompare.Location = new System.Drawing.Point(577, 8);
+            this.btnCompare.Location = new System.Drawing.Point(923, 12);
             this.btnCompare.Name = "btnCompare";
-            this.btnCompare.Size = new System.Drawing.Size(88, 20);
+            this.btnCompare.Size = new System.Drawing.Size(141, 29);
             this.btnCompare.TabIndex = 17;
             this.btnCompare.Text = "Compare";
             this.btnCompare.UseVisualStyleBackColor = true;
@@ -441,10 +441,10 @@ namespace SitecoreConverter
             // 
             // btnLeftAddressList
             // 
-            this.btnLeftAddressList.Location = new System.Drawing.Point(413, 34);
+            this.btnLeftAddressList.Location = new System.Drawing.Point(661, 50);
             this.btnLeftAddressList.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.btnLeftAddressList.Name = "btnLeftAddressList";
-            this.btnLeftAddressList.Size = new System.Drawing.Size(18, 20);
+            this.btnLeftAddressList.Size = new System.Drawing.Size(29, 29);
             this.btnLeftAddressList.TabIndex = 18;
             this.btnLeftAddressList.Text = "*";
             this.btnLeftAddressList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -454,10 +454,10 @@ namespace SitecoreConverter
             // btnRightAddressList
             // 
             this.btnRightAddressList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRightAddressList.Location = new System.Drawing.Point(1079, 35);
+            this.btnRightAddressList.Location = new System.Drawing.Point(1063, 51);
             this.btnRightAddressList.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.btnRightAddressList.Name = "btnRightAddressList";
-            this.btnRightAddressList.Size = new System.Drawing.Size(15, 20);
+            this.btnRightAddressList.Size = new System.Drawing.Size(24, 29);
             this.btnRightAddressList.TabIndex = 19;
             this.btnRightAddressList.Text = "*";
             this.btnRightAddressList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -468,9 +468,9 @@ namespace SitecoreConverter
             // 
             this.btnInstall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInstall.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnInstall.Location = new System.Drawing.Point(1013, 8);
+            this.btnInstall.Location = new System.Drawing.Point(958, 12);
             this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Size = new System.Drawing.Size(88, 20);
+            this.btnInstall.Size = new System.Drawing.Size(141, 29);
             this.btnInstall.TabIndex = 20;
             this.btnInstall.Text = "Install";
             this.btnInstall.UseVisualStyleBackColor = true;
@@ -483,9 +483,9 @@ namespace SitecoreConverter
             // btnTransferFieldsTool
             // 
             this.btnTransferFieldsTool.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTransferFieldsTool.Location = new System.Drawing.Point(919, 8);
+            this.btnTransferFieldsTool.Location = new System.Drawing.Point(1470, 12);
             this.btnTransferFieldsTool.Name = "btnTransferFieldsTool";
-            this.btnTransferFieldsTool.Size = new System.Drawing.Size(88, 20);
+            this.btnTransferFieldsTool.Size = new System.Drawing.Size(141, 29);
             this.btnTransferFieldsTool.TabIndex = 21;
             this.btnTransferFieldsTool.Text = "Transfer fields tool";
             this.btnTransferFieldsTool.UseVisualStyleBackColor = true;
@@ -499,9 +499,9 @@ namespace SitecoreConverter
             "master",
             "web",
             "core"});
-            this.comboDatabaseLeft.Location = new System.Drawing.Point(103, 36);
+            this.comboDatabaseLeft.Location = new System.Drawing.Point(165, 53);
             this.comboDatabaseLeft.Name = "comboDatabaseLeft";
-            this.comboDatabaseLeft.Size = new System.Drawing.Size(89, 21);
+            this.comboDatabaseLeft.Size = new System.Drawing.Size(142, 28);
             this.comboDatabaseLeft.TabIndex = 22;
             this.comboDatabaseLeft.Text = "master";
             // 
@@ -513,18 +513,18 @@ namespace SitecoreConverter
             "master",
             "web",
             "core"});
-            this.comboDatabaseRight.Location = new System.Drawing.Point(773, 35);
+            this.comboDatabaseRight.Location = new System.Drawing.Point(574, 51);
             this.comboDatabaseRight.Name = "comboDatabaseRight";
-            this.comboDatabaseRight.Size = new System.Drawing.Size(89, 21);
+            this.comboDatabaseRight.Size = new System.Drawing.Size(142, 28);
             this.comboDatabaseRight.TabIndex = 23;
             this.comboDatabaseRight.Text = "master";
             // 
             // btnLocateOnOtherSide
             // 
             this.btnLocateOnOtherSide.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLocateOnOtherSide.Location = new System.Drawing.Point(671, 8);
+            this.btnLocateOnOtherSide.Location = new System.Drawing.Point(1074, 12);
             this.btnLocateOnOtherSide.Name = "btnLocateOnOtherSide";
-            this.btnLocateOnOtherSide.Size = new System.Drawing.Size(116, 20);
+            this.btnLocateOnOtherSide.Size = new System.Drawing.Size(185, 29);
             this.btnLocateOnOtherSide.TabIndex = 25;
             this.btnLocateOnOtherSide.Text = "Locate opposite side";
             this.btnLocateOnOtherSide.UseVisualStyleBackColor = true;
@@ -533,9 +533,9 @@ namespace SitecoreConverter
             // btnRename
             // 
             this.btnRename.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRename.Location = new System.Drawing.Point(198, 8);
+            this.btnRename.Location = new System.Drawing.Point(317, 12);
             this.btnRename.Name = "btnRename";
-            this.btnRename.Size = new System.Drawing.Size(90, 20);
+            this.btnRename.Size = new System.Drawing.Size(144, 29);
             this.btnRename.TabIndex = 26;
             this.btnRename.Text = "F2 Rename";
             this.btnRename.UseVisualStyleBackColor = true;
@@ -543,7 +543,7 @@ namespace SitecoreConverter
             // 
             // Form1
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleBaseSize = new System.Drawing.Size(8, 19);
             this.ClientSize = new System.Drawing.Size(1105, 583);
             this.Controls.Add(this.btnRename);
             this.Controls.Add(this.btnLocateOnOtherSide);
@@ -567,7 +567,7 @@ namespace SitecoreConverter
             this.Controls.Add(this.tbRightConnect);
             this.Controls.Add(this.tbLeftConnect);
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(583, 347);
+            this.MinimumSize = new System.Drawing.Size(933, 507);
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "CMS Commander";
@@ -1153,6 +1153,7 @@ namespace SitecoreConverter
             else if (CopyOptionsForm.rbUseNames.Checked)
                 _destItem.Options.CopyOperation = CopyOperations.UseNames;
             _destItem.Options.RecursiveOperation = CopyOptionsForm.cbRecursive.Checked;
+            _destItem.Options.CopyTemplates = CopyOptionsForm.cbCopyTemplates.Checked;
             _destItem.Options.CopyOnlyChildren = CopyOptionsForm.cbOnlyChildren.Checked;
             _destItem.Options.IgnoreErrors = CopyOptionsForm.cbIgnoreErrors.Checked;
 

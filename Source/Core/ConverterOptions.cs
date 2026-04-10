@@ -19,6 +19,7 @@ namespace SitecoreConverter.Core
         public CopyOperations CopyOperation = CopyOperations.Overwrite;
         public bool RecursiveOperation = true;
         public bool CopyOnlyChildren = false;
+        public bool CopyTemplates = false;
         public bool IgnoreErrors = false;
         public CopyItemCallback CopyItem = null;
         public ShouldItemBeCopiedCallback ShouldItemBeCopied = null;
