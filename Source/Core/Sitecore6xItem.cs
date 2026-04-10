@@ -361,7 +361,8 @@ namespace SitecoreConverter.Core
             // are created from an items fields.
             // The program always assumes that all fields exists, so the fieldvalues could be empty in 
             // order to prevent copying to another language.
-            XmlNodeList fieldList = itemNode.SelectNodes("version[@language='" + this.Options.Language + "' and @version='" + sItemVersion + "']/fields/field");
+            // XmlNodeList fieldList = itemNode.SelectNodes("version[@language='" + this.Options.Language + "' and @version='" + sItemVersion + "']/fields/field");
+            XmlNodeList fieldList = itemNode.SelectNodes("version/fields/field");
             foreach (XmlNode node in fieldList)
             {
                 Sitecore6xField field = new Sitecore6xField(node);
@@ -1501,8 +1502,6 @@ namespace SitecoreConverter.Core
 
                         // Upload Blob to destination
                         string sName = Util.MakeValidNodeName(CopyFrom.Name);
-                        if ((extField != null) && (extField.Content != ""))
-                            sName += "." + extField.Content;
                         string sNewMediaID = "";
                         try
                         {
@@ -1514,18 +1513,6 @@ namespace SitecoreConverter.Core
                             break;
                         }
 
-
-                        /*
-                            // WebApi version disabled
-                            SitecoreWebAPIUtil webAPI = new SitecoreWebAPIUtil(sitecoreUri.Scheme + "://" + sitecoreUri.Host, _credentials.UserName, _credentials.Password);
-                            string sResult = webAPI.PostMedia(CopyFrom.Name, sNewItemID, "master", stream, "." + extField.Content); 
-                            string sNewMediaID = sResult;
-                            int iStart = sNewMediaID.IndexOf("\"ID\":\"");
-                            sNewMediaID = sNewMediaID.Remove(0, iStart + "\"ID\":\"".Length);
-
-                            int iStop = sNewMediaID.IndexOf("\",\"");
-                            sNewMediaID = sNewMediaID.Remove(iStop, sNewMediaID.Length - iStop);
-                        */
 
                         // Get temporary media item
                         Sitecore6xItem mediaItem = GetSitecore61Item(sNewMediaID);
@@ -1568,9 +1555,6 @@ namespace SitecoreConverter.Core
                         IField destIconField = returnItem.Fields.GetFieldByName("__Icon" );
                         if (destIconField != null)
                             destIconField.Content = "~/media/" + sNewItemID.Replace("{", "").Replace("}", "").Replace("-", "").ToLower() + ".ashx?h=16&thn=1&w=16";
-
-                        // Remove temporary mediaitem
-                        mediaItem.Delete();
 
                         // Add Blob to list of copied media items, so that they are not copied several times for each language layer
                         _CopiedBlobs.Add(CopyFrom.ID.ToString());
