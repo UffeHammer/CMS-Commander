@@ -438,9 +438,90 @@ namespace SitecoreConverter.Core
             return null;
         }
         public void CopyTo(IItem CopyFrom, bool bRecursive, bool bOnlyChildren) { throw new NotImplementedException(); }
-        public bool MoveTo(IItem MoveTo) { throw new NotImplementedException(); }
-        public void Rename(string Name) { throw new NotImplementedException(); }
-        public void Delete() { throw new NotImplementedException(); }
+        public bool MoveTo(IItem MoveToItem)
+        {
+            if (_kind != Umbraco14xItemKind.Content && _kind != Umbraco14xItemKind.Media
+                && _kind != Umbraco14xItemKind.DocumentType && _kind != Umbraco14xItemKind.DataType)
+                throw new NotImplementedException("MoveTo is only supported for Content/Media/DocumentType/DataType items");
+
+            string segment = KindToSegment(_kind);
+            var body = new JObject
+            {
+                ["target"] = new JObject { ["id"] = MoveToItem.ID }
+            };
+            _api.PutJson(BaseApiPath + "/" + segment + "/" + _sID + "/move", body);
+
+            _parent = MoveToItem as Umbraco14xItem;
+            _sPath = ""; // force recompute on next access
+            return true;
+        }
+        public void Rename(string Name)
+        {
+            if (_rawPayload == null) throw new InvalidOperationException("Cannot rename a synthetic item");
+
+            var updated = (JObject)_rawPayload.DeepClone();
+            var variants = updated["variants"] as JArray;
+            string culture = _Options != null ? _Options.Language : "en";
+
+            if (variants != null && variants.Count > 0)
+            {
+                bool applied = false;
+                foreach (var v in variants.OfType<JObject>())
+                {
+                    var vc = (string)v["culture"];
+                    if (vc == null || string.Equals(vc, culture, StringComparison.OrdinalIgnoreCase)
+                        || (vc != null && culture != null && vc.StartsWith(culture, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        v["name"] = Name;
+                        applied = true;
+                        break;
+                    }
+                }
+                if (!applied) ((JObject)variants[0])["name"] = Name;
+            }
+            else
+            {
+                updated["name"] = Name;
+            }
+
+            string segment = KindToSegment(_kind);
+            _api.PutJson(BaseApiPath + "/" + segment + "/" + _sID, updated);
+
+            _sName = Name;
+            _sKey = Name.ToLower();
+            _rawPayload = updated;
+        }
+        public void Delete()
+        {
+            if (_kind == Umbraco14xItemKind.Content || _kind == Umbraco14xItemKind.Media)
+            {
+                string segment = KindToSegment(_kind);
+                try
+                {
+                    // Two-step hard delete: move to recycle bin, then purge from the bin.
+                    _api.PutJson(BaseApiPath + "/" + segment + "/" + _sID + "/move-to-recycle-bin", new JObject());
+                    _api.DeleteJson(BaseApiPath + "/" + segment + "-recycle-bin/" + _sID);
+                    return;
+                }
+                catch (Umbraco14xApiException)
+                {
+                    // Fall back to direct delete (sometimes permitted on items already in the bin or for hard-delete-enabled builds).
+                    _api.DeleteJson(BaseApiPath + "/" + segment + "/" + _sID);
+                    return;
+                }
+            }
+
+            if (_kind == Umbraco14xItemKind.DocumentType || _kind == Umbraco14xItemKind.DataType
+                || _kind == Umbraco14xItemKind.Member || _kind == Umbraco14xItemKind.UserGroup
+                || _kind == Umbraco14xItemKind.Language)
+            {
+                string segment = KindToSegment(_kind);
+                _api.DeleteJson(BaseApiPath + "/" + segment + "/" + _sID);
+                return;
+            }
+
+            throw new NotImplementedException("Delete is not supported for kind " + _kind);
+        }
         public void Save() { throw new NotImplementedException(); }
         public string AddFromTemplate(string sName, string sTemplatePath) { throw new NotImplementedException(); }
         public bool HasChildren() { return _bHasChildren; }
