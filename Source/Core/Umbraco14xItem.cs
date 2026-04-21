@@ -608,7 +608,63 @@ namespace SitecoreConverter.Core
             _nameDirty = _iconDirty = _sortOrderDirty = false;
             _rawPayload = updated;
         }
-        public string AddFromTemplate(string sName, string sTemplatePath) { throw new NotImplementedException(); }
+        public string AddFromTemplate(string sName, string sTemplatePath)
+        {
+            if (_kind != Umbraco14xItemKind.Content && _kind != Umbraco14xItemKind.Media
+                && _kind != Umbraco14xItemKind.BranchRoot)
+                throw new NotImplementedException("AddFromTemplate is only supported under Content/Media or at their branch root");
+
+            // Resolve sTemplatePath to a document-type GUID.
+            string docTypeId = ResolveDocumentTypeId(sTemplatePath);
+            if (string.IsNullOrEmpty(docTypeId))
+                throw new InvalidOperationException("Could not resolve document type at path '" + sTemplatePath + "'");
+
+            // Decide target kind + endpoint.
+            Umbraco14xItemKind childKind;
+            string segment;
+            if (_kind == Umbraco14xItemKind.Media || (_kind == Umbraco14xItemKind.BranchRoot && _sName == "Media"))
+            {
+                childKind = Umbraco14xItemKind.Media;
+                segment = "media";
+            }
+            else
+            {
+                childKind = Umbraco14xItemKind.Content;
+                segment = "document";
+            }
+
+            string culture = _Options != null ? _Options.Language : "en";
+            var body = new JObject
+            {
+                ["parent"] = (_kind == Umbraco14xItemKind.BranchRoot)
+                    ? (JToken)null
+                    : new JObject { ["id"] = _sID },
+                ["documentType"] = new JObject { ["id"] = docTypeId },
+                ["values"] = new JArray(),
+                ["variants"] = new JArray(new JObject
+                {
+                    ["culture"] = culture,
+                    ["segment"] = null,
+                    ["name"] = sName
+                })
+            };
+            // Media payloads use mediaType instead of documentType.
+            if (childKind == Umbraco14xItemKind.Media)
+            {
+                body.Remove("documentType");
+                body["mediaType"] = new JObject { ["id"] = docTypeId };
+            }
+
+            var resp = _api.PostJson(BaseApiPath + "/" + segment, body) as JObject;
+            // Umbraco returns the new entity; id may be in top-level "id" or in a Location header (not parsed here).
+            string newId = (string)resp?["id"];
+            if (string.IsNullOrEmpty(newId))
+            {
+                // Fallback: the response might be the full entity with id nested.
+                newId = (string)(resp?["entity"]?["id"]);
+            }
+            return newId ?? "";
+        }
         public bool HasChildren() { return _bHasChildren; }
         public string[] GetLanguages()
         {
@@ -830,6 +886,29 @@ namespace SitecoreConverter.Core
         }
 
         internal static string BaseApiPath { get { return "/umbraco/management/api/v1"; } }
+
+        private string ResolveDocumentTypeId(string templatePath)
+        {
+            if (string.IsNullOrEmpty(templatePath)) return "";
+
+            // GUID form
+            if (Guid.TryParse(templatePath, out var g)) return g.ToString();
+
+            // Cache check
+            if (_Options != null && _Options.ExistingTemplates.ContainsKey(templatePath))
+                return _Options.ExistingTemplates[templatePath].ID;
+
+            // Alias form (bare name, no slashes): hit /document-type/by-alias/{alias}
+            if (!templatePath.Contains("/"))
+            {
+                var byAlias = _api.TryGetJson(BaseApiPath + "/document-type/by-alias/" + Uri.EscapeDataString(templatePath)) as JObject;
+                if (byAlias != null) return (string)byAlias["id"];
+            }
+
+            // Path form: walk from root via GetItem
+            var item = GetRoot(_api, _Options).GetItem(templatePath);
+            return item?.ID ?? "";
+        }
 
         private static AccessRights MapUmbracoVerbsToAccessRights(JArray verbs)
         {
