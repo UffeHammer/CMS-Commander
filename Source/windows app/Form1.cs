@@ -294,7 +294,9 @@ namespace SitecoreConverter
             this.comboSiteTypeRight.Items.AddRange(new object[] {
             "Sitecore43",
             "Sitecore5x",
-            "Sitecore6-10"});
+            "Sitecore6-10",
+            "Umbraco6x",
+            "Umbraco14x"});
             this.comboSiteTypeRight.Location = new System.Drawing.Point(420, 53);
             this.comboSiteTypeRight.Name = "comboSiteTypeRight";
             this.comboSiteTypeRight.Size = new System.Drawing.Size(144, 28);
@@ -307,7 +309,9 @@ namespace SitecoreConverter
             this.comboSiteTypeLeft.Items.AddRange(new object[] {
             "Sitecore43",
             "Sitecore5x",
-            "Sitecore6-10"});
+            "Sitecore6-10",
+            "Umbraco6x",
+            "Umbraco14x"});
             this.comboSiteTypeLeft.Location = new System.Drawing.Point(13, 53);
             this.comboSiteTypeLeft.Name = "comboSiteTypeLeft";
             this.comboSiteTypeLeft.Size = new System.Drawing.Size(142, 28);
@@ -814,6 +818,41 @@ namespace SitecoreConverter
             treeView.SelectedNode = newNode;
         }
 
+        private void ConnectUmbraco14x(TreeView treeView, string sServerUrl, string sSiteType)
+        {
+            LoginForm login = new LoginForm();
+            login.SiteUrl = sServerUrl;
+            login.SiteType = sSiteType;
+            login.Username = "admin@example.com";
+            if (login.ShowDialog(this) == DialogResult.Cancel)
+                return;
+
+            Credentials credentials = new Credentials();
+            credentials.UserName = login.loginControl1.Username;
+            credentials.Password = login.loginControl1.Password;
+
+            Umbraco14xItem item = null;
+            try
+            {
+                Umbraco14xAPI umbracoAPI = new Umbraco14xAPI(sServerUrl, credentials);
+                item = Umbraco14xItem.GetRoot(umbracoAPI, new ConverterOptions());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error logging into Umbraco 14+, wrong username or password?\nError message: " + ex.Message);
+                return;
+            }
+            item.Options.LoginName = credentials.UserName;
+            item.Options.LoginPassword = credentials.Password;
+            item.Options.HostName = sServerUrl;
+
+            treeView.Nodes.Clear();
+            TreeNode newNode = new TreeNode(item.Name);
+            newNode.Tag = item;
+            treeView.Nodes.Add(newNode);
+            treeView.SelectedNode = newNode;
+        }
+
 
 
 		private void tbLeftConnect_Click(object sender, System.EventArgs e)
@@ -833,7 +872,11 @@ namespace SitecoreConverter
             else if (comboSiteTypeLeft.Text == "Umbraco6x")
             {
                 ConnectUmbraco6x(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text);
-            }                        
+            }
+            else if (comboSiteTypeLeft.Text == "Umbraco14x")
+            {
+                ConnectUmbraco14x(leftTreeView, tbLeftServerURL.Text, comboSiteTypeLeft.Text);
+            }
 		}
 
         private void tbRightConnect_Click(object sender, EventArgs e)
@@ -853,7 +896,11 @@ namespace SitecoreConverter
             else if (comboSiteTypeRight.Text == "Umbraco6x")
             {
                 ConnectUmbraco6x(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text);
-            }            
+            }
+            else if (comboSiteTypeRight.Text == "Umbraco14x")
+            {
+                ConnectUmbraco14x(rightTreeView, tbRightServerURL.Text, comboSiteTypeRight.Text);
+            }
         }
 
 
