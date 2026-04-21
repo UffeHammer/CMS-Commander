@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Xml;
 using Newtonsoft.Json;
@@ -189,7 +188,14 @@ namespace SitecoreConverter.Core
         public bool HasChildren() { return _bHasChildren; }
         public string[] GetLanguages() { throw new NotImplementedException(); }
         public ConverterOptions Options { get { return _Options; } set { _Options = value; } }
-        public string GetOuterXml() { return _rawPayload == null ? "" : "<umbraco>" + _rawPayload.ToString(Newtonsoft.Json.Formatting.None) + "</umbraco>"; }
+        public string GetOuterXml()
+        {
+            if (_rawPayload == null) return "";
+            var doc = new XmlDocument();
+            var elem = doc.CreateElement("umbraco");
+            elem.InnerText = _rawPayload.ToString(Newtonsoft.Json.Formatting.None);
+            return elem.OuterXml;
+        }
         public string GetHostUrl() { return _api.BaseUrl; }
 
         #endregion
