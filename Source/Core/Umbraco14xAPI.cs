@@ -137,6 +137,38 @@ namespace SitecoreConverter.Core
             return req;
         }
 
+        /// <summary>
+        /// Multipart-form POST used for file uploads (temporary-file endpoint).
+        /// Shares the same bearer-token lifecycle as the JSON helpers.
+        /// </summary>
+        internal void PostMultipart(string path, System.Net.Http.MultipartFormDataContent content)
+        {
+            EnsureToken();
+
+            var url = path.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? path : _baseUrl + path;
+            var req = new HttpRequestMessage(HttpMethod.Post, url) { Content = content };
+            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _bearerToken);
+
+            var resp = _http.SendAsync(req).GetAwaiter().GetResult();
+            if (resp.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                // Retry once with a refreshed token; MultipartFormDataContent is single-use,
+                // so this path requires the caller to hand us a fresh content object if retry is
+                // needed. In practice this is rare because EnsureToken refreshes proactively.
+                lock (_tokenLock) { _bearerToken = null; }
+                EnsureToken();
+                throw new Umbraco14xApiException(401, path, "Multipart request unauthorized; token was refreshed but caller must retry");
+            }
+
+            string respBody = resp.Content != null
+                ? resp.Content.ReadAsStringAsync().GetAwaiter().GetResult()
+                : "";
+            if (!resp.IsSuccessStatusCode)
+            {
+                throw new Umbraco14xApiException((int)resp.StatusCode, path, respBody);
+            }
+        }
+
         private void EnsureToken()
         {
             lock (_tokenLock)

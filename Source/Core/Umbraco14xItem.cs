@@ -530,6 +530,35 @@ namespace SitecoreConverter.Core
             Umbraco14xItemKind createKind = parent._kind == Umbraco14xItemKind.Media
                 ? Umbraco14xItemKind.Media : Umbraco14xItemKind.Content;
 
+            // Media blob handling — only when source is media and exposes a downloadable host URL.
+            string mediaTempKey = null;
+            if (createKind == Umbraco14xItemKind.Media && source.GetHostUrl() != null)
+            {
+                try
+                {
+                    var umbracoFile = source.Fields.FirstOrDefault(f =>
+                        string.Equals(f.Name, "umbracoFile", StringComparison.OrdinalIgnoreCase));
+                    if (umbracoFile != null && !string.IsNullOrEmpty(umbracoFile.Content))
+                    {
+                        string downloadUrl = umbracoFile.Content;
+                        if (downloadUrl.StartsWith("/"))
+                            downloadUrl = source.GetHostUrl().TrimEnd('/') + downloadUrl;
+                        using (var wc = new System.Net.WebClient())
+                        {
+                            var bytes = wc.DownloadData(downloadUrl);
+                            string fileName = System.IO.Path.GetFileName(new Uri(downloadUrl).AbsolutePath);
+                            string contentType = wc.ResponseHeaders?["Content-Type"] ?? "application/octet-stream";
+                            mediaTempKey = UploadTemporaryFile(bytes, fileName, contentType);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Trace.WriteLine("Umbraco14x media blob copy failed for '" + source.Name + "': " + ex.Message);
+                    if (!_Options.IgnoreErrors) throw;
+                }
+            }
+
             var valuesArray = new JArray();
             foreach (var f in source.Fields)
             {
@@ -541,6 +570,15 @@ namespace SitecoreConverter.Core
                     ["segment"] = null,
                     ["value"] = ConvertFieldContent(f)
                 });
+            }
+
+            if (mediaTempKey != null)
+            {
+                foreach (var entry in valuesArray.OfType<JObject>())
+                {
+                    if (string.Equals((string)entry["alias"], "umbracoFile", StringComparison.OrdinalIgnoreCase))
+                        entry["value"] = new JObject { ["temporaryFileId"] = mediaTempKey };
+                }
             }
 
             var body = new JObject
@@ -579,6 +617,26 @@ namespace SitecoreConverter.Core
                 try { return JToken.Parse(s); } catch { /* ignore */ }
             }
             return new JValue(s);
+        }
+
+        /// <summary>
+        /// Uploads binary content as a temporary file and returns the key for referencing in a media create call.
+        /// </summary>
+        public string UploadTemporaryFile(byte[] bytes, string fileName, string contentType)
+        {
+            string tempKey = Guid.NewGuid().ToString();
+
+            using (var content = new System.Net.Http.MultipartFormDataContent())
+            {
+                var fileContent = new System.Net.Http.ByteArrayContent(bytes);
+                fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(contentType ?? "application/octet-stream");
+                content.Add(fileContent, "File", fileName);
+                content.Add(new System.Net.Http.StringContent(tempKey), "Id");
+
+                _api.PostMultipart(BaseApiPath + "/temporary-file", content);
+            }
+
+            return tempKey;
         }
 
         private void MergeFields(IItem source, Umbraco14xItem destination)
