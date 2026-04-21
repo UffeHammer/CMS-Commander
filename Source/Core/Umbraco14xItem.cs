@@ -329,8 +329,72 @@ namespace SitecoreConverter.Core
             }
         }
         public IField[] Fields { get { return _fields.ToArray(); } }
-        public IRole[] Roles { get { throw new NotImplementedException(); } }
-        public IRole[] Users { get { throw new NotImplementedException(); } }
+        public IRole[] Roles
+        {
+            get
+            {
+                if (_kind == Umbraco14xItemKind.BranchRoot && _sName == "Roles")
+                {
+                    var result = new List<IRole>();
+                    var resp = _api.GetJson(BaseApiPath + "/user-group?skip=0&take=500") as JObject;
+                    var items = resp?["items"] as JArray;
+                    if (items != null)
+                    {
+                        foreach (var g in items.OfType<JObject>())
+                        {
+                            string id = (string)g["id"] ?? "";
+                            string name = (string)g["name"] ?? "";
+                            result.Add(new BaseRole(name, id, "/umbraco/Roles/" + name, AccessRights.NotSet));
+                        }
+                    }
+                    return result.ToArray();
+                }
+
+                if (_kind == Umbraco14xItemKind.Content)
+                {
+                    var result = new List<IRole>();
+                    var resp = _api.TryGetJson(BaseApiPath + "/document/" + _sID + "/permissions") as JObject;
+                    var items = resp?["items"] as JArray ?? resp?["permissions"] as JArray;
+                    if (items != null)
+                    {
+                        foreach (var p in items.OfType<JObject>())
+                        {
+                            string groupId = (string)(p["userGroup"]?["id"]) ?? (string)p["userGroupId"] ?? "";
+                            string name = (string)(p["userGroup"]?["name"]) ?? groupId;
+                            var verbs = p["verbs"] as JArray;
+                            var rights = MapUmbracoVerbsToAccessRights(verbs);
+                            result.Add(new BaseRole(name, groupId, "", rights));
+                        }
+                    }
+                    return result.ToArray();
+                }
+
+                return new IRole[0];
+            }
+        }
+        public IRole[] Users
+        {
+            get
+            {
+                if (_kind == Umbraco14xItemKind.BranchRoot && _sName == "Members")
+                {
+                    var result = new List<IRole>();
+                    var resp = _api.GetJson(BaseApiPath + "/member?skip=0&take=500") as JObject;
+                    var items = resp?["items"] as JArray;
+                    if (items != null)
+                    {
+                        foreach (var m in items.OfType<JObject>())
+                        {
+                            string id = (string)m["id"] ?? "";
+                            string name = (string)m["username"] ?? (string)m["name"] ?? "";
+                            result.Add(new BaseRole(name, id, "/umbraco/Members/" + name, AccessRights.NotSet));
+                        }
+                    }
+                    return result.ToArray();
+                }
+                return new IRole[0];
+            }
+        }
         public IItem Parent { get { return _parent; } }
         public IItem[] GetChildren()
         {
@@ -380,7 +444,17 @@ namespace SitecoreConverter.Core
         public void Save() { throw new NotImplementedException(); }
         public string AddFromTemplate(string sName, string sTemplatePath) { throw new NotImplementedException(); }
         public bool HasChildren() { return _bHasChildren; }
-        public string[] GetLanguages() { throw new NotImplementedException(); }
+        public string[] GetLanguages()
+        {
+            var langs = _api.GetLanguages();
+            var result = new List<string>();
+            foreach (var l in langs.OfType<JObject>())
+            {
+                var code = (string)l["isoCode"] ?? (string)l["cultureName"];
+                if (!string.IsNullOrEmpty(code)) result.Add(code);
+            }
+            return result.ToArray();
+        }
         public ConverterOptions Options { get { return _Options; } set { _Options = value; } }
         public string GetOuterXml()
         {
@@ -590,6 +664,22 @@ namespace SitecoreConverter.Core
         }
 
         internal static string BaseApiPath { get { return "/umbraco/management/api/v1"; } }
+
+        private static AccessRights MapUmbracoVerbsToAccessRights(JArray verbs)
+        {
+            var rights = AccessRights.NotSet;
+            if (verbs == null) return rights;
+            foreach (var v in verbs)
+            {
+                var s = ((string)v) ?? "";
+                if (s.IndexOf("browse", StringComparison.OrdinalIgnoreCase) >= 0) rights |= AccessRights.Read;
+                if (s.IndexOf("update", StringComparison.OrdinalIgnoreCase) >= 0) rights |= AccessRights.Write;
+                if (s.IndexOf("create", StringComparison.OrdinalIgnoreCase) >= 0) rights |= AccessRights.Create;
+                if (s.IndexOf("delete", StringComparison.OrdinalIgnoreCase) >= 0) rights |= AccessRights.Delete;
+                if (s.IndexOf("admin", StringComparison.OrdinalIgnoreCase) >= 0) rights |= AccessRights.Administer;
+            }
+            return rights;
+        }
 
         #endregion
     }
