@@ -246,7 +246,19 @@ namespace SitecoreConverter.Core
         #region IItem — skeleton stubs (filled in later tasks)
 
         public string ID { get { return _sID; } }
-        public string Name { get { return _sName; } }
+        public string Name
+        {
+            get { return _sName; }
+            set
+            {
+                if (_sName != value)
+                {
+                    _sName = value;
+                    _sKey = value.ToLower();
+                    _nameDirty = true;
+                }
+            }
+        }
         public string Key { get { return _sKey; } }
         public string Path
         {
@@ -522,7 +534,80 @@ namespace SitecoreConverter.Core
 
             throw new NotImplementedException("Delete is not supported for kind " + _kind);
         }
-        public void Save() { throw new NotImplementedException(); }
+        public void Save()
+        {
+            if (_kind != Umbraco14xItemKind.Content && _kind != Umbraco14xItemKind.Media
+                && _kind != Umbraco14xItemKind.DocumentType)
+                throw new NotImplementedException("Save is only supported for Content, Media, DocumentType");
+            if (_rawPayload == null) throw new InvalidOperationException("Cannot save a synthetic item");
+
+            var dirtyFields = _fields.Where(f => f.IsDirty).ToList();
+            if (dirtyFields.Count == 0 && !_nameDirty && !_iconDirty && !_sortOrderDirty)
+                return; // nothing to persist
+
+            var updated = (JObject)_rawPayload.DeepClone();
+
+            // Item-level edits
+            if (_iconDirty) updated["icon"] = _sIcon;
+            if (_sortOrderDirty) updated["sortOrder"] = int.TryParse(_sSortOrder, out var so) ? (JToken)so : _sSortOrder;
+
+            // Name changes (content/media) go through variants[]
+            if (_nameDirty)
+            {
+                var variants = updated["variants"] as JArray;
+                string culture = _Options != null ? _Options.Language : "en";
+                if (variants != null && variants.Count > 0)
+                {
+                    var target = (JObject)variants.OfType<JObject>()
+                        .FirstOrDefault(v => (string)v["culture"] == null
+                            || string.Equals((string)v["culture"], culture, StringComparison.OrdinalIgnoreCase));
+                    if (target == null)
+                    {
+                        target = new JObject { ["culture"] = culture, ["segment"] = null, ["name"] = _sName };
+                        variants.Add(target);
+                    }
+                    else
+                    {
+                        target["name"] = _sName;
+                    }
+                }
+                else
+                {
+                    updated["name"] = _sName;
+                }
+            }
+
+            // Field-level edits
+            var values = updated["values"] as JArray;
+            if (values == null) { values = new JArray(); updated["values"] = values; }
+
+            foreach (var f in dirtyFields)
+            {
+                var entry = f.ToValuesEntry();
+                // Upsert by (alias, culture, segment).
+                var existing = values.OfType<JObject>().FirstOrDefault(v =>
+                    string.Equals((string)v["alias"], (string)entry["alias"], StringComparison.OrdinalIgnoreCase) &&
+                    (string)v["culture"] == (string)entry["culture"] &&
+                    (string)v["segment"] == (string)entry["segment"]);
+                if (existing != null)
+                {
+                    existing["value"] = entry["value"];
+                    existing["editorAlias"] = entry["editorAlias"];
+                }
+                else
+                {
+                    values.Add(entry);
+                }
+            }
+
+            string segment = KindToSegment(_kind);
+            _api.PutJson(BaseApiPath + "/" + segment + "/" + _sID, updated);
+
+            // Reset dirty flags
+            foreach (var f in dirtyFields) f.IsDirty = false;
+            _nameDirty = _iconDirty = _sortOrderDirty = false;
+            _rawPayload = updated;
+        }
         public string AddFromTemplate(string sName, string sTemplatePath) { throw new NotImplementedException(); }
         public bool HasChildren() { return _bHasChildren; }
         public string[] GetLanguages()
