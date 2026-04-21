@@ -202,7 +202,7 @@ namespace SitecoreConverter.Core
             JObject docTypePayload;
             if (_Options != null && _Options.ExistingTemplateFields.ContainsKey(docTypeId))
             {
-                docTypePayload = JObject.Parse(_Options.ExistingTemplateFields[docTypeId].OuterXml ?? "{}");
+                docTypePayload = JObject.Parse(_Options.ExistingTemplateFields[docTypeId].InnerText ?? "{}");
             }
             else
             {
