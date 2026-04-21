@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilestorageConversionPlugin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendedSitecoreAPI5x", "ExtendedSitecoreAPI5x\ExtendedSitecoreAPI5x.csproj", "{F37E8BDD-6C0C-4D3B-834B-1CE68B25B14F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco14xSmokeTest", "Umbraco14xSmokeTest\Umbraco14xSmokeTest.csproj", "{A1000000-0000-0000-0000-000000000014}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{F37E8BDD-6C0C-4D3B-834B-1CE68B25B14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F37E8BDD-6C0C-4D3B-834B-1CE68B25B14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F37E8BDD-6C0C-4D3B-834B-1CE68B25B14F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1000000-0000-0000-0000-000000000014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1000000-0000-0000-0000-000000000014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1000000-0000-0000-0000-000000000014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1000000-0000-0000-0000-000000000014}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
