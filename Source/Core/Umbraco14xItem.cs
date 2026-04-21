@@ -454,29 +454,38 @@ namespace SitecoreConverter.Core
             if (_Options.ShouldItemBeCopied != null && !_Options.ShouldItemBeCopied(CopyFrom, this))
                 return;
 
+            IItem destination;
             try
             {
-                IItem destination = this;
                 if (!bOnlyChildren)
                     destination = CopyOneItem(CopyFrom, this);
                 else
                     destination = this;
 
                 if (_Options.CopyItem != null) _Options.CopyItem(CopyFrom, this, destination);
-
-                if (bRecursive && CopyFrom.HasChildren())
-                {
-                    foreach (var child in CopyFrom.GetChildren())
-                    {
-                        // Recurse on the destination so each child copy uses the correct parent.
-                        ((Umbraco14xItem)destination).CopyTo(child, true, false);
-                    }
-                }
             }
             catch (Exception ex)
             {
                 if (!_Options.IgnoreErrors) throw;
-                System.Diagnostics.Trace.WriteLine("Umbraco14x CopyTo error: " + ex.Message);
+                System.Diagnostics.Trace.WriteLine("Umbraco14x CopyTo error on '" + CopyFrom.Name + "' (" + CopyFrom.ID + "): " + ex.Message);
+                return; // cannot recurse when item creation failed
+            }
+
+            if (!bRecursive || !CopyFrom.HasChildren()) return;
+
+            foreach (var child in CopyFrom.GetChildren())
+            {
+                // Each child is recursed independently so one sibling's failure doesn't skip the rest
+                // (matches Sitecore6xItem.CopyChildren precedent).
+                try
+                {
+                    ((Umbraco14xItem)destination).CopyTo(child, true, false);
+                }
+                catch (Exception ex)
+                {
+                    if (!_Options.IgnoreErrors) throw;
+                    System.Diagnostics.Trace.WriteLine("Umbraco14x CopyTo child error on '" + child.Name + "' (" + child.ID + "): " + ex.Message);
+                }
             }
         }
 
@@ -504,7 +513,9 @@ namespace SitecoreConverter.Core
                         return existing;
                     case CopyOperations.GenerateNewItemIDs:
                     case CopyOperations.UseNames:
-                        // Fall through to creation with a unique name.
+                        // Fall through to re-create the item alongside the existing one.
+                        // Umbraco will reject a duplicate name at the same parent; callers relying
+                        // on these operations must ensure uniqueness upstream or use Overwrite.
                         break;
                 }
             }
