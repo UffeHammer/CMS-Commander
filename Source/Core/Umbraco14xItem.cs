@@ -168,7 +168,17 @@ namespace SitecoreConverter.Core
         public string ID { get { return _sID; } }
         public string Name { get { return _sName; } }
         public string Key { get { return _sKey; } }
-        public string Path { get { return _sPath; } }
+        public string Path
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_sPath)) return _sPath;
+                if (_kind == Umbraco14xItemKind.Root || _kind == Umbraco14xItemKind.BranchRoot)
+                    return _sPath;
+                _sPath = ComputePath();
+                return _sPath;
+            }
+        }
         public string Icon { get { return _sIcon; } set { _sIcon = value; _iconDirty = true; } }
         public string SortOrder { get { return _sSortOrder; } set { _sSortOrder = value; _sortOrderDirty = true; } }
         public IItem[] Templates { get { throw new NotImplementedException(); } }
@@ -177,8 +187,47 @@ namespace SitecoreConverter.Core
         public IRole[] Roles { get { throw new NotImplementedException(); } }
         public IRole[] Users { get { throw new NotImplementedException(); } }
         public IItem Parent { get { return _parent; } }
-        public IItem[] GetChildren() { throw new NotImplementedException(); }
-        public IItem GetItem(string sItemPath) { throw new NotImplementedException(); }
+        public IItem[] GetChildren()
+        {
+            if (_kind == Umbraco14xItemKind.Root)
+            {
+                var names = new[] { "Content", "Media", "Templates", "DataTypes", "Members", "Roles", "Languages" };
+                var items = new List<IItem>();
+                foreach (var name in names)
+                    items.Add(new Umbraco14xItem(_api, _Options, Umbraco14xItemKind.BranchRoot, name));
+                return items.ToArray();
+            }
+
+            if (_kind == Umbraco14xItemKind.BranchRoot)
+            {
+                var childKind = BRANCH_CHILD_KIND[_sName];
+                return LoadBranchRootChildren(childKind).ToArray();
+            }
+
+            return LoadTreeChildren(_kind, _sID).ToArray();
+        }
+        public IItem GetItem(string sItemPath)
+        {
+            if (string.IsNullOrEmpty(sItemPath)) return null;
+
+            // GUID form → direct lookup.
+            if (Guid.TryParse(sItemPath, out var g))
+            {
+                return GetItemByGuid(g.ToString());
+            }
+
+            // Absolute path form → walk from root.
+            if (sItemPath.StartsWith("/"))
+                return WalkByPath(sItemPath);
+
+            // Bare name relative to this.
+            foreach (var child in GetChildren())
+            {
+                if (string.Equals(child.Name, sItemPath, StringComparison.OrdinalIgnoreCase))
+                    return child;
+            }
+            return null;
+        }
         public void CopyTo(IItem CopyFrom, bool bRecursive, bool bOnlyChildren) { throw new NotImplementedException(); }
         public bool MoveTo(IItem MoveTo) { throw new NotImplementedException(); }
         public void Rename(string Name) { throw new NotImplementedException(); }
@@ -201,6 +250,181 @@ namespace SitecoreConverter.Core
         #endregion
 
         #region Helpers used across later tasks
+
+        private List<IItem> LoadBranchRootChildren(Umbraco14xItemKind childKind)
+        {
+            string segment = KindToSegment(childKind);
+
+            // Content / Media / DocumentType / DataType use the tree/{segment}/root paginated endpoint.
+            // Member / UserGroup / Language list directly under the collection endpoint.
+            switch (childKind)
+            {
+                case Umbraco14xItemKind.Content:
+                case Umbraco14xItemKind.Media:
+                case Umbraco14xItemKind.DocumentType:
+                case Umbraco14xItemKind.DataType:
+                    return LoadTreeChildrenRaw(segment, null, childKind);
+                case Umbraco14xItemKind.Member:
+                    return LoadCollection("/member?skip=0&take=500", childKind);
+                case Umbraco14xItemKind.UserGroup:
+                    return LoadCollection("/user-group?skip=0&take=500", childKind);
+                case Umbraco14xItemKind.Language:
+                    return LoadCollection("/language?skip=0&take=500", childKind);
+                default:
+                    return new List<IItem>();
+            }
+        }
+
+        private List<IItem> LoadTreeChildren(Umbraco14xItemKind childKind, string parentId)
+        {
+            string segment = KindToSegment(childKind);
+            return LoadTreeChildrenRaw(segment, parentId, childKind);
+        }
+
+        private List<IItem> LoadTreeChildrenRaw(string segment, string parentId, Umbraco14xItemKind childKind)
+        {
+            var result = new List<IItem>();
+            int skip = 0;
+            int take = 500;
+            while (true)
+            {
+                string path = parentId == null
+                    ? BaseApiPath + "/tree/" + segment + "/root?skip=" + skip + "&take=" + take
+                    : BaseApiPath + "/tree/" + segment + "/children?parentId=" + parentId + "&skip=" + skip + "&take=" + take;
+                var resp = (JObject)_api.GetJson(path);
+                var items = resp["items"] as JArray ?? new JArray();
+                foreach (var entry in items.OfType<JObject>())
+                {
+                    var detail = LoadItemPayload(childKind, (string)entry["id"]);
+                    // Tree endpoints return shallow payloads; merge hasChildren from the tree entry.
+                    if (detail["hasChildren"] == null && entry["hasChildren"] != null)
+                        detail["hasChildren"] = entry["hasChildren"];
+                    result.Add(new Umbraco14xItem(_api, _Options, childKind, detail, this));
+                }
+                int total = (int?)resp["total"] ?? items.Count;
+                skip += items.Count;
+                if (items.Count == 0 || skip >= total) break;
+            }
+            return result;
+        }
+
+        private List<IItem> LoadCollection(string relativePath, Umbraco14xItemKind childKind)
+        {
+            var result = new List<IItem>();
+            var resp = (JObject)_api.GetJson(BaseApiPath + relativePath);
+            var items = resp["items"] as JArray ?? new JArray();
+            foreach (var entry in items.OfType<JObject>())
+            {
+                result.Add(new Umbraco14xItem(_api, _Options, childKind, entry, this));
+            }
+            return result;
+        }
+
+        private JObject LoadItemPayload(Umbraco14xItemKind kind, string id)
+        {
+            string segment = KindToSegment(kind);
+            var detail = (JObject)_api.GetJson(BaseApiPath + "/" + segment + "/" + id);
+            return detail;
+        }
+
+        private string ComputePath()
+        {
+            // Cache check
+            if (_Options != null && _Options.ExistingTemplates.ContainsKey("path:" + _sID))
+            {
+                var cached = _Options.ExistingTemplates["path:" + _sID];
+                return cached.Path;
+            }
+
+            // Walk ancestors via the tree endpoint.
+            string branchName = BranchNameForKind(_kind);
+            string segment = KindToSegment(_kind);
+            var path = "/umbraco/" + branchName;
+
+            try
+            {
+                var ancestorsResp = _api.TryGetJson(BaseApiPath + "/tree/" + segment + "/ancestors?descendantId=" + _sID);
+                if (ancestorsResp is JArray arr)
+                {
+                    foreach (var a in arr.OfType<JObject>())
+                        path += "/" + (string)a["name"];
+                }
+                else if (ancestorsResp is JObject obj && obj["items"] is JArray arr2)
+                {
+                    foreach (var a in arr2.OfType<JObject>())
+                        path += "/" + (string)a["name"];
+                }
+            }
+            catch { /* ancestor walk is best-effort; fall back to parent-less path */ }
+
+            path += "/" + _sName;
+            return path;
+        }
+
+        private static string BranchNameForKind(Umbraco14xItemKind kind)
+        {
+            switch (kind)
+            {
+                case Umbraco14xItemKind.Content:      return "Content";
+                case Umbraco14xItemKind.Media:        return "Media";
+                case Umbraco14xItemKind.DocumentType: return "Templates";
+                case Umbraco14xItemKind.DataType:     return "DataTypes";
+                case Umbraco14xItemKind.Member:       return "Members";
+                case Umbraco14xItemKind.MemberGroup:  return "Members";
+                case Umbraco14xItemKind.User:         return "Members";
+                case Umbraco14xItemKind.UserGroup:    return "Roles";
+                case Umbraco14xItemKind.Language:     return "Languages";
+                default: return "";
+            }
+        }
+
+        private IItem GetItemByGuid(string guid)
+        {
+            if (_Options != null && _Options.ExistingTemplates.ContainsKey(guid))
+                return _Options.ExistingTemplates[guid];
+
+            // Try the kinds in order: DocumentType most commonly queried by GUID first, then Content.
+            foreach (var kind in new[] {
+                Umbraco14xItemKind.DocumentType, Umbraco14xItemKind.Content,
+                Umbraco14xItemKind.Media, Umbraco14xItemKind.DataType,
+                Umbraco14xItemKind.Member, Umbraco14xItemKind.UserGroup })
+            {
+                string segment = KindToSegment(kind);
+                var payload = _api.TryGetJson(BaseApiPath + "/" + segment + "/" + guid) as JObject;
+                if (payload != null)
+                {
+                    var item = new Umbraco14xItem(_api, _Options, kind, payload, null);
+                    if (_Options != null) _Options.ExistingTemplates[guid] = item;
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        private IItem WalkByPath(string path)
+        {
+            if (_Options != null && _Options.ExistingTemplates.ContainsKey(path))
+                return _Options.ExistingTemplates[path];
+
+            var segments = path.Trim('/').Split('/');
+            IItem current = GetRoot(_api, _Options);
+            foreach (var seg in segments)
+            {
+                if (string.Equals(seg, "umbraco", StringComparison.OrdinalIgnoreCase)) continue;
+                IItem next = null;
+                foreach (var child in current.GetChildren())
+                {
+                    if (string.Equals(child.Name, seg, StringComparison.OrdinalIgnoreCase))
+                    {
+                        next = child; break;
+                    }
+                }
+                if (next == null) return null;
+                current = next;
+            }
+            if (_Options != null && current is Umbraco14xItem) _Options.ExistingTemplates[path] = current;
+            return current;
+        }
 
         /// <summary>Map a kind to its Management API segment (`document`, `media`, ...).</summary>
         internal static string KindToSegment(Umbraco14xItemKind kind)
