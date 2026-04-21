@@ -126,6 +126,7 @@
     <Compile Include="Sitecore5xItem.cs" />
     <Compile Include="Sitecore6xField.cs" />
     <Compile Include="Sitecore6xItem.cs" />
+    <Compile Include="Umbraco14xAPI.cs" />
     <Compile Include="TemplateIDs.cs" />
     <Compile Include="Umbraco6xField.cs" />
     <Compile Include="Umbraco6xItem.cs" />
