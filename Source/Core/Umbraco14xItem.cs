@@ -449,7 +449,151 @@ namespace SitecoreConverter.Core
             }
             return null;
         }
-        public void CopyTo(IItem CopyFrom, bool bRecursive, bool bOnlyChildren) { throw new NotImplementedException(); }
+        public void CopyTo(IItem CopyFrom, bool bRecursive, bool bOnlyChildren)
+        {
+            if (_Options.ShouldItemBeCopied != null && !_Options.ShouldItemBeCopied(CopyFrom, this))
+                return;
+
+            try
+            {
+                IItem destination = this;
+                if (!bOnlyChildren)
+                    destination = CopyOneItem(CopyFrom, this);
+                else
+                    destination = this;
+
+                if (_Options.CopyItem != null) _Options.CopyItem(CopyFrom, this, destination);
+
+                if (bRecursive && CopyFrom.HasChildren())
+                {
+                    foreach (var child in CopyFrom.GetChildren())
+                    {
+                        // Recurse on the destination so each child copy uses the correct parent.
+                        ((Umbraco14xItem)destination).CopyTo(child, true, false);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (!_Options.IgnoreErrors) throw;
+                System.Diagnostics.Trace.WriteLine("Umbraco14x CopyTo error: " + ex.Message);
+            }
+        }
+
+        private Umbraco14xItem CopyOneItem(IItem source, Umbraco14xItem parent)
+        {
+            // Try to find an existing destination item by name under this parent.
+            Umbraco14xItem existing = null;
+            foreach (var c in parent.GetChildren())
+            {
+                if (string.Equals(c.Name, source.Name, StringComparison.OrdinalIgnoreCase) && c is Umbraco14xItem uc)
+                {
+                    existing = uc; break;
+                }
+            }
+
+            if (existing != null)
+            {
+                switch (_Options.CopyOperation)
+                {
+                    case CopyOperations.SkipExisting:
+                        return existing;
+                    case CopyOperations.Overwrite:
+                        MergeFields(source, existing);
+                        existing.Save();
+                        return existing;
+                    case CopyOperations.GenerateNewItemIDs:
+                    case CopyOperations.UseNames:
+                        // Fall through to creation with a unique name.
+                        break;
+                }
+            }
+
+            // Resolve (or create) destination document type.
+            string docTypeId = ResolveOrCreateDocumentTypeFor(source);
+            if (string.IsNullOrEmpty(docTypeId))
+                throw new InvalidOperationException("Cannot resolve document type for source '" + source.Name + "'");
+
+            string culture = _Options.Language;
+            string createSegment = parent._kind == Umbraco14xItemKind.Media ? "media" : "document";
+            Umbraco14xItemKind createKind = parent._kind == Umbraco14xItemKind.Media
+                ? Umbraco14xItemKind.Media : Umbraco14xItemKind.Content;
+
+            var valuesArray = new JArray();
+            foreach (var f in source.Fields)
+            {
+                valuesArray.Add(new JObject
+                {
+                    ["editorAlias"] = f.Type,
+                    ["alias"] = f.Name,
+                    ["culture"] = culture,
+                    ["segment"] = null,
+                    ["value"] = ConvertFieldContent(f)
+                });
+            }
+
+            var body = new JObject
+            {
+                ["parent"] = parent._kind == Umbraco14xItemKind.BranchRoot
+                    ? (JToken)null
+                    : new JObject { ["id"] = parent.ID },
+                ["values"] = valuesArray,
+                ["variants"] = new JArray(new JObject
+                {
+                    ["culture"] = culture,
+                    ["segment"] = null,
+                    ["name"] = source.Name
+                })
+            };
+            if (createKind == Umbraco14xItemKind.Media)
+                body["mediaType"] = new JObject { ["id"] = docTypeId };
+            else
+                body["documentType"] = new JObject { ["id"] = docTypeId };
+
+            var resp = _api.PostJson(BaseApiPath + "/" + createSegment, body) as JObject;
+            string newId = (string)resp?["id"] ?? (string)(resp?["entity"]?["id"]);
+            if (string.IsNullOrEmpty(newId))
+                throw new InvalidOperationException("Create returned no id for '" + source.Name + "'");
+
+            var newPayload = _api.GetJson(BaseApiPath + "/" + createSegment + "/" + newId) as JObject;
+            return new Umbraco14xItem(_api, _Options, createKind, newPayload, parent);
+        }
+
+        private JToken ConvertFieldContent(IField f)
+        {
+            var s = f.Content ?? "";
+            if (string.IsNullOrEmpty(s)) return null;
+            if (s.StartsWith("{") || s.StartsWith("["))
+            {
+                try { return JToken.Parse(s); } catch { /* ignore */ }
+            }
+            return new JValue(s);
+        }
+
+        private void MergeFields(IItem source, Umbraco14xItem destination)
+        {
+            foreach (var srcField in source.Fields)
+            {
+                var dst = destination._fields.FirstOrDefault(f =>
+                    string.Equals(f.Name, srcField.Name, StringComparison.OrdinalIgnoreCase));
+                if (dst != null)
+                {
+                    dst.Content = srcField.Content; // setter flips dirty
+                }
+                else
+                {
+                    var newField = new Umbraco14xField(new JObject
+                    {
+                        ["alias"] = srcField.Name,
+                        ["culture"] = destination._Options.Language,
+                        ["segment"] = null,
+                        ["value"] = srcField.Content
+                    }, null);
+                    newField.IsDirty = true;
+                    destination._fields.Add(newField);
+                }
+            }
+        }
         public bool MoveTo(IItem MoveToItem)
         {
             if (_kind != Umbraco14xItemKind.Content && _kind != Umbraco14xItemKind.Media
@@ -924,6 +1068,95 @@ namespace SitecoreConverter.Core
                 if (s.IndexOf("admin", StringComparison.OrdinalIgnoreCase) >= 0) rights |= AccessRights.Administer;
             }
             return rights;
+        }
+
+        private string ResolveOrCreateDocumentTypeFor(IItem source)
+        {
+            // Use the source's BaseTemplate name as the Umbraco document-type alias.
+            var baseTpl = source.BaseTemplate;
+            string desiredAlias = baseTpl != null ? SanitizeAlias(baseTpl.Name) : "defaultDocument";
+
+            // Cache
+            if (_Options.ExistingTemplates.ContainsKey("alias:" + desiredAlias))
+                return _Options.ExistingTemplates["alias:" + desiredAlias].ID;
+
+            // Lookup
+            var existing = _api.TryGetJson(BaseApiPath + "/document-type/by-alias/" + Uri.EscapeDataString(desiredAlias)) as JObject;
+            if (existing != null)
+            {
+                string id = (string)existing["id"];
+                if (!string.IsNullOrEmpty(id))
+                {
+                    var cached = new Umbraco14xItem(_api, _Options, Umbraco14xItemKind.DocumentType, existing, null);
+                    _Options.ExistingTemplates["alias:" + desiredAlias] = cached;
+                    return id;
+                }
+            }
+
+            if (!_Options.CopyTemplates) return "";
+
+            // Create a minimal document type matching the source template's fields.
+            var propsArray = new JArray();
+            if (baseTpl != null)
+            {
+                foreach (var f in baseTpl.Fields)
+                {
+                    propsArray.Add(new JObject
+                    {
+                        ["alias"] = SanitizeAlias(f.Name),
+                        ["name"] = f.Name,
+                        ["dataType"] = new JObject { ["id"] = KnownDataTypeIdForEditor(f.Type) },
+                        ["variesByCulture"] = true
+                    });
+                }
+            }
+            var createBody = new JObject
+            {
+                ["alias"] = desiredAlias,
+                ["name"] = baseTpl != null ? baseTpl.Name : "Default",
+                ["icon"] = "icon-document",
+                ["allowedAsRoot"] = true,
+                ["variesByCulture"] = true,
+                ["properties"] = propsArray,
+                ["compositions"] = new JArray()
+            };
+            var createdResp = _api.PostJson(BaseApiPath + "/document-type", createBody) as JObject;
+            string newId = (string)createdResp?["id"] ?? (string)(createdResp?["entity"]?["id"]);
+            return newId ?? "";
+        }
+
+        private static string SanitizeAlias(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return "alias";
+            var sb = new StringBuilder();
+            bool upperNext = false;
+            foreach (var ch in name)
+            {
+                if (char.IsLetterOrDigit(ch))
+                {
+                    sb.Append(upperNext ? char.ToUpper(ch) : (sb.Length == 0 ? char.ToLower(ch) : ch));
+                    upperNext = false;
+                }
+                else upperNext = true;
+            }
+            return sb.Length == 0 ? "alias" : sb.ToString();
+        }
+
+        /// <summary>Well-known Umbraco data-type IDs. Values can be overridden on the installation;
+        /// these match Umbraco's default seed data for v14+.</summary>
+        private static string KnownDataTypeIdForEditor(string editorAlias)
+        {
+            switch (editorAlias)
+            {
+                case "Umbraco.RichText":       return "ca90c950-0aff-4e72-b976-a30b1ac57dad"; // Richtext editor
+                case "Umbraco.TextBox":        return "0cc0eba1-9960-42c9-bf9b-60e150b429ae"; // Textstring
+                case "Umbraco.TextArea":       return "c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3"; // Textarea
+                case "Umbraco.Integer":        return "2e6d3631-066e-44b8-aec4-96f09099b2b5"; // Numeric
+                case "Umbraco.TrueFalse":      return "92897bc6-a5f3-4ffe-ae27-f2e7e33dda49"; // True/false
+                case "Umbraco.DateTime":       return "e4d66c0f-b935-4200-81f0-025f7256b89a"; // Date/time
+                case "Umbraco.MediaPicker3":   return "135d60e0-2dd4-4f27-9b2b-e8f9ad3b8b8a"; // Media Picker 3
+                default:                        return "0cc0eba1-9960-42c9-bf9b-60e150b429ae"; // Textstring fallback
+            }
         }
 
         #endregion
