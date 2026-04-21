@@ -146,6 +146,86 @@ namespace SitecoreConverter.Core
             if (parentRef != null) _sParentID = (string)parentRef["id"] ?? "";
 
             // Path is computed lazily (see Task 5).
+            PopulateFields(payload);
+        }
+
+        private void PopulateFields(JObject payload)
+        {
+            _fields.Clear();
+
+            if (_kind == Umbraco14xItemKind.DocumentType)
+            {
+                // Field definitions come from properties[] on the document type itself.
+                var props = payload["properties"] as JArray;
+                if (props != null)
+                {
+                    foreach (var p in props.OfType<JObject>())
+                        _fields.Add(new Umbraco14xField(p));
+                }
+                return;
+            }
+
+            if (_kind != Umbraco14xItemKind.Content && _kind != Umbraco14xItemKind.Media) return;
+
+            // Content / Media: values[] filtered by current culture + invariant.
+            var values = payload["values"] as JArray;
+            if (values == null) return;
+
+            string culture = _Options != null ? _Options.Language : "en";
+            var docTypeProps = LoadDocumentTypeProperties();
+
+            foreach (var v in values.OfType<JObject>())
+            {
+                var vCulture = (string)v["culture"];
+                bool accept = vCulture == null
+                    || string.Equals(vCulture, culture, StringComparison.OrdinalIgnoreCase)
+                    || (vCulture != null && culture != null && vCulture.StartsWith(culture, StringComparison.OrdinalIgnoreCase));
+                if (!accept) continue;
+
+                string alias = (string)v["alias"];
+                JObject propDef = null;
+                if (alias != null && docTypeProps.TryGetValue(alias.ToLower(), out var def)) propDef = def;
+                _fields.Add(new Umbraco14xField(v, propDef));
+            }
+        }
+
+        /// <summary>Returns property-definitions keyed by alias (lower-cased) for this item's document type.</summary>
+        private Dictionary<string, JObject> LoadDocumentTypeProperties()
+        {
+            var result = new Dictionary<string, JObject>(StringComparer.OrdinalIgnoreCase);
+
+            var docTypeRef = _rawPayload["documentType"] as JObject ?? _rawPayload["mediaType"] as JObject;
+            if (docTypeRef == null) return result;
+            string docTypeId = (string)docTypeRef["id"];
+            if (string.IsNullOrEmpty(docTypeId)) return result;
+
+            JObject docTypePayload;
+            if (_Options != null && _Options.ExistingTemplateFields.ContainsKey(docTypeId))
+            {
+                docTypePayload = JObject.Parse(_Options.ExistingTemplateFields[docTypeId].OuterXml ?? "{}");
+            }
+            else
+            {
+                string segment = _kind == Umbraco14xItemKind.Media ? "media-type" : "document-type";
+                docTypePayload = _api.TryGetJson(BaseApiPath + "/" + segment + "/" + docTypeId) as JObject;
+                if (docTypePayload == null) return result;
+                if (_Options != null)
+                {
+                    // Stash as XML-wrapped JSON so the cache dictionary type fits.
+                    var doc = new XmlDocument();
+                    doc.LoadXml("<d>" + System.Security.SecurityElement.Escape(docTypePayload.ToString(Newtonsoft.Json.Formatting.None)) + "</d>");
+                    _Options.ExistingTemplateFields[docTypeId] = doc.DocumentElement;
+                }
+            }
+
+            var props = docTypePayload["properties"] as JArray;
+            if (props == null) return result;
+            foreach (var p in props.OfType<JObject>())
+            {
+                string alias = (string)p["alias"];
+                if (!string.IsNullOrEmpty(alias)) result[alias.ToLower()] = p;
+            }
+            return result;
         }
 
         private JObject PickVariantForCulture(JArray variants)
@@ -181,8 +261,73 @@ namespace SitecoreConverter.Core
         }
         public string Icon { get { return _sIcon; } set { _sIcon = value; _iconDirty = true; } }
         public string SortOrder { get { return _sSortOrder; } set { _sSortOrder = value; _sortOrderDirty = true; } }
-        public IItem[] Templates { get { throw new NotImplementedException(); } }
-        public IItem BaseTemplate { get { throw new NotImplementedException(); } }
+        public IItem[] Templates
+        {
+            get
+            {
+                if (_kind == Umbraco14xItemKind.Content || _kind == Umbraco14xItemKind.Media)
+                {
+                    var docTypeRef = _rawPayload["documentType"] as JObject ?? _rawPayload["mediaType"] as JObject;
+                    if (docTypeRef == null) return new IItem[0];
+                    var items = new List<IItem>();
+                    var primary = GetItemByGuid((string)docTypeRef["id"]);
+                    if (primary != null) items.Add(primary);
+                    var comps = docTypeRef["compositions"] as JArray;
+                    if (comps != null)
+                    {
+                        foreach (var c in comps.OfType<JObject>())
+                        {
+                            var ci = GetItemByGuid((string)c["id"]);
+                            if (ci != null) items.Add(ci);
+                        }
+                    }
+                    return items.ToArray();
+                }
+
+                if (_kind == Umbraco14xItemKind.DocumentType)
+                {
+                    var comps = _rawPayload["compositions"] as JArray;
+                    if (comps == null) return new IItem[0];
+                    var items = new List<IItem>();
+                    foreach (var c in comps.OfType<JObject>())
+                    {
+                        var ci = GetItemByGuid((string)c["id"]);
+                        if (ci != null) items.Add(ci);
+                    }
+                    return items.ToArray();
+                }
+
+                return new IItem[0];
+            }
+        }
+        public IItem BaseTemplate
+        {
+            get
+            {
+                if (_kind == Umbraco14xItemKind.Content || _kind == Umbraco14xItemKind.Media)
+                {
+                    var docTypeRef = _rawPayload["documentType"] as JObject ?? _rawPayload["mediaType"] as JObject;
+                    if (docTypeRef == null) return null;
+                    return GetItemByGuid((string)docTypeRef["id"]);
+                }
+
+                if (_kind == Umbraco14xItemKind.DocumentType)
+                {
+                    var parent = _rawPayload["parent"] as JObject;
+                    if (parent != null)
+                    {
+                        var p = GetItemByGuid((string)parent["id"]);
+                        if (p != null) return p;
+                    }
+                    var comps = _rawPayload["compositions"] as JArray;
+                    if (comps != null && comps.Count > 0)
+                        return GetItemByGuid((string)((JObject)comps[0])["id"]);
+                    return null;
+                }
+
+                return null;
+            }
+        }
         public IField[] Fields { get { return _fields.ToArray(); } }
         public IRole[] Roles { get { throw new NotImplementedException(); } }
         public IRole[] Users { get { throw new NotImplementedException(); } }
